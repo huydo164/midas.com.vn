@@ -1,0 +1,13 @@
+jQuery(document).ready(function(){
+	if(jQuery("#title[name='wpi_invoice[subject]']").length){
+		jQuery("#wpi_button_show_advanced").trigger("click");
+		var invoice = jQuery("input[name='wpi_invoice[meta][custom_id]']").val();
+		jQuery("#title[name='wpi_invoice[subject]']").val("Invoice from QUEENSPORTSWEAR  #"+invoice);
+		jQuery(".postarea").css("display","none");
+		jQuery(".mobile-sidebar.no-scrollbar.mfp-hide").css("display","none");
+		jQuery("#login-form-popup").css("display","none");
+	}
+	jQuery("body").on("click", ".btn_queensportwear", function(){
+		jQuery("#vutienit-buy-now").trigger("click");
+	});
+});

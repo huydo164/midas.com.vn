@@ -14,7 +14,8 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
     Route::get('/', array('as' => 'SIndex','uses' => 'StaticsController@index'));
 
-    Route::get('{name}-{id}.html',array('as' => 'site.actionRouter','uses' =>'StaticsController@actionRouter', 'permission_name'=>'Tin tức'))->where('name', '[A-Z0-9a-z)_\-]+')->where('id', '[0-9]+');
+    /*
+     Route::get('{name}-{id}.html',array('as' => 'site.actionRouter','uses' =>'StaticsController@actionRouter', 'permission_name'=>'Tin tức'))->where('name', '[A-Z0-9a-z)_\-]+')->where('id', '[0-9]+');
 
     Route::get('tin-tuc', array('as' => 'site.pageStatic', 'uses' => 'StaticsController@pageStatic'));
     Route::get('tin-tuc/{name}-{id}.html', array('as' => 'site.detailStatics', 'uses' => 'StaticsController@DetailStatics'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
@@ -28,5 +29,6 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
     Route::post('dang-ky', array('as' => 'site.pageContactPost', 'uses' => 'StaticsController@pageContactPost'));
 
     Route::get('Tim-kiem', array('as' => 'site.pageStaticsSearch', 'uses' => 'StaticsController@pageSearch'));
+    */
 
 });
