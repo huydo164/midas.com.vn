@@ -1,0 +1,16 @@
+.header,
+.header-wrapper {
+	width: 100%;
+	z-index: 30;
+	position: relative;
+	background-size: cover;
+	background-position: 50% 0;
+	transition: background-color .3s, opacity .3s
+}
+div#top-bar {
+    display: none;
+}
+#masthead {
+	/*border-bottom: 1px solid #403c3c;*/
+	box-shadow: inset 0px 0px 0px 0px #fff, 0px 1px 0 0 #38301d;
+}

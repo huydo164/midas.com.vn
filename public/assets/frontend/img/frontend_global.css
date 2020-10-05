@@ -1,0 +1,842 @@
+/*GENEARAL*/
+
+.notshow {
+
+	display: none !important;
+
+}
+
+
+
+.float-right {
+
+	float: right !important;
+
+}
+
+
+
+.ajax-response,
+
+#ajax-response {
+
+	display: block;
+
+	width: 100%;
+
+}
+
+
+
+.msg-error,
+
+.ajax-response .error,
+
+#ajax-response .error{
+
+	border-left-color: #dc3232 !important;
+
+    border-top: 1px solid #eee !important;
+
+    color: #ff0000 !important;
+
+    padding: 10px !important;
+
+	font-size: 14px;
+
+}
+
+
+
+.msg-succesful,
+
+.ajax-response .succesful,
+
+#ajax-response .succesful{	
+
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+	border-left: 3px solid #5bb75b !important;
+
+    border-top: 1px solid #eee !important;
+
+    color: #5bb75b !important;
+
+    padding: 10px !important;
+
+	font-size: 14px;
+
+}
+
+
+
+
+
+.ajax-response .loading,
+
+#ajax-response .loading{
+
+	background: url("../images/ajax-loader.gif") top left no-repeat;
+
+	font-size: 16px;
+
+    height: 33px;
+
+    line-height: 33px;
+
+    margin: 10px 0;
+
+    text-indent: 40px;
+
+}
+
+
+
+.ajax-response.ajax-response-list .loading,
+
+#ajax-response.ajax-response-list .loading {
+
+	background:#FFF url("../images/ajax-loader.gif") 10px 10px no-repeat;
+
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+	width: calc(100% - 20px) !important;
+
+	border: 1px solid #eee;
+
+	margin: 10px 0px;
+
+	padding: 10px;
+
+	display: block;
+
+}
+
+
+
+.ajax-response.ajax-response-list .msg,
+
+#ajax-response.ajax-response-list .msg {
+
+	background-color:#FFF;
+
+}
+
+
+
+a.red-link {
+
+	color: #f00 !important;
+
+	text-decoration: none
+
+}
+
+
+
+a.red-link:hover {
+
+	color: #000 !important;
+
+	transition: all 0.2s ease;
+
+	-webkit-transition: all 0.2s ease;
+
+}
+
+
+
+
+
+/*JQUERY VALIDATOR*/
+
+form label.error,
+
+form .label.error{ 
+
+	color: #FF0000 !important;
+
+}
+
+
+
+form input.error,
+
+form textarea.error,
+
+form select.error { 
+
+	border-color: #FF0000 !important;
+
+}
+
+
+
+form input.error::placeholder,
+
+form textarea.error::placeholder{
+
+	color: #595959;
+
+}
+
+
+
+
+
+/*TEXTAREA*/
+
+textarea.comment {	
+
+	outline: 0;
+
+	width: 100%;
+
+	min-height: 50px;	
+
+	padding: 8px 10px;
+
+	border: 4px solid #DDD;	
+
+	-webkit-border-radius: 5px;
+
+	-moz-border-radius: 5px;
+
+	border-radius: 5px;
+
+}
+
+
+
+textarea.comment:hover,
+
+textarea.comment:focus {
+
+	border: 4px solid #1ABC9C;	
+
+}
+
+
+
+textarea.full {
+
+	width: 100%;
+
+	min-height: 100px;
+
+}
+
+
+
+
+
+/*INPUT TEXT*/
+
+input.half {
+
+	width: 50%;
+
+}
+
+ 
+
+
+
+/*BUTTON*/
+
+.cbtn {
+
+	text-transform:uppercase;
+
+	margin: 10px 20px 10px 0px; 
+
+	color: #FFF !important;
+
+	text-decoration: none;
+
+	display: inline-block;
+
+	padding: 5px 15px; 
+
+	border-radius: 2px;
+
+	position: relative;
+
+	font-size: 14px;
+
+	cursor:pointer; 
+
+	border: none;
+
+}
+
+
+
+.cbtn:active {
+
+	transform: translate(0px, 1px);
+
+	-webkit-transform: translate(0px, 1px);
+
+}
+
+
+
+
+
+.cbtn.blue {
+
+	background-color: #0088cc;
+
+}
+
+
+
+.cbtn.blue:hover {
+
+	background-color: #006DA3;
+
+}
+
+
+
+.cbtn.green {
+
+	background-color: #5bb75b;
+
+}
+
+
+
+.cbtn.green:hover {
+
+	background-color: #47A247;
+
+}
+
+
+
+.cbtn.red {
+
+	background-color: #da4f49;
+
+}
+
+
+
+.cbtn.red:hover {
+
+	background-color: #D0312A;
+
+}
+
+
+
+.cbtn.orange {
+
+	background-color: #faa732;
+
+}
+
+
+
+.cbtn.orange:hover {
+
+	background-color: #FAA732;
+
+}
+
+
+
+.cbtn.black {
+
+	background-color: #363636;
+
+}
+
+
+
+.cbtn.black:hover {
+
+	background-color: #000000;
+
+}
+
+
+
+
+
+/*CSS TABS*/
+
+.wrapper-css-tabs {
+
+	max-width: 100%;
+
+	width: 100%;
+
+	margin: 0 auto;
+
+}
+
+
+
+.css-tabs {
+
+	position: relative;
+
+	margin: 10px 0px;
+
+	background: #1abc9c;
+
+	/*height: 14.75rem;*/
+
+}
+
+
+
+.css-tabs::before,
+
+.css-tabs::after {
+
+  	content: "";
+
+  	display: table;
+
+}
+
+
+
+.css-tabs::after {
+
+  	clear: both;
+
+}
+
+.css-tabs .tab {
+
+  	float: left;
+
+}
+
+.css-tabs .tab-switch {
+
+  	display: none;
+
+}
+
+
+
+.css-tabs .tab-label {
+
+	position: relative;
+
+	display: block;
+
+	line-height: 2.75em;
+
+	height: 3em;
+
+	padding: 0 1.618em;
+
+	background: #1abc9c;
+
+	border-right: 0.125rem solid #16a085;
+
+	color: #fff;
+
+	cursor: pointer;
+
+	top: 0;
+
+	transition: all 0.25s;
+
+}
+
+
+
+.css-tabs .tab-label:hover {
+
+	top: -0.25rem;
+
+	transition: top 0.25s;
+
+}
+
+
+
+.css-tabs .tab-content {
+
+	left: 0;
+
+	z-index: 1;
+
+	top: 2.75em;
+
+	opacity: 0;
+
+	color: #2c3e50;
+
+	background: #fff;
+
+	position: absolute;
+
+	transition: all 0.35s;
+
+	width: -moz-available;
+
+	padding: 30px 30px 50px;
+
+	border-bottom: 0.25rem solid #bdc3c7;
+
+}
+
+
+
+.css-tabs .tab-switch:checked + .tab-label {
+
+	background: #fff;
+
+	color: #2c3e50;
+
+	border-bottom: 0;
+
+	border-right: 0.125rem solid #fff;
+
+	transition: all 0.35s;
+
+	z-index: 1;
+
+	top: -0.0625rem;
+
+}
+
+
+
+.css-tabs .tab-switch:checked + label + .tab-content {
+
+	z-index: 2;
+
+	opacity: 1;
+
+	transition: all 0.35s;
+
+}
+
+
+
+
+
+.nav_pagination{
+
+    float:right;
+
+}
+
+
+
+.nav_pagination li{
+
+	list-style-type: none;
+
+	display: inline-block;
+
+
+
+}
+
+
+
+.nav_pagination li a{
+
+	color: #fff;
+
+	background: #e1e1e1;
+
+	text-decoration: none;
+
+	padding: 3px 12px;
+
+	display: inline-block;
+
+	margin-left: 5px
+
+
+
+}
+
+
+
+.nav_pagination li a.is_active{
+
+    background: #00a1df !important;
+
+}
+
+
+
+.nav_pagination li a.prev_paged,
+
+.nav_pagination li a.next_paged {
+
+    padding: 3px 4px 3px 9px;
+
+}
+
+
+
+.not-show{
+
+	display: none !important;
+
+}
+
+
+
+.nav_pagination li a:hover,
+
+.nav_pagination li a:active{
+
+    background: #00a1df !important;
+
+}
+
+/* Call now */
+
+/* call-button */
+
+    #text-7{
+
+        position: fixed;
+
+        margin: 0;
+
+        padding: 0;
+
+        right: -10px;
+
+        top: 30%;
+
+        background: #fff;
+
+        background-color: transparent;
+
+        cursor: pointer;
+
+        font-size: 0;
+
+        width: 110px;
+
+        height: 110px;
+
+        z-index: 1000;
+
+    }
+
+    #text-7 .tada{
+
+        background: #c31610;
+
+        border-radius: 100px;
+
+        width: 40px;
+
+        height: 40px;
+
+        position: absolute;
+
+        left: 50%;
+
+        top: 50%;
+
+        margin-top: -20px;
+
+        margin-left: -20px;
+
+        animation-name: tada;
+
+        animation-duration: 0.5s;
+
+        animation-iteration-count: infinite;
+
+        animation-direction: alternate;
+
+    }
+
+    #text-7 .tada a:before{
+
+        position: absolute;
+
+        top: -4px;
+
+        content: "\f095";
+
+        font-size: 30px;
+
+        font-family: FontAwesome;
+
+        text-decoration: none;
+
+        color: #fff;
+
+        margin-left: 10px;
+
+        left: 0;
+
+    }
+
+
+
+    @keyframes tada {
+
+        from {transform:rotate(-20deg);}
+
+        to {transform:rotate(20deg);}
+
+    }
+
+	
+
+	#text-7 .pulse{
+
+        width: 60px;
+
+        height: 60px;
+
+        background: rgba(255, 64, 0, 0.4);
+
+        border-radius: 100px;
+
+        position: absolute;
+
+        top: 50%;
+
+        left: 50%;
+
+        margin-top: -30px;
+
+        margin-left: -30px;
+
+        animation-name: pulse;
+
+        animation-duration: 0.5s;
+
+        animation-iteration-count: infinite;
+
+        animation-direction: alternate;
+
+        animation-timing-function: ease-in-out;
+
+    }
+
+    @keyframes pulse {
+
+        from {
+
+            width: 55px;
+
+            height: 55px;
+
+            margin-top: -27.5px;
+
+            margin-left: -27.5px;
+
+        }
+
+        to {
+
+            width: 60px;
+
+            height: 60px;
+
+            margin-top: -30px;
+
+            margin-left: -30px;
+
+        }
+
+    }
+
+
+
+    #text-7 .zoomIn{
+
+        width: 80px;
+
+        height: 80px;
+
+        border: 2px solid #c31610;
+
+        border-radius: 100px;
+
+        position: absolute;
+
+        top: 50%;
+
+        left: 50%;
+
+        margin-top: -40px;
+
+        margin-left: -40px;
+
+        animation-name: zoomIn;
+
+        animation-duration: 1s;
+
+        animation-iteration-count: infinite;
+
+        animation-timing-function: ease-out;
+
+    }
+
+    @keyframes zoomIn {
+
+        from {   
+
+            width: 40px;
+
+            height: 40px;
+
+            margin-top: -20px;
+
+            margin-left: -20px;
+
+
+
+        }
+
+        to {
+
+            width: 80px;
+
+            height: 80px;
+
+            margin-top: -40px;
+
+            margin-left: -40px;
+
+        }
+
+    }
+
+
+
+    #text-7{
+
+    	position: static;
+
+    	width: 0;
+
+    	height: 0;
+
+    }
+
+
+
+
+
+
+
+
+
+
+

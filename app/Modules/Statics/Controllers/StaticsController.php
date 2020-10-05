@@ -25,9 +25,14 @@ class StaticsController extends BaseStaticsController{
         Loader::loadJS('libs/owl.carousel/owl.carousel.min.js', CGlobal::$postEnd);
         Loader::loadCSS('libs/owl.carousel/owl.carousel.min.css', CGlobal::$postHead);
 
+        $messages = Utility::messages('messages');
+
+        return view('Statics::content.index',[
+            'messages' => $messages
+        ]);
     }
 
-    public function actionRouter($catname, $catid){
+    /*public function actionRouter($catname, $catid){
         if($catid > 0 && $catname != ''){
             $arrCat = Category::getById($catid);
             if($arrCat != null){
@@ -50,7 +55,7 @@ class StaticsController extends BaseStaticsController{
         }else{
             return Redirect::route('page.404');
         }
-    }
+    }*/
 
 
 

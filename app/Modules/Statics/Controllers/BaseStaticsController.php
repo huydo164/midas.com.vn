@@ -39,57 +39,7 @@ class BaseStaticsController extends Controller{
         Loader::loadCSS('libs/jAlert/jquery.alerts.css', CGlobal::$postHead);
         Loader::loadCSS('libs/fontAwesome/css/font-awesome.min.css', CGlobal::$postHead);
 
-        $searchBannerHead['banner_status'] = CGlobal::status_show;
-        $searchBannerHead['banner_type'] = 0;
-        $searchBannerHead['field_get'] = 'banner_id,banner_title,banner_title_show,banner_image,banner_link,banner_is_target,banner_is_rel,banner_is_run_time,banner_start_time,banner_end_time';
-        $dataBannerHead = Banner::getBannerSite($searchBannerHead,$limit = 1, 'head');
-        $dataBannerHead = FuncLib::checkBannerShow($dataBannerHead);
-        View::share('dataBannerHead', $dataBannerHead);
 
-        $searchBannerContent['banner_status'] = CGlobal::status_show;
-        $searchBannerContent['banner_type'] = 1;
-        $searchBannerContent['field_get'] = 'banner_id,banner_title,banner_title_show,banner_image,banner_link,banner_is_target,banner_is_rel,banner_is_run_time,banner_start_time,banner_end_time';
-        $dataBannerContent = Banner::getBannerSite($searchBannerContent, $limit = 1, 'content');
-        $dataBannerContent = FuncLib::checkBannerShow($dataBannerContent);
-        View::share('dataBannerContent', $dataBannerContent);
-
-        $searchBannerFooter['banner_status'] = CGlobal::status_show;
-        $searchBannerFooter['banner_type'] = 2;
-        $searchBannerContent['field_get'] = 'banner_id,banner_title,banner_title_show,banner_image,banner_link,banner_is_target,banner_is_rel,banner_is_run_time,banner_start_time,banner_end_time';
-        $dataBannerFooter = Banner::getBannerSite($searchBannerFooter, $limit = 1, 'footer');
-        $dataBannerFooter = FuncLib::checkBannerShow($dataBannerFooter);
-        View::share('dataBannerFooter', $dataBannerFooter);
-
-        $searchBannerLeft['banner_status'] = CGlobal::status_show;
-        $searchBannerLeft['banner_type'] = 3;
-        $searchBannerLeft['field_get'] = 'banner_id,banner_title,banner_title_show,banner_image,banner_link,banner_is_target,banner_is_rel,banner_is_run_time,banner_start_time,banner_end_time';
-        $dataBannerLeft = Banner::getBannerSite($searchBannerLeft, $limit = 1, 'left');
-        $dataBannerLeft = FuncLib::checkBannerShow($dataBannerLeft);
-        View::share('dataBannerLeft', $dataBannerLeft);
-
-        $searchBannerRight['banner_status'] = CGlobal::status_show;
-        $searchBannerRight['banner_type'] = 4;
-        $searchBannerRight['field_get'] = 'banner_id,banner_title,banner_title_show,banner_image,banner_link,banner_is_target,banner_is_rel,banner_is_run_time,banner_start_time,banner_end_time';
-        $dataBannerRight = Banner::getBannerSite($searchBannerRight, $limit = 1, 'right');
-        $dataBannerRight = FuncLib::checkBannerShow($dataBannerRight);
-        View::share('dataBannerRight', $dataBannerRight);
-
-
-        $dataField['field_get'] = '';
-        $arrCategory = Category::getAllCategory(0, array(), 0);
-        View::share('arrCategory',$arrCategory);
-
-        $textHotline = strip_tags(self::viewShareVal('SITE_HOTLIINE'));
-        View::share('textHotline',$textHotline);
-
-        $textaddress = self::viewShareVal('SITE_FOOTER_LEFT');
-        View::share('textaddress',$textaddress);
-
-        $textLink = self::viewShareVal('SITE_FOOTER_LINK');
-        View::share('textLink',$textLink);
-
-        $textRight = self::viewShareVal('SITE_FOOTER_RIGHT');
-        View::share('textRight',$textRight);
     }
     public function page403(){
         $meta_img='';
