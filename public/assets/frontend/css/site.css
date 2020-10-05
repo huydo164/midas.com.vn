@@ -1,0 +1,45 @@
+@font-face {
+    font-family: samsung-one-400;
+    src: url(../fonts/samsung-one-400.eot?#iefix) format('embedded-opentype'),
+    url(../fonts/samsung-one-400.otf) format('opentype'),
+    url(../fonts/samsung-one-400.woff) format('woff'),
+    url(../fonts/samsung-one-400.ttf) format('truetype'),
+    url(../fonts/samsung-one-400.svg#samsung-one-400.eot) format('svg');
+    font-weight: 400;font-style: normal
+}
+@font-face{
+    font-family:samsung-one-700;
+    src:url(../fonts/samsung-one-700.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/samsung-one-700.otf) format("opentype"),
+    url(../fonts/samsung-one-700.woff) format("woff"),
+    url(../fonts/samsung-one-700.ttf) format("truetype"),
+    url(../fonts/samsung-one-700.svg#samsung-one-700) format("svg");
+    font-weight:400; font-style:normal
+}
+@font-face{
+    font-family:Roboto-Regular;
+    src:url(../fonts/Roboto-Regular.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/Roboto-Regular.otf) format("opentype"),
+    url(../fonts/Roboto-Regular.woff) format("woff"),
+    url(../fonts/Roboto-Regular.ttf) format("truetype"),
+    url(../fonts/Roboto-Regular.svg#samsung-one-700) format("svg");
+    font-weight:400; font-style:normal
+}
+@font-face{
+    font-family: Montserat-Regular;
+    src:url(../fonts/Montserrat-Regular.eot?#iefix) format("embedded-opentype"),
+    url(../fonts/Montserrat-Regular.otf) format("opentype"),
+    url(../fonts/Montserrat-Regular.woff) format("woff"),
+    url(../fonts/Montserrat-Regular.ttf) format("truetype"),
+    url(../fonts/Montserrat-Regular.svg#samsung-one-700) format("svg");
+    font-weight:400; font-style:normal
+}
+body {
+    font-family: Montserat-Regular;
+    font-size: 15px;
+    background:#fff;
+    color: #222;
+    line-height: 1.42857143;
+    width: 100%;
+    overflow: hidden;
+}
