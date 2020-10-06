@@ -14,6 +14,8 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
     Route::get('/', array('as' => 'SIndex','uses' => 'StaticsController@index'));
 
+    Route::get('contact', array('as' => 'SIndex','uses' => 'StaticsController@pageContact'));
+
     /*
      Route::get('{name}-{id}.html',array('as' => 'site.actionRouter','uses' =>'StaticsController@actionRouter', 'permission_name'=>'Tin tức'))->where('name', '[A-Z0-9a-z)_\-]+')->where('id', '[0-9]+');
 

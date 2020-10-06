@@ -33,4 +33,4 @@ use App\Library\PHPDev\ThumbImg;
             </div>
         </div>
     </div>
-</div>
+</div><?php /**PATH C:\wamp64\www\midas.com.vn\app\Modules/Statics/Views/block/header.blade.php ENDPATH**/ ?>
