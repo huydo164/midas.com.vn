@@ -1,5 +1,6 @@
 $(document).ready(function ($) {
     STATICS.navigationIcon();
+    STATICS.slickSlider();
 });
 
 STATICS = {
@@ -17,4 +18,14 @@ STATICS = {
             }
         })
     },
+
+    slickSlider:function () {
+        $(".slider-area").slick({
+            lazyLoad: 'ondemand', // ondemand progressive anticipated
+            infinite: true,
+            autoplay: true,
+            appendArrows: false,
+            appendDots: false
+        });
+    }
 };

@@ -12,6 +12,8 @@ use App\Library\PHPDev\FuncLib;
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="shortcut icon" href="<?php echo e(FuncLib::getBaseUrl()); ?>assets/frontend/img/favicon.ico" type="image/vnd.microsoft.icon">
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/bootstrap/css/bootstrap.css')); ?>" />
+    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/slick/slick.css')); ?>" />
+    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/slick/slick.theme.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/focus/css/reset.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/site.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/media.css')); ?>" />
@@ -19,6 +21,7 @@ use App\Library\PHPDev\FuncLib;
     <script src="<?php echo e(URL::asset('assets/frontend/js/site.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/focus/js/jquery.2.1.1.min.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/libs/bootstrap/js/bootstrap.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/slick/slick.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/libs/number/autoNumeric.js')); ?>"></script>
 	<?php echo CGlobal::$extraHeaderCSS; ?>
 
