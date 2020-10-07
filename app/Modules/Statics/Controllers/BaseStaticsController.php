@@ -39,6 +39,13 @@ class BaseStaticsController extends Controller{
         Loader::loadCSS('libs/jAlert/jquery.alerts.css', CGlobal::$postHead);
         Loader::loadCSS('libs/fontAwesome/css/font-awesome.min.css', CGlobal::$postHead);
 
+        $bannerHeader['banner_status'] = CGlobal::status_show;
+        $bannerHeader['banner_type'] = 0;
+        $bannerHeader['field_get'] = 'banner_id,banner_title,banner_title_show,banner_image,banner_link,banner_is_target,banner_is_rel,banner_is_run_time,banner_start_time,banner_end_time';
+        $dataBannerHeader = Banner::getBannerSite($bannerHeader, $limit = 2, 'header');
+        $dataBannerHeader = FuncLib::checkBannerShow($dataBannerHeader);
+        View::share('dataBannerHeader', $dataBannerHeader);
+
 
     }
     public function page403(){

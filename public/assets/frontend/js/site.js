@@ -1,6 +1,6 @@
 $(document).ready(function ($) {
     STATICS.navigationIcon();
-    STATICS.slickSlider();
+    STATICS.slider();
 });
 
 STATICS = {
@@ -19,13 +19,9 @@ STATICS = {
         })
     },
 
-    slickSlider:function () {
-        $(".slider-area").slick({
-            lazyLoad: 'ondemand', // ondemand progressive anticipated
-            infinite: true,
-            autoplay: true,
-            appendArrows: false,
-            appendDots: false
-        });
+    slider:function () {
+        $('.carousel').carousel({
+            interval: 2000
+        })
     }
 };

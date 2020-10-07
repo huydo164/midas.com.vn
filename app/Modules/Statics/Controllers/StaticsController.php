@@ -58,7 +58,10 @@ class StaticsController extends BaseStaticsController{
     }*/
 
 
+    public function pageService(){
 
+        return view('Statics::content.pageService');
+    }
 
     public function pageSearch(){
         $pageNo = (int)Request::get('page', 1);
