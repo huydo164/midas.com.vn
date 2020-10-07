@@ -61,12 +61,18 @@ class StaticsController extends BaseStaticsController{
         Loader::loadJS('libs/owl.carousel/owl.carousel.min.js', CGlobal::$postEnd);
         Loader::loadCSS('libs/owl.carousel/owl.carousel.min.css', CGlobal::$postHead);
 
+
         $messages = Utility::messages('messages');
         return view('Statics::content.contact',[
             'messages' => $messages
         ]);
     }
 
+    public function pageService(){
+
+
+        return view('Statics::content.pageService');
+    }
 
     public function pageSearch(){
         $pageNo = (int)Request::get('page', 1);

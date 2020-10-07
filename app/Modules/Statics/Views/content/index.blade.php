@@ -14,6 +14,7 @@ use App\Library\PHPDev\ThumbImg;
 @stop
 @section('content')
 
+
 <div class="service">
     <div class="container">
         <div class="title">
@@ -349,6 +350,21 @@ use App\Library\PHPDev\ThumbImg;
                 }
             });
         </script>
+
+<div id="content">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @if(isset($dataBannerHeader) && !empty($dataBannerHeader))
+                @foreach($dataBannerHeader as $item)
+                    @if ($item > 2)
+                        <div class="carousel-item active">
+                            <img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $item['banner_id'], $item['banner_image'], 2000, 0, '', true, true, false)}}" alt="">
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+        </div>
+
     </div>
 </div>
 <div class="testimonials">
