@@ -250,7 +250,8 @@ use App\Library\PHPDev\ThumbImg;
                 }
             });
         </script>
-
+    </div>
+</div>
 <div id="content">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">

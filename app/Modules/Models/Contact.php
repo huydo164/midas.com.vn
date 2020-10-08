@@ -16,7 +16,7 @@ class Contact extends Model{
     public $timestamps = false;
 
     protected $fillable = [
-        'contact_id','contact_title', 'contact_email', 'contact_phone', 'contact_content', 'contact_address' ,'contact_created','contact_type', 'contact_status'
+        'contact_id','contact_name', 'contact_email', 'contact_phone', 'contact_content', 'contact_address' ,'contact_created','contact_type', 'contact_status'
     ];
 
     public static function searchByCondition($dataSearch = array(), $limit = 0, $offset = 0, &$total){
