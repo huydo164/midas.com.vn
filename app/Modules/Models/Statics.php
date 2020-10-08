@@ -25,7 +25,7 @@ class Statics extends Model {
 
     protected $fillable = array(
         'statics_id', 'statics_catid', 'statics_cat_name', 'statics_cat_alias', 'statics_title', 'statics_intro', 'statics_content', 'statics_view_num',
-        'statics_image', 'statics_image_other', 'statics_created', 'statics_order_no', 'statics_focus', 'statics_status', 'statics_word', 'meta_title', 'meta_keywords', 'meta_description', 'statics_video');
+        'statics_image', 'statics_image_other', 'statics_created', 'statics_order_no', 'statics_focus', 'statics_status', 'statics_word', 'meta_title', 'meta_keywords', 'meta_description');
 
     public static function searchByCondition($dataSearch=array(), $limit=0, $offset=0, &$total){
         try{

@@ -46,6 +46,13 @@ class BaseStaticsController extends Controller{
         $dataBannerHeader = FuncLib::checkBannerShow($dataBannerHeader);
         View::share('dataBannerHeader', $dataBannerHeader);
 
+        $bannerPage['banner_status'] = CGlobal::status_show;
+        $bannerPage['banner_type'] = 1;
+        $bannerPage['field_get'] = 'banner_id,banner_title,banner_title_show,banner_image,banner_link,banner_is_target,banner_is_rel,banner_is_run_time,banner_start_time,banner_end_time';
+        $dataBannerPage = Banner::getBannerSite($bannerPage, $limit = 1, 'header page');
+        $dataBannerPage = FuncLib::checkBannerShow($dataBannerPage);
+        View::share('dataBannerPage', $dataBannerPage);
+
 
     }
     public function page403(){

@@ -337,7 +337,7 @@ class FuncLib{
     //Buid Link Statics Detail
     static function buildLinkDetailStatic($id = 0, $statics_title = 'Tin-tuc'){
         if ($id > 0) {
-            return URL::route('site.detailStatics', array('id' => $id, 'name' => strtolower(FuncLib::safeTitle($statics_title))));
+            return URL::route('site.pageStaticsDetail', array('id' => $id, 'name' => strtolower(FuncLib::safeTitle($statics_title))));
         }
         return '#';
     }
