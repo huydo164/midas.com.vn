@@ -247,6 +247,7 @@ class Statics extends Model {
                 }else{
                     $result = $query->take($limit)->get();
                 }
+                
             }
 
         }catch (PDOException $e){

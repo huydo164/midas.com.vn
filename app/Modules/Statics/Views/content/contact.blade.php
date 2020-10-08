@@ -30,24 +30,25 @@ use App\Library\PHPDev\ThumbImg;
             <div class="col-md-6">
                 <h2>LIÊN HỆ VỚI CHÚNG TÔI</h2>
                 <div class="form">
-                    <form action="">
+                    <form action="{{ URL::route('site.pageContactPost') }}" method="POST">
                         <div class="input">
-                            <input type="text" placeholder="Họ và tên">
+                            <input type="text" placeholder="Họ và tên" name="contact_name">
                         </div>
                         <div class="input">
-                            <input type="text" placeholder="Số điện thoại">
+                            <input type="text" placeholder="Số điện thoại" name="contact_phone">
                         </div>
                         <div class="input mail">
-                            <input type="text" placeholder="Email">
+                            <input type="text" placeholder="Email" name="contact_email">
                             <i class="fa fa-envelope"></i>
 
                         </div>
                         <div class="input">
-                            <input type="text" placeholder="Ghi chú">
+                            <input type="text" placeholder="Ghi chú" name="contact_content">
                         </div>
                         <div class="button">
                             <button>Gửi ngay</button>
                         </div>
+                        {!! csrf_field() !!}
                     </form>
                 </div>
             </div>

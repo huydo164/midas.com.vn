@@ -124,7 +124,7 @@ body {
 .header li ul {
     background: #002020;
     position: absolute;
-    top: 35px;
+    top: 61px;
     left: 0;
     white-space: nowrap;
     padding: 0;
@@ -132,6 +132,8 @@ body {
     display: none;
     min-width: 200px;
     z-index: 999;
+    border: 1px solid #fecd43;
+    border-radius: 0;
 }
 
 .header li:hover ul {
@@ -139,10 +141,13 @@ body {
 }
 
 .header li ul li {
+    padding-right: 0px;
+    width: 100%;
     display: block;
     float: none;
-    margin: 0px 12px;
-    line-height: normal
+    text-align: center;
+    line-height: normal;
+    border-bottom: 1px solid;
 }
 
 .header li ul li a {
@@ -152,12 +157,17 @@ body {
     width: 100%;
     overflow: hidden;
     color: white;
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0); */
     transition: all .2s ease-in-out;
 }
 
-.header li ul li a:hover {
-    border-bottom: 1px solid #fff;
+.header li ul li:hover {
+    background: #fecd43;
+}
+
+.header li ul li:hover a {
+    color: black;
+    /* border: none; */
 }
 
 .header ul li:last-child {
@@ -521,6 +531,10 @@ h2 {
     background-color: #f8cb41;
 }
 
+.collection .col-md-6 {
+    margin-bottom: 13px;
+}
+
 .collection h3 {
     margin-bottom: 15px;
     font-size: 25px;
@@ -534,7 +548,7 @@ h2 {
 }
 
 .collection .right img {
-    height: 142px;
+    height: 165px;
 }
 
 .collection {
@@ -661,6 +675,7 @@ h2 {
 
 .contact .input {
     margin-bottom: 25px;
+    color: black;
 }
 
 .contact .input.mail {
