@@ -10,11 +10,11 @@ use App\Library\PHPDev\ThumbImg;
     <div class="service-menu">
         <div class="list-service">
             <ul>
-                <li><a href="">Mạ vàng nhà</a></li>
-                <li><a href="">Mạ vàng đồng hồ</a></li>
-                <li><a href="">Mạ vàng đình chùa</a></li>
-                <li><a href="">Mạ vàng oto</a></li>
-                <li><a href="">Các dự án thực hiện</a></li>
+                @if(isset($data_dich_vu) && !empty($data_dich_vu))
+                    @foreach($data_dich_vu as $item)
+                        <li><a href="{{FuncLib::buildLinkDetailStatic($item->statics_id, $item->statics_title)}}">{{ $item->statics_title }}</a></li>
+                    @endforeach
+                @endif
             </ul>
         </div>
     </div>
@@ -22,7 +22,7 @@ use App\Library\PHPDev\ThumbImg;
     <!----------service----------->
 
     <div class="keyword">
-        <h2>Từ khóa</h2>
+        <h2>{!! isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : '' !!}</h2>
         <div class="list-key">
             <ul>
                 <li><a href="">Tượng</a></li>
@@ -40,7 +40,7 @@ use App\Library\PHPDev\ThumbImg;
     <!------------keyword--------------->
 
     <div class="Contact-form">
-        <h2>Liên hệ với chúng tôi</h2>
+        <h2>{!! isset($text_lien_he_voi_chung_toi) ? strip_tags($text_lien_he_voi_chung_toi) : '' !!}</h2>
         <form class="iForm" action="" method="POST">
             <div class="form-group">
                 <input type="text" name="" class="form-control" id="name" placeholder="Họ và tên">

@@ -134,8 +134,6 @@ class StaticsController extends BaseAdminController{
             'statics_created'=>array('value'=>time()),
             'statics_status'=>array('value'=>(int)Request::get('statics_status', -1),'require'=>0),
             'statics_focus'=>array('value'=>(int)Request::get('statics_focus', -1),'require'=>0),
-
-
             'meta_title'=>array('value'=>addslashes(Request::get('meta_title')),'require'=>0),
             'meta_keywords'=>array('value'=>addslashes(Request::get('meta_keywords')),'require'=>0),
             'meta_description'=>array('value'=>addslashes(Request::get('meta_description')),'require'=>0),
