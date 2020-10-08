@@ -65,7 +65,6 @@ use App\Library\PHPDev\ThumbImg;
                                                             </div>
                                                         </div>
                                                         <div class="clearfix"></div>
-                                                        
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
                                                                 <label class="control-label">Ảnh</label>

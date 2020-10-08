@@ -75,6 +75,7 @@ class StaticsController extends BaseStaticsController{
         }
 
 
+
         $cat_aboutme   = (int)strip_tags(self::viewShareVal('CAT_ID_ABOUTME'));
         $data_aboutme  = [];
         if ($data_aboutme  > 0){

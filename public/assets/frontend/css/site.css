@@ -36,6 +36,10 @@ body {
     overflow: hidden;
 }
 
+.footer-top p {
+    margin-bottom: 0;
+}
+
 .slider {
     width: 100%;
     margin: 0 auto;
@@ -223,6 +227,7 @@ h2 {
 }
 
 .footer-mid {
+    padding: 20px 0px;
     border-top: 1px solid #38301d;
     background: #121111;
 }
@@ -278,6 +283,7 @@ h2 {
 }
 
 .service {
+    padding: 20px 0px;
     background-image: url('http://localhost:8080/midas.com.vn/public/assets/frontend/img/bg.png');
     color: white;
 }
@@ -295,6 +301,7 @@ h2 {
 }
 
 .service h3 {
+    margin-top: 19px;
     margin-bottom: 15px;
     font-size: 25px;
     font-weight: 500;
@@ -343,11 +350,13 @@ h2 {
     width: 100%;
     text-transform: uppercase;
 }
-.commitment span{
+
+.commitment span {
     margin: 0 21px;
 }
 
 .commitment {
+    padding: 25px;
     background: #121111;
     color: white;
 }
@@ -426,6 +435,7 @@ h2 {
 }
 
 .highlights {
+    padding: 24px;
     background-image: url('http://localhost:8080/midas.com.vn/public/assets/frontend/img/bg.png');
 }
 
@@ -557,6 +567,7 @@ h2 {
 
 .collection {
     background: #121111;
+    padding: 20px;
 }
 
 .testimonials {
@@ -724,26 +735,32 @@ h2 {
 .contact button:hover {
     background: red;
 }
+
+
 /*---------------- left page -----------------*/
-#left-page h2, .info-service h2{
+
+#left-page h2,
+.info-service h2 {
     font-size: 22px;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-.info-service h2::before{
+.info-service h2::before {
     content: "\f0c9";
     font-family: FontAwesome;
     color: #fff;
     font-size: 20px;
     margin-right: 11px;
 }
-.list-service{
+
+.list-service {
     background: #FECD43;
     padding: 0px 15px;
     margin-bottom: 40px;
 }
-.list-service li{
+
+.list-service li {
     background: url("../img/triangle.png") no-repeat;
     background-size: 17px;
     background-position-y: 50%;
@@ -751,121 +768,151 @@ h2 {
     line-height: 45px;
     border-bottom: 1px solid #333;
 }
-.list-service li:last-child{
+
+.list-service li:last-child {
     border-bottom: none;
 }
-.list-service li a{
+
+.list-service li a {
     color: #000;
     display: block;
     font-weight: bold;
     font-size: 16px;
 }
-.list-service a:hover{
+
+.list-service a:hover {
     color: #fff;
 }
+
+
 /*--------- service ---------*/
 
-.keyword{
+.keyword {
     margin-bottom: 35px;
 }
-.list-key li{
+
+.list-key li {
     display: inline-block;
     line-height: 33px;
 }
 
-.list-key a{
+.list-key a {
     text-transform: uppercase;
     color: #fff;
     display: block;
     text-align: center;
     padding: 0 9px;
 }
-.list-key a:hover{
+
+.list-key a:hover {
     background: #fecd43;
     color: #000;
     border-radius: 5px;
 }
+
+
 /*--------- keyword ------------*/
 
-.iForm{
+.iForm {
     padding: 20px;
     background: #fecd43;
 }
-.iForm input, .iForm textarea{
+
+.iForm input,
+.iForm textarea {
     border-radius: 0;
 }
-.icon-mail{
+
+.icon-mail {
     color: #000;
     float: right;
     position: relative;
     bottom: 27px;
     padding-right: 15px;
 }
-.btn-click{
+
+.btn-click {
     text-align: center;
 }
-.btnBox{
+
+.btnBox {
     background: #333;
     text-transform: uppercase;
     font-size: 14px;
     border: none;
 }
-.btnBox:hover{
+
+.btnBox:hover {
     background: red;
 }
+
+
 /*---------------- Page Service ---------------*/
-#pd-page{
+
+#pd-page {
     padding-top: 80px;
 }
-.dich-vu h4{
+
+.dich-vu h4 {
     line-height: 17px;
     font-size: 20px;
     color: #fecd43;
     margin-bottom: 24px;
     font-weight: bold;
 }
-.dich-vu p{
+
+.dich-vu p {
     color: #cac9c9;
     line-height: 25px;
     font-size: 16px;
 }
-.dich-vu span img{
+
+.dich-vu span img {
     width: 30%;
 }
-.click-link{
+
+.click-link {
     margin-bottom: 60px;
     margin-top: 25px;
 }
-.click-link li{
+
+.click-link li {
     background: url("../img/triangle-white.png") no-repeat;
     background-size: 17px;
     padding-left: 25px;
     background-position-y: 50%;
     line-height: 23px;
 }
-.click-link a{
+
+.click-link a {
     display: block;
     color: #fff;
     font-size: 16px;
 }
-.click-link a:hover{
+
+.click-link a:hover {
     color: #fecd43;
 }
 
+
 /*----------------page Service Detail *--------------------*/
-.blog-share{
+
+.blog-share {
     text-align: center;
 }
-.divider{
+
+.divider {
     height: 3px;
     background: #000;
     margin: 34px 394px;
 }
-.blog-share a{
+
+.blog-share a {
     color: silver;
     display: inline-block;
 }
-.box{
+
+.box {
     border: 2px solid currentColor;
     background-color: transparent;
     padding: 4px;
@@ -873,17 +920,23 @@ h2 {
     width: 34px;
     border-radius: 50%;
 }
-.blog-share a:hover{
+
+.blog-share a:hover {
     color: #fff;
 }
-.blog-share .box:hover{
+
+.blog-share .box:hover {
     border: none;
     padding: 5px;
 }
-.blog-share .btn-face:hover, .blog-share .btn-twit:hover, .blog-share .btn-link:hover{
+
+.blog-share .btn-face:hover,
+.blog-share .btn-twit:hover,
+.blog-share .btn-link:hover {
     background-color: #3a589d;
 }
 
-.blog-share .btn-print:hover, .blog-share .btn-gg:hover{
-    background-color: #dd4e31 ;
+.blog-share .btn-print:hover,
+.blog-share .btn-gg:hover {
+    background-color: #dd4e31;
 }

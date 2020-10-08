@@ -14,6 +14,7 @@ use App\Library\PHPDev\ThumbImg;
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
+
 <div class="service">
     <div class="container">
         <div class="title">
@@ -249,6 +250,22 @@ use App\Library\PHPDev\ThumbImg;
                 }
             });
         </script>
+    </div>
+</div>
+<div id="content">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <?php if(isset($dataBannerHeader) && !empty($dataBannerHeader)): ?>
+                <?php $__currentLoopData = $dataBannerHeader; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($item > 2): ?>
+                        <div class="carousel-item active">
+                            <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $item['banner_id'], $item['banner_image'], 2000, 0, '', true, true, false)); ?>" alt="">
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
+        </div>
+
     </div>
 </div>
 <div class="testimonials">
