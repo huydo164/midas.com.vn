@@ -15,6 +15,7 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
     Route::get('/', array('as' => 'SIndex','uses' => 'StaticsController@index'));
 
 
+
     Route::get('contact', array('as' => 'SIndex','uses' => 'StaticsController@pageContact'));
 
     Route::get('dich-vu', array('as' => 'site.pageService' , 'uses' => 'StaticsController@pageService'));
@@ -36,5 +37,10 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
     Route::get('Tim-kiem', array('as' => 'site.pageStaticsSearch', 'uses' => 'StaticsController@pageSearch'));
     */
+
+    Route::get('contact', array('as' => 'site.pageContact', 'uses' => 'StaticsController@pageContact'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
+    Route::post('lien-he', array('as' => 'site.pageContactPost', 'uses' => 'StaticsController@pageContactPost'));
+    
+
 
 });
