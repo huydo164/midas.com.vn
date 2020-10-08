@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [2020-10-08 15:54:05] local.ERROR: file_put_contents(D:\wamp64\www\project.vn\midas.com.vn\storage\framework/sessions/8h9K4DoksUJqj5L62gqK5t6kjpXs8bQaesm3CkxO): failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(D:\\wamp64\\www\\project.vn\\midas.com.vn\\storage\\framework/sessions/8h9K4DoksUJqj5L62gqK5t6kjpXs8bQaesm3CkxO): failed to open stream: No such file or directory at D:\\wamp64\\www\\project.vn\\midas.com.vn\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php:122)
+=======
+[2020-10-08 15:49:33] local.ERROR: file_put_contents(D:\wamp64\www\project.vn\midas.com.vn\storage\framework/sessions/8h9K4DoksUJqj5L62gqK5t6kjpXs8bQaesm3CkxO): failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(D:\\wamp64\\www\\project.vn\\midas.com.vn\\storage\\framework/sessions/8h9K4DoksUJqj5L62gqK5t6kjpXs8bQaesm3CkxO): failed to open stream: No such file or directory at D:\\wamp64\\www\\project.vn\\midas.com.vn\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php:122)
+>>>>>>> huy
 [stacktrace]
 #0 [internal function]: Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', 'D:\\\\wamp64\\\\www\\\\p...', 122, Array)
 #1 D:\\wamp64\\www\\project.vn\\midas.com.vn\\vendor\\laravel\\framework\\src\\Illuminate\\Filesystem\\Filesystem.php(122): file_put_contents('D:\\\\wamp64\\\\www\\\\p...', 'a:3:{s:6:\"_toke...', 2)
