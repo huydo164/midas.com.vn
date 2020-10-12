@@ -19,6 +19,9 @@ use App\Library\PHPDev\ThumbImg;
     </div>
     <div id="pd-page">
         <div class="container">
+            <div class="info-service">
+                <h2><?php echo isset($text_dvct) ? strip_tags($text_dvct) : ''; ?></h2>
+            </div>
             <div class="row">
                 <div class="col-lg-3">
                     <?php echo $__env->make('Statics::block.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -27,12 +30,11 @@ use App\Library\PHPDev\ThumbImg;
                     <div class="commitment">
                         <h3>
                             <b></b>
-                            <span>Giới thiệu về công ty</span>
+                            <span><?php echo isset($text_gioi_thieu_cong_ty) ? strip_tags($text_gioi_thieu_cong_ty) : ''; ?></span>
                             <b></b>
                         </h3>
                     </div>
                     <div class="dich-vu">
-                        <h4>Dịch vụ mạ vàng nhà</h4>
                         <p class="tt-service">
                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
                         </p>

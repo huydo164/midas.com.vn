@@ -1,59 +1,59 @@
+<?php
+
+use App\Library\PHPDev\CGlobal;
+use App\Library\PHPDev\FuncLib;
+use App\Library\PHPDev\ThumbImg;
+?>
 <div class="footer">
     <div class="footer-top">
         <div class="container">
-            <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/logo.png"/>
-            <h6>HỆ THỐNG SẢN PHẨM MẠ VÀNG</h6>
-            <p>TƯ VẤN MUA HÀNG: <span>0182.44.55.828 - 01159.865.523</span> </p>
-            <p>ĐỊA CHỈ: SỐ 12 NGÕ 34 ĐƯỜNG LĨNH NAM - HOÀNG MAI - HÀ NỘI</p>
-            <p> <i class="far fa-envelope"></i> MAVANGMIDAS@GMAIL.COM</p>
+            <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $arrTextLogo->info_id, $arrTextLogo->info_img, 800, 0, '', true, true)); ?>"/>
+            <h6><?php echo $arrTextLogo->info_content; ?></h6>
+            <p><?php echo $text1->info_content; ?>: <span><?php echo $text_sdt->info_content; ?></span> </p>
+            <p><?php echo $text_add->info_content; ?></p>
+            <p> <i class="far fa-envelope"></i> <?php echo $text_mail->info_content; ?></p>
         </div>
     </div>
     <div class="footer-mid">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+                    <h2><?php echo e($name_cat_support->info_intro); ?></h2>
                     <div class="gach"></div>
                     <ul>
+                        <?php if(isset($data_support) && !empty($data_support)): ?>
+                            <?php $__currentLoopData = $data_support; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li>
-                            <a href="#">Hướng dẫn mua hàng</a>
+                            <a href="#"><?php echo e($item->statics_cat_name); ?></a>
                         </li>
-                        <li>
-                            <a href="#">Vận chuyển</a>
-                        </li>
-                        <li>
-                            <a href="#">Chính sách bảo mật</a>
-                        </li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+                <h2><?php echo e($name_cat_chinhsach->info_intro); ?></h2>
                     <div class="gach"></div>
                     <ul>
+                        <?php if(isset($data_chinhsach) && !empty($data_chinhsach)): ?>
+                            <?php $__currentLoopData = $data_chinhsach; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li>
-                            <a href="#">Hướng dẫn mua hàng</a>
+                            <a href="#"><?php echo e($item->statics_cat_name); ?></a>
                         </li>
-                        <li>
-                            <a href="#">Vận chuyển</a>
-                        </li>
-                        <li>
-                            <a href="#">Chính sách bảo mật</a>
-                        </li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                <h2>HỖ TRỢ KHÁCH HÀNG</h2>
+                <h2><?php echo e($name_cat_hotline->info_intro); ?></h2>
                     <div class="gach"></div>
                     <ul>
+                        <?php if(isset($data_hotline) && !empty($data_hotline)): ?>
+                            <?php $__currentLoopData = $data_hotline; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <li>
-                            <a href="#">Hướng dẫn mua hàng</a>
+                            <a href="#"><?php echo e($item->statics_title); ?></a>
                         </li>
-                        <li>
-                            <a href="#">Vận chuyển</a>
-                        </li>
-                        <li>
-                            <a href="#">Chính sách bảo mật</a>
-                        </li>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
@@ -61,7 +61,7 @@
     </div>
     <div class="footer-bot">
         <div class="container">
-            <p>Bản quyền thuộc về Copyright 2020 © <a href=""> xuongmavang.com</a> . Thiết kế web bởi <a href=""> http://thietkewebwp.vn </a></p>
+            <p><?php echo $text_bot->info_content; ?></p>
         </div>
     </div>
 </div>

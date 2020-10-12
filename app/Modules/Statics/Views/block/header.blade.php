@@ -22,7 +22,7 @@ use App\Library\PHPDev\ThumbImg;
                                 @endif
                             @endforeach
                             <li>
-                                <a @if($i > 0) @endif title="{{$cat->category_title}}" >
+                                <a @if($i > 0) @endif title="{{$cat->category_title}}" href="@if($cat->category_link_replace != ''){{$cat->category_link_replace}}@else{{FuncLib::buildLinkCategory($cat->category_id, $cat->category_title)}}@endif" >
                                     {{$cat->category_title}}
                                 </a>
                                 @if($i > 0)
@@ -30,7 +30,7 @@ use App\Library\PHPDev\ThumbImg;
                                         @foreach($arrCategory as $sub)
                                             @if($sub->category_menu == CGlobal::status_show && $sub->category_parent_id == $cat->category_id)
                                                 <li>
-                                                    <a title="{{$sub->category_title}}">
+                                                    <a title="{{$sub->category_title}}" href="@if($sub->category_link_replace != ''){{$sub->category_link_replace}}@else{{FuncLib::buildLinkDetailStatic($sub->category_id, $sub->category_title)}}@endif">
                                                         {{stripcslashes($sub->category_title)}}
                                                     </a>
                                                 </li>

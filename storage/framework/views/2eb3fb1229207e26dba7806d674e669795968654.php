@@ -9,14 +9,49 @@ use App\Library\PHPDev\ThumbImg;
 <div id="left-page">
     <div class="service-menu">
         <div class="list-service">
-            <ul>
-                <?php if(isset($data_dich_vu) && !empty($data_dich_vu)): ?>
-                    <?php $__currentLoopData = $data_dich_vu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <li><a href="<?php echo e(FuncLib::buildLinkDetailStatic($item->statics_id, $item->statics_title)); ?>"><?php echo e($item->statics_title); ?></a></li>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                <?php endif; ?>
-            </ul>
+            <?php if(isset($arrCategory) && !empty($arrCategory)): ?>
+                <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                        <?php if($cat->category_id == 680): ?>
+                            <ul class="menu-sub">
+                                <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if( $sub->category_parent_id == $cat->category_id): ?>
+                                        <li>
+                                            <a title="<?php echo e($sub->category_title); ?>" href="<?php if($sub->category_link_replace != ''): ?><?php echo e($sub->category_link_replace); ?><?php else: ?><?php echo e(FuncLib::buildLinkDetailStatic($sub->category_id, $sub->category_title)); ?><?php endif; ?>">
+                                                <?php echo e(stripcslashes($sub->category_title)); ?>
+
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                        <?php endif; ?>
+
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
         </div>
+    </div>
+
+    <div class="search-box">
+        <?php if(isset($dataCate->category_id) && !empty($dataCate->category_id)): ?>
+            <?php if($dataCate->category_id > 0 ): ?>
+                <form action="<?php echo e(URL::route('site.pageSearch')); ?>" method="GET" id="formSearch">
+                    <input type="text" class="form-control" name="statics_title" autocomplete="off" id="inputBox" placeholder="Tìm kiếm...">
+                    <button type="submit" class="btn btn-primary btn-search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            <?php endif; ?>
+        <?php elseif(isset($dataCate->statics_id) && !empty($dataCate->statics_id)): ?>
+            <?php if($dataCate->statics_id > 0): ?>
+                <form action="<?php echo e(URL::route('site.pageSearch')); ?>" method="GET" id="formSearch">
+                    <input type="text" class="form-control" name="statics_title" autocomplete="off" id="inputBox" placeholder="Tìm kiếm...">
+                    <button type="submit" class="btn btn-primary btn-search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            <?php endif; ?>
+        <?php endif; ?>
     </div>
 
     <!----------service----------->
@@ -24,16 +59,22 @@ use App\Library\PHPDev\ThumbImg;
     <div class="keyword">
         <h2><?php echo isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : ''; ?></h2>
         <div class="list-key">
-            <ul>
-                <li><a href="">Tượng</a></li>
-                <li><a href="">Vàng</a></li>
-                <li><a href="">Mạ vàng</a></li>
-                <li><a href="">Vật phẩm</a></li>
-                <li><a href="">Kích thước</a></li>
-                <li><a href="">Video</a></li>
-                <li><a href="">Tin dùng</a></li>
-                <li><a href="">Giá tiền</a></li>
-            </ul>
+            <?php if(isset($arrCategory) && !empty($arrCategory)): ?>
+                <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($item->category_id == 680): ?>
+                        <ul>
+                            <li><a href="">Tượng</a></li>
+                            <li><a href="">Vàng</a></li>
+                            <li><a href="">Mạ vàng</a></li>
+                            <li><a href="">Vật phẩm</a></li>
+                            <li><a href="">Kích thước</a></li>
+                            <li><a href="">Video</a></li>
+                            <li><a href="">Tin dùng</a></li>
+                            <li><a href="">Giá tiền</a></li>
+                        </ul>
+                    <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
         </div>
     </div>
 

@@ -778,6 +778,7 @@ h2 {
     display: block;
     font-weight: bold;
     font-size: 16px;
+    text-transform: uppercase;
 }
 
 .list-service a:hover {
@@ -894,6 +895,18 @@ h2 {
     color: #fecd43;
 }
 
+.bg-none {
+    margin-top: 30px;
+}
+
+.bg-none li {
+    background: url("../img/triangle-white.png") no-repeat;
+    padding-left: 32px;
+    line-height: 33px;
+    background-position-y: 50%;
+    background-size: 20px;
+}
+
 
 /*----------------page Service Detail *--------------------*/
 
@@ -942,483 +955,148 @@ h2 {
 }
 
 
-/*--------- DANH MUC SAN PHAM ---------------*/
+/*------------- Page Các dự án đã thực hiện --------------------*/
 
-ul.breadcrumb {
-    background: transparent;
-    padding: 0;
+.pro-contro {
+    margin-bottom: 30px;
 }
 
-a {}
-
-ul.breadcrumb li a {
-    color: #fecd43;
-}
-
-.price .container {
-    margin-top: 125px;
-}
-
-.slider-labels {
-    margin-top: 10px;
-}
-
-
-/* Functional styling;
-   * These styles are required for noUiSlider to function.
-   * You don't need to change these rules to apply your design.
-   */
-
-.noUi-target,
-.noUi-target * {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -ms-touch-action: none;
-    touch-action: none;
-    -ms-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.noUi-target {
-    position: relative;
-    direction: ltr;
-}
-
-.noUi-base {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 1;
-    /* Fix 401 */
-}
-
-.noUi-origin {
-    position: absolute;
-    right: 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
-}
-
-.noUi-handle {
-    position: relative;
-    z-index: 1;
-}
-
-.noUi-stacking .noUi-handle {
-    /* This class is applied to the lower origin when
-     its values is > 50%. */
-    z-index: 10;
-}
-
-.noUi-state-tap .noUi-origin {
-    -webkit-transition: left 0.3s, top .3s;
-    transition: left 0.3s, top .3s;
-}
-
-.noUi-state-drag * {
-    cursor: inherit !important;
-}
-
-
-/* Painting and performance;
-   * Browsers can paint handles in their own layer.
-   */
-
-.noUi-base,
-.noUi-handle {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-}
-
-
-/* Slider size and handle placement;
-   */
-
-.noUi-horizontal {
-    height: 4px;
-}
-
-.noUi-horizontal .noUi-handle {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    left: -7px;
-    top: -7px;
-    background-color: #345DBB;
-}
-
-
-/* Styling;
-   */
-
-.noUi-background {
-    background: #D6D7D9;
-}
-
-.noUi-connect {
-    background: #345DBB;
-    -webkit-transition: background 450ms;
-    transition: background 450ms;
-}
-
-.noUi-origin {
-    border-radius: 2px;
-}
-
-.noUi-target {
-    border-radius: 2px;
-}
-
-.noUi-target.noUi-connect {}
-
-
-/* Handles and cursors;
-   */
-
-.noUi-draggable {
-    cursor: w-resize;
-}
-
-.noUi-vertical .noUi-draggable {
-    cursor: n-resize;
-}
-
-.noUi-handle {
-    cursor: default;
-    -webkit-box-sizing: content-box !important;
-    -moz-box-sizing: content-box !important;
-    box-sizing: content-box !important;
-}
-
-.noUi-handle:active {
-    border: 8px solid #345DBB;
-    border: 8px solid rgba(53, 93, 187, 0.38);
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    left: -14px;
-    top: -14px;
-}
-
-
-/* Disabled state;
-   */
-
-[disabled].noUi-connect,
-[disabled] .noUi-connect {
-    background: #B8B8B8;
-}
-
-[disabled].noUi-origin,
-[disabled] .noUi-handle {
-    cursor: not-allowed;
-}
-
-
-/*-- danh muc --*/
-
-.noidung h4 {
-    /* margin-left: 10px; */
-    font-size: 19px;
-}
-
-.noidung h4 i {
-    margin-right: 7px;
-}
-
-span.ui-slider-handle.ui-corner-all.ui-state-default {
-    outline: none;
-    background: #fecd43;
-    width: 7px;
-    border-radius: 999px;
-    cursor: pointer;
-    border: none;
-}
-
-input[type="text"] {}
-
-.input {
-    width: 85%;
-    display: inline-block;
-}
-
-.icon {
-    width: 13%;
-    display: inline-block;
-}
-
-input[type="text"] {
-    padding: 5px 10px;
-    width: 100%;
-}
-
-i.icon-search:before {
-    content: "\e012";
-}
-
-button {
-    padding: 5px 10px;
-}
-
-.price {
-    margin-top: 20px;
-}
-
-.price button {
-    border: navajowhite;
-    border-radius: 15px;
-    padding: 4px 14px;
-    text-transform: uppercase;
-    color: white;
-    background: #666;
-}
-
-.price p {
-    margin-top: 16px;
-}
-
-.price input#amount {
-    padding-left: 14px;
-    background: transparent;
-    color: white;
-    font-size: 13px;
-    width: 74%;
-}
-
-.news .col-md-4 {
-    padding: 0;
-}
-
-.news img {
-    width: 100%;
-}
-
-.news a span.name {
-    color: #fecd43;
-    font-weight: 500;
-    font-size: 17px;
-}
-
-.news p.time {
-    font-size: 12px;
-    margin-top: 6px;
-}
-
-.news li {
-    padding-top: 14px;
-}
-
-.news .row {
-    border-bottom: 1px solid white;
-    padding-bottom: 15px;
-}
-
-.noidung p.gt {
-    color: #bbbbbb;
-}
-
-.right .sp {
-    text-align: center;
-}
-
-.right .nd {
-    margin-top: 15px;
-}
-
-.right p.price {
-    margin-top: 0px;
-    color: #fecd43;
-    font-weight: bolder;
-}
-
-.right p.name {
-    margin-bottom: 4px;
-}
-
-.right img:hover {
-    opacity: 0.8;
-    transition: 0.5s;
-}
-
-
-/* ------ product details --------- */
-
-.top {
-    padding-top: 28px;
-}
-
-h1.product-title {
-    color: #fecd43;
-    font-weight: 500;
-    font-size: 19px;
-    text-transform: uppercase;
-}
-
-.breadcrums a {
-    color: #ffdb76 !important;
-}
-
-.carousel {
-    background: #FAFAFA;
+.title-project {
     margin-bottom: 40px;
 }
 
-.carousel-cell {
-    width: 100%;
-    height: 200px;
-    margin-right: 10px;
-    background: #8C8;
-    border-radius: 5px;
-    counter-increment: carousel-cell;
-}
-
-.carousel-cell:before {
-    display: block;
+.txt-center {
     text-align: center;
-    content: counter(carousel-cell);
-    line-height: 200px;
-    font-size: 80px;
-    color: white;
 }
 
-.carousel-nav .carousel-cell {
-    height: 80px;
-    width: 100px;
-}
-
-.carousel-nav .carousel-cell:before {
-    font-size: 50px;
-    line-height: 80px;
-}
-
-.carousel-nav .carousel-cell.is-nav-selected {
-    background: #ED2;
-}
-
-.tab {
-    overflow: hidden;
-    /* border: 1px solid #ccc; */
-    background-color: transparent;
-}
-
-
-/* Style the buttons that are used to open the tab content */
-
-.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-}
-
-
-/* Change background color of buttons on hover */
-
-.tab button:hover {
-    background-color: #ddd;
-}
-
-
-/* Create an active/current tablink class */
-
-.tab button.active {
-    background-color: #ccc;
-}
-
-
-/* Style the tab content */
-
-.tabcontent {
-    display: none;
-    /* padding: 6px 12px; */
-    /* border: 1px solid #ccc; */
-    border-top: none;
-    padding: 17px 0px;
-}
-
-.bottom .row.bot {
-    border-top: 1px solid white;
-}
-
-.bottom .row.bot .col-md-9,
-.row.bot .col-md-3 {
-    padding: 0;
-}
-
-.bottom button.tablinks {
-    background: #fecd43;
-    border: none;
-    color: white;
+.date {
     text-transform: uppercase;
-    padding: 5px 15px;
+    margin-bottom: 25px;
+    font-size: 12px;
+}
+
+.cb {
+    color: #334862;
+}
+
+.mg-bot {
+    margin-bottom: 45px;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.mg-bot a {
+    color: #fff;
+}
+
+.img-project {
+    display: block;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.date-box {
+    border: 2px solid #FECD43;
+    font-size: 18px;
+    color: #333;
+    background-color: #fff;
+    text-align: center;
+    display: inline-block;
+    padding: 3px 11px;
+    position: absolute;
+    top: 7%;
+    left: -1%;
+}
+
+.date-box p {
+    margin-bottom: 0;
+}
+
+.f-s {
+    font-size: 13px;
+}
+
+.pro-intro {
+    font-size: 17px;
+    text-align: left;
+    margin-bottom: 28px;
+}
+
+.btn-read {
+    margin-bottom: 40px;
+}
+
+.btn-read a {
+    border: 2px solid #FECD43;
+    padding: 7px 22px;
+    color: #FECD43;
+    transition: all .4s;
+    text-transform: uppercase;
     font-size: 14px;
 }
 
-.bottom button.tablinks.acitve {
-    background: white;
+.btn-read a:hover {
+    background: #FECD43;
+    color: #fff;
 }
 
-.bottom button.tablinks.active {
-    background: white;
-    color: black;
-    border-top: 5px solid #fecd43;
-}
-
-.tab {}
-
-label {
-    display: block;
-}
-
-textarea#comment {
+.pro-bot {
+    border-top: 1px solid #ececec;
+    border-bottom: 2px solid #ececec;
+    padding: 5px 0;
+    display: inline-block;
     width: 100%;
 }
 
-p.name {
-    display: inline-block;
-    width: 50%;
+.pro-bot span {
+    color: #334862;
+    font-size: 12px;
+    padding-left: 3px;
 }
 
-p.email {
-    display: inline-block;
+
+/*--------------- Page Search ------------------*/
+
+.search-box {
+    position: relative;
+    display: block;
+    margin-bottom: 30px;
 }
 
-input#author {
-    width: 93%;
+.search-box .form-control:focus {
+    box-shadow: none;
+    border-color: #fff;
 }
 
-input#gmail {
-    width: 181%;
+.search-box .btn-search {
+    position: absolute;
+    right: 0;
+    background: #fff;
+    top: 1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border: none;
+    border-left: 1px solid grey;
 }
 
-input[type="checkbox"] {
-    display: inline-block;
+.search-box .btn-search i {
+    color: #000;
 }
 
-label.form-cooki {
-    display: inline-block;
+.search-box .btn-search:hover {
+    box-shadow: inset 0 0 0 100px rgba(0, 0, 0, 0.2);
+    background: none;
+    border-left: 1px solid grey;
 }
 
-input#submit {
-    background: #fead20;
-    padding: 10px 19px;
-    color: white;
-    border: navajowhite;
-    text-transform: uppercase;
+.count {
+    font-size: 26px;
 }
 
-div#review {
-    border: 2px solid #fbc52d;
-    padding: 16px 26px;
+.float-left {
+    float: left;
 }
 
-.sidebar h4 {
-    font-size: 19px;
-    padding-top: 14px;
+.float-right {
+    float: right;
 }

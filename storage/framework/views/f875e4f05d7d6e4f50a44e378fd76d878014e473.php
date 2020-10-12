@@ -32,11 +32,13 @@ use App\Library\PHPDev\ThumbImg;
                 </div>
                 <div class="col-lg-9">
                     <div class="dich-vu">
-                        <h4><?php echo e($data->statics_title); ?></h4>
-                        <div class="tt-service">
-                            <?php echo stripslashes($data->statics_content); ?>
+                        <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <h4><?php echo e($item->statics_title); ?></h4>
+                            <div class="tt-service">
+                                <?php echo stripslashes($item->statics_content); ?>
 
-                        </div>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                     <div class="blog-share">
                         <div class="divider"></div>

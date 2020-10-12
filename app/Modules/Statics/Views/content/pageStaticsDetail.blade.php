@@ -32,10 +32,12 @@ use App\Library\PHPDev\ThumbImg;
                 </div>
                 <div class="col-lg-9">
                     <div class="dich-vu">
-                        <h4>{{ $data->statics_title }}</h4>
-                        <div class="tt-service">
-                            {!! stripslashes($data->statics_content) !!}
-                        </div>
+                        @foreach($data as $item)
+                            <h4>{{ $item->statics_title }}</h4>
+                            <div class="tt-service">
+                                {!! stripslashes($item->statics_content) !!}
+                            </div>
+                        @endforeach
                     </div>
                     <div class="blog-share">
                         <div class="divider"></div>

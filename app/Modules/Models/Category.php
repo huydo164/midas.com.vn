@@ -296,7 +296,7 @@ class Category extends Model{
         try{
             if(empty($result)){
                 $query = Category::where('category_parent_id', $id);
-                $query->where('category_status', CGlobal::status_show);
+                $query->where('category_focus', CGlobal::status_show);
                 $query->orderBy('category_id', 'asc');
                 $fields = (isset($dataField['field_get']) && trim($dataField['field_get']) != '') ? explode(',',trim($dataField['field_get'])): array();
                 if(!empty($fields)){
