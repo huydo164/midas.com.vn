@@ -10,7 +10,7 @@ use App\Library\PHPDev\FuncLib;
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="shortcut icon" href="{{FuncLib::getBaseUrl()}}assets/frontend/img/favicon.ico" type="image/vnd.microsoft.icon">
-    <link media="all" type="text/css" rel="stylesheet" href="{{URL::asset('assets/libs/bootstrap/css/bootstrap.min.css')}}" />
+    <link media="all" type="text/css" rel="stylesheet" href="{{URL::asset('assets/libs/bootstrap/css/bootstrap.css')}}" />
     <link media="all" type="text/css" rel="stylesheet" href="{{URL::asset('assets/libs/fontawesome-free-5.15.1-web/css/all.css')}}" />
     <link media="all" type="text/css" rel="stylesheet" href="{{URL::asset('assets/focus/css/reset.css')}}" />
     <link media="all" type="text/css" rel="stylesheet" href="{{URL::asset('assets/frontend/css/site.css')}}" />
@@ -22,6 +22,7 @@ use App\Library\PHPDev\FuncLib;
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{URL::asset('assets/frontend/js/site.js')}}"></script>
+    <script src="{{URL::asset('assets/focus/js/jquery.2.1.1.min.js')}}"></script>
     <script src="{{URL::asset('assets/libs/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{URL::asset('assets/libs/number/autoNumeric.js')}}"></script>
     

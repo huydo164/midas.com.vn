@@ -19,6 +19,9 @@ use App\Library\PHPDev\ThumbImg;
     </div>
     <div id="pd-page">
         <div class="container">
+            <div class="info-service">
+                <h2>{!! isset($text_dvct) ? strip_tags($text_dvct) : '' !!}</h2>
+            </div>
             <div class="row">
                 <div class="col-lg-3">
                     @include('Statics::block.left')
@@ -27,7 +30,7 @@ use App\Library\PHPDev\ThumbImg;
                     <div class="commitment">
                         <h3>
                             <b></b>
-                            <span>Giới thiệu về công ty</span>
+                            <span>{!! isset($text_gioi_thieu_cong_ty) ? strip_tags($text_gioi_thieu_cong_ty) : '' !!}</span>
                             <b></b>
                         </h3>
                     </div>

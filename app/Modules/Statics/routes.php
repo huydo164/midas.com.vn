@@ -18,8 +18,10 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
     Route::get('contact', array('as' => 'SIndex','uses' => 'StaticsController@pageContact'));
 
-    Route::get('{name}-{id}.html', array('as' => 'site.pageStatics' , 'uses' => 'StaticsController@pageStatics'));
+
+    Route::get('dich-vu', array('as' => 'site.pageServices', 'uses' => 'StaticsController@pageServices'));
     Route::get('dich-vu/{name}-{id}.html', array('as' => 'site.pageStaticsDetail', 'uses' => 'StaticsController@pageStaticsDetail'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
+    Route::get('cac-du-an-da-thuc-hien', array('as' => 'site.pageProject', 'uses' => 'StaticsController@pageProject'));
 
     Route::get('cong-ty', array('as' => 'site.pageCompany', 'uses' => 'StaticsController@pageCompany'));
 
@@ -27,24 +29,14 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
 
     Route::get('{name}-{id}.html',array('as' => 'site.actionRouter','uses' =>'StaticsController@actionRouter', 'permission_name'=>'Tin tức'))->where('name', '[A-Z0-9a-z)_\-]+')->where('id', '[0-9]+');
-    /*
-    Route::get('tin-tuc', array('as' => 'site.pageStatic', 'uses' => 'StaticsController@pageStatic'));
-    Route::get('tin-tuc/{name}-{id}.html', array('as' => 'site.detailStatics', 'uses' => 'StaticsController@DetailStatics'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
 
-    Route::get('benh-ly/{name}-{id}.html', array('as' => 'site.pageContact', 'uses' =>'StaticsController@pageContact'));
+    Route::get('Tim-kiem', array('as' => 'site.pageSearch', 'uses' => 'StaticsController@pageSearch'));
 
-    Route::get('san-pham/{name}-{id}.html', array('as' => 'site.pageProduct', 'uses' => 'StaticsController@pageProduct'));
-
-    Route::get('dat-mua/{name}-{id}.html', array('as' => 'site.pageBuy', 'uses' => 'StaticsController@pageBuy'));
-
-    Route::post('dang-ky', array('as' => 'site.pageContactPost', 'uses' => 'StaticsController@pageContactPost'));
-
-    Route::get('Tim-kiem', array('as' => 'site.pageStaticsSearch', 'uses' => 'StaticsController@pageSearch'));
-    */
 
     Route::get('contact', array('as' => 'site.pageContact', 'uses' => 'StaticsController@pageContact'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
     Route::post('lien-he', array('as' => 'site.pageContactPost', 'uses' => 'StaticsController@pageContactPost'));
-    
+
+
 
 
 });
