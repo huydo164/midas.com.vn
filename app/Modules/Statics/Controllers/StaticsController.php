@@ -319,4 +319,17 @@ class StaticsController extends BaseStaticsController{
         }
     }
 
+    public function pageProPor(){
+
+        $arrCategory = Category::getAllCategory(0, array(), 0);
+
+        return view('Statics::content.product_portfolio',[
+            'arrCategory' => $arrCategory,
+        ]);
+    }
+    public function pageProduct(){
+        return view('Statics::content.pageProduct');
+    }
+
+
 }

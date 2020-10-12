@@ -85,6 +85,7 @@ class Statics extends Model {
             DB::connection()->getPdo()->beginTransaction();
             $data = Statics::getById($id);
             if($id > 0 && !empty($dataInput)){
+                dd($data);
                 $data->update($dataInput);
                 if(isset($data->statics_id) && $data->statics_id > 0){
                     self::removeCacheId($data->statics_id);

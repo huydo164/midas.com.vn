@@ -27,6 +27,11 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
 
     Route::get('{name}-{id}.html',array('as' => 'site.actionRouter','uses' =>'StaticsController@actionRouter', 'permission_name'=>'Tin tức'))->where('name', '[A-Z0-9a-z)_\-]+')->where('id', '[0-9]+');
+
+    Route::get('danh-muc/tuong-dia-danh.html',array('as' => 'site.pageProPor', 'uses' => 'StaticsController@pageProPor'));
+    Route::get('danh-muc/{name}-{id}.html', array('as' => 'site.pageProPor', 'uses' => 'StaticsController@pageProPor'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
+
+    Route::get('san-pham/tuong-dia-danh.html',array('as' => 'site.pageProduct', 'uses' => 'StaticsController@pageProduct'));
     /*
     Route::get('tin-tuc', array('as' => 'site.pageStatic', 'uses' => 'StaticsController@pageStatic'));
     Route::get('tin-tuc/{name}-{id}.html', array('as' => 'site.detailStatics', 'uses' => 'StaticsController@DetailStatics'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');

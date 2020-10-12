@@ -26,4 +26,5 @@ class CDatabase{
     const feedback = 'feedback';
     const comment = 'comment';
     const buy = 'buy';
+    const product = 'product';
 }
