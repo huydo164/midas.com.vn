@@ -19,206 +19,51 @@ use App\Library\PHPDev\ThumbImg;
     </div>
     <div id="pd-page">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <?php echo $__env->make('Statics::block.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                </div>
-                <div class="col-lg-9">
-                    <div class="commitment">
-                        <h3>
-                            <b></b>
-                            <span>Thư viện ảnh</span>
-                            <b></b>
-                        </h3>
+            <div class="page-library">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <?php echo $__env->make('Statics::block.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
-                    <div class="dich-vu">
-                        <h4>Các công trình đã thực viện</h4>
-                        <p class="tt-service">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                        </p>
-                        <div class="carousel-wrap">
-                            <div class="owl-carousel owl-theme">
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                                <div class="item">
-                                    <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                </div>
-                            </div>
+                    <div class="col-lg-9">
+                        <div class="commitment">
+                            <h3>
+                                <b></b>
+                                <span>Thư viện ảnh</span>
+                                <b></b>
+                            </h3>
                         </div>
-                        <div class="item-product">
-                            <h4>Các công trình đã thực viện</h4>
-                            <p class="tt-service">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                            </p>
-                            <div class="carousel-wrap">
-                                <div class="owl-carousel owl-theme">
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
+                        <div class="dich-vu">
+                            <?php if(isset($data_thu_vien) && !empty($data_thu_vien)): ?>
+                                <?php $__currentLoopData = $data_thu_vien; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <h4><?php echo $item->statics_title; ?></h4>
+                                    <p class="tt-service">
+                                        <?php echo $item->statics_content; ?>
 
+                                    </p>
+                                    <?php
+                                        $statics_image_other = ($item->statics_image_other != '') ? unserialize($item->statics_image_other) : [];
+                                    ?>
+                                    <div class="carousel-wrap">
+                                        <div class="owl-carousel owl-theme">
+                                            <?php if( !empty($statics_image_other)): ?>
+                                                <?php $__currentLoopData = $statics_image_other; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $img): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($img != ''): ?>
+                                                    <div class="item">
+                                                        <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $img, 800, 0, '', true, true)); ?>" />
+                                                    </div>
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
 
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-product">
-                            <h4>Các công trình đã thực viện</h4>
-                            <p class="tt-service">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                            </p>
-                            <div class="carousel-wrap">
-                                <div class="owl-carousel owl-theme">
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                    <div class="item">
-                                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/06-350x240.jpg" />
-
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!---------row---------->
         </div>
     </div>

@@ -19,36 +19,34 @@ use App\Library\PHPDev\ThumbImg;
     </div>
     <div id="pd-page">
         <div class="container">
-            <div class="info-service">
-                <h2><?php echo isset($text_dvct) ? strip_tags($text_dvct) : ''; ?></h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <?php echo $__env->make('Statics::block.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-                </div>
-                <div class="col-lg-9">
-                    <div class="commitment">
-                        <h3>
-                            <b></b>
-                            <span><?php echo isset($text_gioi_thieu_cong_ty) ? strip_tags($text_gioi_thieu_cong_ty) : ''; ?></span>
-                            <b></b>
-                        </h3>
+            <div class="page-company">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <?php echo $__env->make('Statics::block.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
-                    <div class="dich-vu">
-                        <p class="tt-service">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                        </p>
-                        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/ma-vang-nha.jpg" alt="">
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
-                    </div>
-                    <div class="linkPage">
-                        <ul>
-                            <li><a href="">Mạ vàng nhà.</a></li>
-                            <li><a href="">Mạ vàng đồng hồ.</a></li>
-                            <li><a href="">Mạ vàng đình chùa</a></li>
-                            <li><a href="">Mạ vàng oto.</a></li>
-                        </ul>
+                    <div class="col-lg-9">
+                        <div class="commitment">
+                            <h3>
+                                <b></b>
+                                <span><?php echo $data->statics_title; ?></span>
+                                <b></b>
+                            </h3>
+                        </div>
+                        <div class="dich-vu">
+                            <?php echo stripslashes($data->statics_content); ?>
+
+                        </div>
+                        <div class="linkPage">
+                            <ul>
+                                <?php if(isset($data_id) && !empty($data_id)): ?>
+                                    <?php $__currentLoopData = $data_id; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if($item->category_id != 703): ?>
+                                            <li><a href="<?php echo e(FuncLib::buildLinkDetailStatic($item->category_id, $item->category_title)); ?>"><?php echo $item->category_title; ?>.</a></li>
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ use App\Library\PHPDev\ThumbImg;
                 <?php if(isset($data_cat_dich_vu) && !empty($data_cat_dich_vu)): ?>
                     <?php $__currentLoopData = $data_cat_dich_vu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-md-4">
-                            <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                            <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true, false)); ?>" />
                             <h3 class="chunho">
                                 <b></b>
                                 <span><?php echo e($item->statics_title); ?></span>

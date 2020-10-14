@@ -27,7 +27,7 @@ use App\Library\PHPDev\ThumbImg;
                 @if(isset($data_cat_dich_vu) && !empty($data_cat_dich_vu))
                     @foreach ($data_cat_dich_vu as $item)
                         <div class="col-md-4">
-                            <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true) }}" />
+                            <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true, false) }}" />
                             <h3 class="chunho">
                                 <b></b>
                                 <span>{{ $item->statics_title }}</span>

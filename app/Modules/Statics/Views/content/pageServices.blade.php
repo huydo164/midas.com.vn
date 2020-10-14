@@ -25,9 +25,6 @@ use App\Library\PHPDev\ThumbImg;
     </div>
     <div id="pd-page">
         <div class="container">
-            <div class="info-service">
-                <h2>{!! isset($text_dich_vu) ? strip_tags($text_dich_vu) : '' !!}</h2>
-            </div>
             <div class="row">
                 <div class="col-lg-3">
                     @include('Statics::block.left')

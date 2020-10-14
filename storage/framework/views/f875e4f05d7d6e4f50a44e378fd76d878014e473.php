@@ -23,9 +23,6 @@ use App\Library\PHPDev\ThumbImg;
     </div>
     <div id="pd-page">
         <div class="container">
-            <div class="info-service">
-                <h2><?php echo isset($text_dich_vu)  ? strip_tags($text_dich_vu) : ''; ?> </h2>
-            </div>
             <div class="row">
                 <div class="col-lg-3">
                     <?php echo $__env->make('Statics::block.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>

@@ -853,7 +853,9 @@ h2 {
 #pd-page {
     padding-top: 80px;
 }
-
+.dich-vu{
+    padding-top: 40px;
+}
 .dich-vu h4 {
     line-height: 17px;
     font-size: 20px;
@@ -1069,4 +1071,22 @@ h2 {
 }
 .float-right{
     float: right;
+}
+
+/*-----------page Company-----------*/
+.page-company .commitment{
+    padding: 0 0 25px 0 ;
+}
+.page-company .commitment span{
+    color:#FECD43;
+}
+.linkPage ul li{
+    list-style-type: disc;
+    color: #777;
+    line-height: 30px;
+}
+.linkPage a{
+    color: #ff0000;
+    text-transform: unset;
+    font-weight: bold;
 }

@@ -46,6 +46,8 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::post('buy/edit/{id?}', array('as' => 'admin.buy_edit', 'uses' => 'BuyController@postItem', 'permission_name' => 'Sửa mua sản phẩm'))->where('id', '[0-9]+');
     Route::post('buy/delete', array('as' => 'admin.buy_delete', 'uses' => 'BuyController@delete', 'permission_name' => 'Xóa mua sản phẩm'));
 
+    Route::get('tag', array('as' => 'admin.tag', 'uses' => 'TagController@listView', 'permission_name' => 'Danh sách từ khóa', 'display_menu' => 1, 'display_icon_sub' => 'fa fa-globe'));
+
 });
 
 Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', 'namespace' => $namespace , 'group'=>'5','group_name'=>'Hệ thống', 'display_icon'=>'fa fa-tag'], function () {

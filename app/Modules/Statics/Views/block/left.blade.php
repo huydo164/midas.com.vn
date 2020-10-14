@@ -7,6 +7,21 @@ use App\Library\PHPDev\ThumbImg;
 ?>
 
 <div id="left-page">
+    <div class="info-service">
+        @if(isset($arrCategory) && !empty($arrCategory))
+
+           <h2>
+               @foreach($arrCategory as $cat)
+                   @if($cat->category_id == 680 && isset($cat->category_id))
+                       {!! isset($text_dich_vu) ? strip_tags($text_dich_vu) : '' !!}
+                   @elseif($cat->category_id == 682)
+                       {!! isset($text_dvct) ? strip_tags($text_dvct) : '' !!}
+                   @endif
+               @endforeach
+           </h2>
+
+        @endif
+    </div>
     <div class="service-menu">
         <div class="list-service">
             @if(isset($arrCategory) && !empty($arrCategory))

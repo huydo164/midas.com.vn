@@ -7,6 +7,23 @@ use App\Library\PHPDev\ThumbImg;
 ?>
 
 <div id="left-page">
+    <div class="info-service">
+        <?php if(isset($arrCategory) && !empty($arrCategory)): ?>
+
+           <h2>
+               <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                   <?php if($cat->category_id == 680 && isset($cat->category_id)): ?>
+                       <?php echo isset($text_dich_vu) ? strip_tags($text_dich_vu) : ''; ?>
+
+                   <?php elseif($cat->category_id == 682): ?>
+                       <?php echo isset($text_dvct) ? strip_tags($text_dvct) : ''; ?>
+
+                   <?php endif; ?>
+               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+           </h2>
+
+        <?php endif; ?>
+    </div>
     <div class="service-menu">
         <div class="list-service">
             <?php if(isset($arrCategory) && !empty($arrCategory)): ?>
