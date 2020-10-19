@@ -70,12 +70,11 @@ use App\Library\PHPDev\ThumbImg;
 
     <!----------service----------->
 
-    @if(isset($data) && !empty($data) || isset($pageDetail) && !empty($pageDetail))
+    @if(isset($data) && !empty($data))
         <div class="keyword">
             <h2>{!! isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : '' !!}</h2>
             <div class="list-key">
                 <?php $statics_tag = (isset($data->statics_tag) && $data->statics_tag != '') ? json_decode($data->statics_tag, true) : []; ?>
-                <?php $statics_tag = (isset($pageDetail->statics_tag) && $pageDetail->statics_tag != '') ? json_decode($pageDetail->statics_tag, true) : []; ?>
                 <ul>
                     @foreach($statics_tag as $key => $item)
                         <li><a href="{{$key}}">{{ $item }}</a></li>
@@ -94,6 +93,17 @@ use App\Library\PHPDev\ThumbImg;
             </ul>
         </div>
    @endif
+
+    @if(isset($pageDetail) && !empty($pageDetail))
+        <div class="list-key">
+            <?php $statics_tag = (isset($pageDetail->statics_tag) && $pageDetail->statics_tag != '') ? json_decode($pageDetail->statics_tag, true) : []; ?>
+            <ul>
+                @foreach($statics_tag as $key => $item)
+                    <li><a href="{{$key}}">{{ $item }}</a></li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
 
     <!------------keyword--------------->

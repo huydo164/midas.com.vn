@@ -27,7 +27,6 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
     Route::get('thu-vien', array('as' => 'site.pageLibrary', 'uses'  => 'StaticsController@pageLibrary'));
 
-
     Route::get('{name}-{id}.html',array('as' => 'site.actionRouter','uses' =>'StaticsController@actionRouter', 'permission_name'=>'Tin tức'))->where('name', '[A-Z0-9a-z)_\-]+')->where('id', '[0-9]+');
 
    
@@ -35,6 +34,7 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
     Route::get('danh-muc-san-pham/{name}-{id}.html', array('as' => 'site.pageProductDetail', 'uses' => 'StaticsController@pageProductDetail' ))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
     Route::get('chi-tiet-san-pham/{name}-{id}.html',array('as' => 'site.pageProduct', 'uses' => 'StaticsController@pageProduct' ))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
 
+    Route::get('tim-kiem', array('as' => 'site.pageSearch', 'uses' => 'StaticsController@pageSearch'));
     Route::post('tim-kiem-theo-kick-thuoc' , array('as'=>'site.pageSearchSize', 'uses'=>'StaticsController@pageSearchSize'));
     Route::post('tim-kiem-theo-mau-sac' , array('as'=>'site.pageSearchColor', 'uses'=>'StaticsController@pageSearchColor'));
 
@@ -49,6 +49,7 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
     Route::get('{name}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
     Route::get('dich-vu/{name}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
     Route::get('tag', array('as' => 'site.pageTagDetail', 'uses' => 'StaticsController@pageTagDetail'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');;
+
 
 
 });

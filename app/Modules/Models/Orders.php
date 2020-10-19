@@ -105,7 +105,7 @@ class Orders extends Model {
                     $data->$k = $v;
                 }
             }
-            
+           
             if ($data->save()) {
                 DB::connection()->getPdo()->commit();
                 if($data->orders_id && Memcache::CACHE_ON){
