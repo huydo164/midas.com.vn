@@ -46,9 +46,9 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::post('buy/edit/{id?}', array('as' => 'admin.buy_edit', 'uses' => 'BuyController@postItem', 'permission_name' => 'Sửa mua sản phẩm'))->where('id', '[0-9]+');
     Route::post('buy/delete', array('as' => 'admin.buy_delete', 'uses' => 'BuyController@delete', 'permission_name' => 'Xóa mua sản phẩm'));
 
-<<<<<<< HEAD
-    Route::get('tag', array('as' => 'admin.tag', 'uses' => 'TagController@listView', 'permission_name' => 'Danh sách từ khóa', 'display_menu' => 1, 'display_icon_sub' => 'fa fa-globe'));
-=======
+
+
+
     Route::get('product', array('as' => 'admin.product', 'uses' => 'ProductController@listView', 'permission_name' => 'Danh sách sản phẩm', 'display_menu' => 1, 'display_icon_sub' => 'fa fa-globe'));
     Route::get('product/edit/{id?}', array('as' => 'admin.product_edit', 'uses' => 'ProductController@getItem', 'permission_name' => 'Chi tiết sản phẩm'))->where('id', '[0-9]+');
     Route::post('product/edit/{id?}', array('as' => 'admin.product_edit', 'uses' => 'ProductController@postItem', 'permission_name' => 'Sửa sản phẩm'))->where('id', '[0-9]+');
@@ -58,7 +58,13 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::get('orders/edit/{id?}', array('as' => 'admin.orders_edit', 'uses' => 'OrdersController@getItem', 'permission_name' => 'Chi tiết đơn hàng'))->where('id', '[0-9]+');
     Route::post('orders/edit/{id?}', array('as' => 'admin.orders_edit', 'uses' => 'OrdersController@postItem', 'permission_name' => 'Sửa đơn hàng'))->where('id', '[0-9]+');
     Route::post('orders/delete', array('as' => 'admin.orders_delete', 'uses' => 'OrdersController@delete', 'permission_name' => 'Xóa đơn hàng'));
->>>>>>> c43b1b4a1f5600f164c4ec200d02a1434a8d555e
+
+    Route::get('tag', array('as' => 'admin.tag', 'uses' => 'TagController@listView', 'permission_name' => 'Danh sách từ khóa', 'display_menu' => 1, 'display_icon_sub' => 'fa fa-globe'));
+    Route::get('tag/edit/{id?}', array('as' => 'admin.tag_edit', 'uses' => 'TagController@getItem', 'permission_name' => 'Chi tiết từ khóa'))->where('id', '[0-9]+');
+    Route::post('tag/edit/{id?}', array('as' => 'admin.tag_edit', 'uses' => 'TagController@postItem', 'permission_name' => 'Sửa từ khóa'))->where('id', '[0-9]+');
+    Route::post('tag/delete', array('as' => 'admin.tag_delete', 'uses' => 'TagController@delete', 'permission_name' => 'Xóa từ khóa'));
+
+
 
 });
 

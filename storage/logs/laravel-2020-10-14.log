@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [2020-10-14 08:55:51] local.ERROR: Undefined variable: v (View: D:\wamp64\www\project.vn\midas.com.vn\app\Modules\Statics\Views\content\pageLibrary.blade.php) {"exception":"[object] (ErrorException(code: 0): Undefined variable: v (View: D:\\wamp64\\www\\project.vn\\midas.com.vn\\app\\Modules\\Statics\\Views\\content\\pageLibrary.blade.php) at D:\\wamp64\\www\\project.vn\\midas.com.vn\\storage\\framework\\views\\492cb355379af40e7cd3f67f6c24cc1d4553e51f.php:47, ErrorException(code: 0): Undefined variable: v at D:\\wamp64\\www\\project.vn\\midas.com.vn\\storage\\framework\\views\\492cb355379af40e7cd3f67f6c24cc1d4553e51f.php:47)
 [stacktrace]
 #0 D:\\wamp64\\www\\project.vn\\midas.com.vn\\vendor\\laravel\\framework\\src\\Illuminate\\View\\Engines\\PhpEngine.php(45): Illuminate\\View\\Engines\\CompilerEngine->handleViewException(Object(ErrorException), 1)
@@ -2059,3 +2060,5 @@
 #55 {main}
 >>>>>>> c43b1b4a1f5600f164c4ec200d02a1434a8d555e
 "} 
+=======
+>>>>>>> huy

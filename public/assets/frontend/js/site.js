@@ -1,10 +1,15 @@
 $(document).ready(function ($) {
     STATICS.navigationIcon();
+
     // STATICS.carousel();
     STATICS.searchSize();
     STATICS.searchColor();
     STATICS.minusButton();
     STATICS.plusButton();
+
+    STATICS.carousel();
+    STATICS.btnTop();
+
 });
 
 STATICS = {
@@ -85,6 +90,7 @@ STATICS = {
             $('input.qty').val(val);
         });
     },
+
     plusButton:function (){
 
             $('.plus.product-cart').on('click',function(){
@@ -103,5 +109,27 @@ STATICS = {
             }
             });
 
-    }
+    },
+
+
+    btnTop:function () {
+        if ($('.btnTop').length > 0){
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                if (e > 500){
+                    $('.btnTop').fadeIn(500);
+                }
+                else {
+                    $('.btnTop').fadeOut(500);
+                }
+            });
+
+            $('.btnTop').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                },700)
+            })
+        }
+    },
+
 };

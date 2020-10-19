@@ -237,10 +237,10 @@ class CategoryController extends BaseAdminController{
         $arrData = array();
 
         $dataCate['field_get'] = '';
-        $arrCategogry = Category::getAllCategory($typeid, $dataCate, 0);
+        $arrCategory = Category::getAllCategory($typeid, $dataCate, 0);
 
-        if($arrCategogry != null){
-            foreach($arrCategogry as $k => $v){
+        if($arrCategory != null){
+            foreach($arrCategory as $k => $v){
                 $arrData[] = array(
                     'category_id'=>$v->category_id,
                     'category_title'=>$v->category_title,

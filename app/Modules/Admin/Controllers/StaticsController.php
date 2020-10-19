@@ -3,6 +3,8 @@ namespace App\Modules\Admin\Controllers;
 
 use App\Library\PHPDev\FuncLib;
 use App\Modules\Models\Statics;
+use App\Modules\Models\Tag;
+use App\Modules\Models\TagStatics;
 use App\Modules\Models\Type;
 use App\Modules\Models\Category;
 use Illuminate\Support\Facades\Redirect;
@@ -22,6 +24,7 @@ class StaticsController extends BaseAdminController{
     private $arrCate = array(-1=>'Chọn danh mục cha');
     private $strCategoryProduct = '';
     private $error = '';
+
     public function __construct(){
         parent::__construct();
         Loader::loadJS('backend/js/admin.js', CGlobal::$postEnd);
@@ -32,8 +35,9 @@ class StaticsController extends BaseAdminController{
         Loader::loadCSS('libs/jAlert/jquery.alerts.css', CGlobal::$postHead);
         Loader::loadJS('libs/jAlert/jquery.alerts.js', CGlobal::$postEnd);
 
-        $typeId = Type::getIdByKeyword('group_static');
+        $typeId = Type::getIdByKeyword('group_statics');
         $this->arrCate = CategoryController::getArrCategory($typeId);
+
     }
     public function listView(){
 
@@ -59,7 +63,7 @@ class StaticsController extends BaseAdminController{
         $optionFocus = Utility::getOption($this->arrFocus, $search['statics_focus']);
 
         $messages = Utility::messages('messages');
-        $typeId = Type::getIdByKeyword('group_static');
+        $typeId = Type::getIdByKeyword('group_statics');
         $this->strCategoryProduct = CategoryController::createOptionCategory($typeId, isset($search['statics_catid']) ? $search['statics_catid'] : 0);
 
 
@@ -83,6 +87,7 @@ class StaticsController extends BaseAdminController{
         $data = array();
         $statics_image = '';
         $statics_image_other = array();
+        $arrTag = array();
 
         if($id > 0) {
             $data = Statics::getById($id);
@@ -101,14 +106,17 @@ class StaticsController extends BaseAdminController{
             }
         }
 
+        $arrTag = Tag::getAllTag(array(), $limit = 0);
+
         $optionStatus = Utility::getOption($this->arrStatus, isset($data['statics_status'])? $data['statics_status'] : CGlobal::status_show);
         $optionFocus = Utility::getOption($this->arrFocus, isset($data['statics_focus'])? $data['statics_focus'] : CGlobal::status_hide);
-        $typeId = Type::getIdByKeyword('group_static');
+        $typeId = Type::getIdByKeyword('group_statics');
         $this->strCategoryProduct = CategoryController::createOptionCategory($typeId, isset($data['statics_catid'])? $data['statics_catid'] : 0);
 
         return view('Admin::statics.add',[
             'id'=>$id,
             'data'=>$data,
+            'arrTag' => $arrTag,
             'optionStatus'=>$optionStatus,
             'optionFocus'=>$optionFocus,
             'news_image'=>$statics_image,
@@ -137,6 +145,7 @@ class StaticsController extends BaseAdminController{
             'meta_title'=>array('value'=>addslashes(Request::get('meta_title')),'require'=>0),
             'meta_keywords'=>array('value'=>addslashes(Request::get('meta_keywords')),'require'=>0),
             'meta_description'=>array('value'=>addslashes(Request::get('meta_description')),'require'=>0),
+            'statics_tag' => array('value' => Request::get('statics_tag', []), 'require' => 0),
         );
 
         //get statics_cat_name, statics_cat_alias
@@ -147,6 +156,8 @@ class StaticsController extends BaseAdminController{
                 $dataSave['statics_cat_alias']['value'] = $arrCat->category_title_alias;
             }
         }
+        $statics_tag = $dataSave['statics_tag']['value'];
+        $dataSave['statics_tag']['value'] = json_encode($statics_tag);
 
         //Main Img
         $image_primary = addslashes(Request::get('image_primary', ''));
@@ -172,7 +183,18 @@ class StaticsController extends BaseAdminController{
         $this->error = ValidForm::validInputData($dataSave);
         if($this->error == ''){
             $id = ($id == 0) ? $id_hiden : $id;
-            Statics::saveData($id, $dataSave);
+            $id = Statics::saveData($id, $dataSave);
+            if($id > 0){
+                TagStatics::where('statics_id', $id)->delete();
+                foreach ($statics_tag as $key => $item){
+                    $tmp = [
+                        'tag_id'=>$key,
+                        'statics_id'=>$id
+                    ];
+                    TagStatics::create($tmp);
+                }
+            }
+
             return Redirect::route('admin.statics');
         }else{
             foreach($dataSave as $key=>$val){
@@ -182,7 +204,7 @@ class StaticsController extends BaseAdminController{
 
         $optionStatus = Utility::getOption($this->arrStatus, isset($data['statics_status'])? $data['statics_status'] : -1);
         $optionFocus = Utility::getOption($this->arrFocus, isset($data['statics_focus'])? $data['statics_focus'] : CGlobal::status_hide);
-        $typeId = Type::getIdByKeyword('group_static');
+        $typeId = Type::getIdByKeyword('group_statics');
         $this->strCategoryProduct = CategoryController::createOptionCategory($typeId, isset($data['statics_catid'])? $data['statics_catid'] : 0);
 
         return view('Admin::statics.add',[
@@ -196,6 +218,7 @@ class StaticsController extends BaseAdminController{
             'error'=>$this->error,
         ]);
     }
+
     public function delete(){
 
         $listId = Request::get('checkItem', array());

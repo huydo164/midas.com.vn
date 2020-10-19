@@ -17,6 +17,7 @@ class InfoController extends BaseAdminController{
 
     private $arrStatus = array(-1 => 'Chọn trạng thái', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
     private $error = '';
+
     public function __construct(){
         parent::__construct();
         Loader::loadJS('backend/js/admin.js', CGlobal::$postEnd);
@@ -28,6 +29,7 @@ class InfoController extends BaseAdminController{
         Loader::loadCSS('libs/jAlert/jquery.alerts.css', CGlobal::$postHead);
         Loader::loadJS('libs/jAlert/jquery.alerts.js', CGlobal::$postEnd);
     }
+
     public function listView(){
 
         //Config Page

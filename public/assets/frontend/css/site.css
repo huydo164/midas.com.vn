@@ -201,7 +201,7 @@ body {
 .footer-top h6 {
     font-size: 14px;
     font-weight: 500;
-    font-family: Roboto;
+
 }
 
 .footer-top span {
@@ -210,7 +210,7 @@ body {
 
 .footer-top p {
     font-size: 12px;
-    font-family: Roboto;
+
 }
 
 .footer-top {
@@ -224,7 +224,7 @@ h2 {
     letter-spacing: .05em;
     text-transform: uppercase;
     color: white;
-    font-family: Roboto;
+
 }
 
 .footer-mid {
@@ -247,7 +247,6 @@ h2 {
     line-height: 200%;
     font-size: 14px;
     color: white !important;
-    font-family: Roboto;
 }
 
 .footer-mid ul li:hover a {
@@ -742,7 +741,7 @@ h2 {
 
 #left-page h2,
 .info-service h2 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
 }
@@ -853,6 +852,7 @@ h2 {
 
 #pd-page {
     padding-top: 80px;
+    margin-bottom: 80px;
 }
 .dich-vu{
     padding-top: 40px;
@@ -863,6 +863,7 @@ h2 {
     color: #fecd43;
     margin-bottom: 24px;
     font-weight: bold;
+    margin-top: 29px;
 }
 
 .dich-vu p {
@@ -913,6 +914,12 @@ h2 {
 
 /*----------------page Service Detail *--------------------*/
 
+#page-detail .keyword, #page-tag .keyword, #page-search .keyword, #page-project .keyword{
+    margin: 45px 0 0 0;
+}
+.mgb{
+    margin-bottom: 40px;
+}
 .blog-share {
     text-align: center;
 }
@@ -1388,9 +1395,9 @@ button {
 
 /*-----------page Company-----------*/
 .page-company .commitment{
-    padding: 0 0 25px 0 ;
+    padding: 30px 0 0  0 ;
 }
-.page-company .commitment span{
+.page-company .commitment span, .page-library .commitment span{
     color:#FECD43;
 }
 .linkPage ul li{
@@ -1403,13 +1410,6 @@ button {
     text-transform: unset;
     font-weight: bold;
 }
-
-
-
-
-
-
-
 
 
 .row.bot .col-md-9 {
@@ -2104,5 +2104,36 @@ h3 {
 }
 .pay .thong-tin input[type="text"] {
     color: black;
->>>>>>> c43b1b4a1f5600f164c4ec200d02a1434a8d555e
+}
+.dich-vu{
+    padding-top: 20px;
+}
+
+/*------------ page Library ----------------*/
+.page-library .dich-vu{
+    padding-top: 0;
+}
+.page-library .commitment{
+    padding-bottom: 0;
+}
+
+.btnTop{
+    position: fixed;
+    display: none;
+    bottom: 4%;
+    right: 3%;
+    padding: 12px;
+    z-index: 9999;
+    background: none;
+    border: 2px solid gray;
+    border-radius: 50%;
+    height: 43px;
+    line-height: 0;
+    font-size: 18px;
+}
+.btnTop i{
+    position: relative;
+    bottom: 3px;
+    color: gray;
+
 }

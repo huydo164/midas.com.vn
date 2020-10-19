@@ -45,22 +45,10 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
     Route::post('thanh-toan' , array('as'=>'site.pagePay', 'uses'=>'StaticsController@pagePay'));
     Route::post('dat-hang', array('as'=>'site.pageOrder', 'uses'=>'StaticsController@pageOrder'));
-    /*
-    Route::get('tin-tuc', array('as' => 'site.pageStatic', 'uses' => 'StaticsController@pageStatic'));
-    Route::get('tin-tuc/{name}-{id}.html', array('as' => 'site.detailStatics', 'uses' => 'StaticsController@DetailStatics'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
 
-    Route::get('benh-ly/{name}-{id}.html', array('as' => 'site.pageContact', 'uses' =>'StaticsController@pageContact'));
-
-    Route::get('san-pham/{name}-{id}.html', array('as' => 'site.pageProduct', 'uses' => 'StaticsController@pageProduct'));
-
-
-    Route::get('Tim-kiem', array('as' => 'site.pageSearch', 'uses' => 'StaticsController@pageSearch'));
-
-
-    Route::get('contact', array('as' => 'site.pageContact', 'uses' => 'StaticsController@pageContact'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
-    Route::post('lien-he', array('as' => 'site.pageContactPost', 'uses' => 'StaticsController@pageContactPost'));
-
-*/
+    Route::get('{name}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
+    Route::get('dich-vu/{name}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
+    Route::get('tag', array('as' => 'site.pageTagDetail', 'uses' => 'StaticsController@pageTagDetail'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');;
 
 
 });
