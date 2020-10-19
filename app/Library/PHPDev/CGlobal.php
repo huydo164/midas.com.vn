@@ -65,6 +65,7 @@ class CGlobal{
     const FOLDER_TRASH = 'trash';
     const FOLDER_INFO = 'info';
     const FOLDER_STATICS = 'statics';
+    const FOLDER_PRODUCT = 'product';
     const FOLDER_TRAINING = 'training';
     const FOLDER_FEEDBACK = 'feedback';
     const FOLDER_COMMENT = 'comment';

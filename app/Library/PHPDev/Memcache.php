@@ -45,8 +45,13 @@ class Memcache{
 	//Statics
 	const CACHE_STATICS_ID = 'cache_statics_id_';
 	const CACHE_STATICS_CAT_ID = 'cache_statics_cat_id_';
+	// Product
+	const CACHE_PRODUCT_ID = 'cache_product_id_';
+	const CACHE_PRODUCT_CAT_ID = 'cache_product_cat_id_';
 	//Contact
     const CACHE_CONTACT_ID = 'cache_contact_id_';
     //Buy
     const CACHE_BUY_ID = 'cache_buy_id_';
+    //Orders
+    const CACHE_ORDERS_ID = 'cache_orders_id_';
 }

@@ -82,7 +82,7 @@ class CategoryController extends BaseAdminController{
                 );
             }
         }
-
+        
         //Sort Data
         $newData = array();
         Category::sortListView($data, 0, $newData);

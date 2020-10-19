@@ -342,4 +342,17 @@ class FuncLib{
         return '#';
     }
 
+    static function buildLinkDetailProduct($id = 0, $cat_title = 'danh-muc-san-pham'){
+        if ($id > 0) {
+            return URL::route('site.pageProductDetail', array('id' => $id, 'name' => strtolower(FuncLib::safeTitle($cat_title))));
+        }
+        return '#';
+    }
+    static function buildLinkProduct($id = 0, $product_title = 'chi-tiet-san-pham'){
+        if ($id > 0) {
+            return URL::route('site.pageProduct', array('id' => $id, 'name' => strtolower(FuncLib::safeTitle($product_title))));
+        }
+        return '#';
+    }
+
 }
