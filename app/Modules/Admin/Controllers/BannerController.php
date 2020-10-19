@@ -106,7 +106,7 @@ class BannerController extends BaseAdminController{
 
         $dataSave = array(
             'banner_title'=>array('value'=>addslashes(Request::get('banner_title')), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
-            'banner_title_show'=>array('value'=>addslashes(Request::get('banner_title_show')), 'require'=>1, 'messages'=>'Tiêu đề hiển thị không được trống!'),
+            'banner_title_show'=>array('value'=>addslashes(Request::get('banner_title_show')), 'require'=>0),
             'banner_intro'=>array('value'=>addslashes(Request::get('banner_intro')),'require'=>0),
             'banner_link'=>array('value'=>addslashes(Request::get('banner_link')),'require'=>0),
             'banner_order_no'=>array('value'=>(int)addslashes(Request::get('banner_order_no')),'require'=>0),

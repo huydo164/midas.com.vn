@@ -46,6 +46,16 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::post('buy/edit/{id?}', array('as' => 'admin.buy_edit', 'uses' => 'BuyController@postItem', 'permission_name' => 'Sửa mua sản phẩm'))->where('id', '[0-9]+');
     Route::post('buy/delete', array('as' => 'admin.buy_delete', 'uses' => 'BuyController@delete', 'permission_name' => 'Xóa mua sản phẩm'));
 
+    Route::get('product', array('as' => 'admin.product', 'uses' => 'ProductController@listView', 'permission_name' => 'Danh sách sản phẩm', 'display_menu' => 1, 'display_icon_sub' => 'fa fa-globe'));
+    Route::get('product/edit/{id?}', array('as' => 'admin.product_edit', 'uses' => 'ProductController@getItem', 'permission_name' => 'Chi tiết sản phẩm'))->where('id', '[0-9]+');
+    Route::post('product/edit/{id?}', array('as' => 'admin.product_edit', 'uses' => 'ProductController@postItem', 'permission_name' => 'Sửa sản phẩm'))->where('id', '[0-9]+');
+    Route::post('product/delete', array('as' => 'admin.product_delete', 'uses' => 'ProductController@delete', 'permission_name' => 'Xóa sản phẩm'));
+
+    Route::get('orders', array('as' => 'admin.orders', 'uses' => 'OrdersController@listView', 'permission_name' => 'Danh sách đơn hàng', 'display_menu' => 1, 'display_icon_sub' => 'fa fa-globe'));
+    Route::get('orders/edit/{id?}', array('as' => 'admin.orders_edit', 'uses' => 'OrdersController@getItem', 'permission_name' => 'Chi tiết đơn hàng'))->where('id', '[0-9]+');
+    Route::post('orders/edit/{id?}', array('as' => 'admin.orders_edit', 'uses' => 'OrdersController@postItem', 'permission_name' => 'Sửa đơn hàng'))->where('id', '[0-9]+');
+    Route::post('orders/delete', array('as' => 'admin.orders_delete', 'uses' => 'OrdersController@delete', 'permission_name' => 'Xóa đơn hàng'));
+
 });
 
 Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', 'namespace' => $namespace , 'group'=>'5','group_name'=>'Hệ thống', 'display_icon'=>'fa fa-tag'], function () {

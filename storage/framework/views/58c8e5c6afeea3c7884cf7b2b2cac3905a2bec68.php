@@ -14,39 +14,29 @@ use App\Library\PHPDev\ThumbImg;
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 
+
 <div class="service">
     <div class="container">
         <div class="title">
             <h3>
                 <b></b>
-                <span>CÁC DỊCH VỤ CỦA CHÚNG TÔI</span>
+                <span><?php echo e($name_cat_dich_vu->info_intro); ?></span>
                 <b></b>
             </h3>
             <div class="row">
-                <div class="col-md-4">
-                    <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/09-350x240.jpg" />
-                    <h3 class="chunho">
-                        <b></b>
-                        <span>QÙA TẶNG MẠ VÀNG</span>
-                        <b></b>
-                    </h3>
-                </div>
-                <div class="col-md-4">
-                    <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/09-350x240.jpg" />
-                    <h3 class="chunho">
-                        <b></b>
-                        <span>QÙA TẶNG MẠ VÀNG</span>
-                        <b></b>
-                    </h3>
-                </div>
-                <div class="col-md-4">
-                    <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/09-350x240.jpg" />
-                    <h3 class="chunho">
-                        <b></b>
-                        <span>QÙA TẶNG MẠ VÀNG</span>
-                        <b></b>
-                    </h3>
-                </div>
+                <?php if(isset($data_cat_dich_vu) && !empty($data_cat_dich_vu)): ?>
+                    <?php $__currentLoopData = $data_cat_dich_vu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col-md-4">
+                            <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                            <h3 class="chunho">
+                                <b></b>
+                                <span><?php echo e($item->statics_title); ?></span>
+                                <b></b>
+                            </h3>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
+                
 
             </div>
         </div>
@@ -57,69 +47,32 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>CÁC DỊCH VỤ CỦA CHÚNG TÔI</span>
+                <span><?php echo e($name_cat_commitment->info_intro); ?></span>
                 <b></b>
             </h3>
         </div>
         <div class="row">
-            <div class="col-md-6">
-                <a href="#">
-                    <div class="box-img">
-                        <div class="box-img-1">
-                            <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
+            <?php if(isset($data_commitment) && !empty($data_commitment)): ?>
+                <?php $__currentLoopData = $data_commitment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="col-md-6">
+                    <a href="#">
+                        <div class="box-img">
+                            <div class="box-img-1">
+                                <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="box-text">
-                        <h5>Máy móc hiện đại</h5>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, inventore iure. voluptas laborum? Corrupti?</p>
-                        <button>XEM THÊM</button>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href="#">
-                    <div class="box-img">
-                        <div class="box-img-1">
-                            <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
+                        <div class="box-text">
+                            <h5><?php echo e($item->statics_title); ?></h5>
+                            <p><?php echo e(strip_tags($item->statics_content)); ?></p>
+                            <button>XEM THÊM</button>
                         </div>
-                    </div>
-                    <div class="box-text">
-                        <h5>Máy móc hiện đại</h5>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, inventore iure. voluptas laborum? Corrupti?</p>
-                        <button>XEM THÊM</button>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href="#">
-                    <div class="box-img">
-                        <div class="box-img-1">
-                            <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
-                        </div>
-                    </div>
-                    <div class="box-text">
-                        <h5>Máy móc hiện đại</h5>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, inventore iure. voluptas laborum? Corrupti?</p>
-                        <button>XEM THÊM</button>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6">
-                <a href="#">
-                    <div class="box-img">
-                        <div class="box-img-1">
-                            <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
-                        </div>
-                    </div>
-                    <div class="box-text">
-                        <h5>Máy móc hiện đại</h5>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea, inventore iure. voluptas laborum? Corrupti?</p>
-                        <button>XEM THÊM</button>
-
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
+            
+            
         </div>
     </div>
 </div>
@@ -216,7 +169,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>BỘ SƯU TẬP CÁC SẢN PHẨM</span>
+                <span><?php echo e($name_cat_collection->info_intro); ?></span>
                 <b></b>
             </h3>
         </div>
@@ -224,7 +177,12 @@ use App\Library\PHPDev\ThumbImg;
             <div class="col-md-6">
                 <div class="left">
                     <a data-fancybox="gallery" href="img/1.png" data-caption="Caption for single image">
-                        <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
+                        <?php $__currentLoopData = $data_collection; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($key < 1): ?>
+                                <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        
                     </a>
                 </div>
 
@@ -232,26 +190,15 @@ use App\Library\PHPDev\ThumbImg;
             <div class="col-md-6">
                 <div class="right">
                     <div class="row">
-                        <div class="col-md-6">
-                            <a data-fancybox="gallery" href="img/1.png" data-caption="Caption for single image">
-                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a data-fancybox="gallery" href="img/1.png" data-caption="Caption for single image">
-                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a data-fancybox="gallery" href="img/1.png" data-caption="Caption for single image">
-                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a data-fancybox="gallery" href="img/1.png" data-caption="Caption for single image">
-                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/bao-hanh-294x300.png" />
-                            </a>
-                        </div>
+                        <?php $__currentLoopData = $data_collection; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php if($key >= 1): ?>
+                                <div class="col-md-6">
+                                    <a data-fancybox="gallery" href="img/1.png" data-caption="Caption for single image">
+                                        <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
 
@@ -271,64 +218,18 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>CÁC DỊCH VỤ CỦA CHÚNG TÔI</span>
+                <span><?php echo e($name_cat_finish->info_intro); ?></span>
                 <b></b>
             </h3>
         </div>
         <div class="carousel-wrap">
             <div class="owl-carousel owl-theme">
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=1" />
-                    <span class="img-text">nightlife</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=2" />
-                    <span class="img-text">abstract</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=3" />
-                    <span class="img-text">animals</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=4" />
-                    <span class="img-text">nature</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=5" />
-                    <span class="img-text">business</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=6" />
-                    <span class="img-text">cats</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=7" />
-                    <span class="img-text">city</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=8" />
-                    <span class="img-text">food</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=9" />
-                    <span class="img-text">fashion</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=10" />
-                    <span class="img-text">people</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=11" />
-                    <span class="img-text">sports</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=12" />
-                    <span class="img-text">technics</span>
-                </div>
-                <div class="item">
-                    <img src="https://picsum.photos/640/480?pic=13" />
-                    <span class="img-text">transport</span>
-                </div>
+                <?php $__currentLoopData = $data_finish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="item">
+                            <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                        </div>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                
             </div>
         </div>
         <script>
@@ -351,47 +252,46 @@ use App\Library\PHPDev\ThumbImg;
         </script>
     </div>
 </div>
+<div id="content">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <?php if(isset($dataBannerHeader) && !empty($dataBannerHeader)): ?>
+                <?php $__currentLoopData = $dataBannerHeader; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($item > 2): ?>
+                        <div class="carousel-item active">
+                            <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $item['banner_id'], $item['banner_image'], 2000, 0, '', true, true, false)); ?>" alt="">
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php endif; ?>
+        </div>
+
+    </div>
+</div>
 <div class="testimonials">
     <div class="container">
         <div class="title">
             <h3>
                 <b></b>
-                <span>CÁC DỊCH VỤ CỦA CHÚNG TÔI</span>
+                <span><?php echo e($name_cat_testimonials->info_intro); ?></span>
                 <b></b>
             </h3>
         </div>
         <div class="row">
-            <div class="col-md-4">
-                <div class="anh">
-                    <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/maxresdefault.jpg" />
-                </div>
+            <?php $__currentLoopData = $data_testimonials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="col-md-4">
+                    <div class="anh">
+                        <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                    </div>
 
-                <div class="quote">
-                    <i class="fa fa-quote-right"></i>
-                    <p class="quote-content">Kim loại quý là thứ mà không bao giờ lỗi mốt và luôn được các nhà thiết kế, chế tác lựa chọn để đưa vào các sản phẩm làm đẹp. Những sản phẩm mạ ...</p>
-                    <p class="name">Nguyễn văn An</p>
+                    <div class="quote">
+                        <i class="fa fa-quote-right"></i>
+                        <p class="quote-content">Kim loại quý là thứ mà không bao giờ lỗi mốt và luôn được các nhà thiết kế, chế tác lựa chọn để đưa vào các sản phẩm làm đẹp. Những sản phẩm mạ ...</p>
+                        <p class="name">Nguyễn văn An</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="anh">
-                    <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/maxresdefault.jpg" />
-                </div>
-                <div class="quote">
-                    <i class="fa fa-quote-right"></i>
-                    <p class="quote-content">Kim loại quý là thứ mà không bao giờ lỗi mốt và luôn được các nhà thiết kế, chế tác lựa chọn để đưa vào các sản phẩm làm đẹp. Những sản phẩm mạ ...</p>
-                    <p class="name">Nguyễn văn An</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="anh">
-                    <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/maxresdefault.jpg" />
-                </div>
-                <div class="quote">
-                    <i class="fa fa-quote-right"></i>
-                    <p class="quote-content">Kim loại quý là thứ mà không bao giờ lỗi mốt và luôn được các nhà thiết kế, chế tác lựa chọn để đưa vào các sản phẩm làm đẹp. Những sản phẩm mạ ...</p>
-                    <p class="name">Nguyễn văn An</p>
-                </div>
-            </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            
         </div>
         <a href="#" class="showmore">
             <span>XEM THÊM</span>
@@ -401,20 +301,23 @@ use App\Library\PHPDev\ThumbImg;
 </div>
 <div class="introduce">
     <div class="container">
+        <?php $__currentLoopData = $data_aboutme; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>:
         <div class="row">
+        
             <div class="col-md-6">
                 <div class="anh">
-                    <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/du-an-01.png" />
+                    <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="about-me">
-                    <h5>Về chúng tôi</h5>
-                    <p>Kim loại quý là thứ mà không bao giờ lỗi mốt và luôn được các nhà thiết kế, chế tác lựa chọn để đưa vào các sản phẩm làm đẹp. Những sản phẩm mạ vàng sau đây đã và đang gây sốt trong cộng đồng những người...</p>
+                    <h5><?php echo e($item->statics_title); ?></h5>
+                    <p><?php echo e(strip_tags($item->statics_content)); ?></p>
                     <button>XEM NGAY</button>
                 </div>
             </div>
         </div>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 </div>
 

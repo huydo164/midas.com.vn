@@ -12,17 +12,25 @@ use App\Library\PHPDev\FuncLib;
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="shortcut icon" href="<?php echo e(FuncLib::getBaseUrl()); ?>assets/frontend/img/favicon.ico" type="image/vnd.microsoft.icon">
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/bootstrap/css/bootstrap.css')); ?>" />
-    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/slick/slick.css')); ?>" />
-    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/slick/slick.theme.css')); ?>" />
+    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/fontawesome-free-5.15.1-web/css/all.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/focus/css/reset.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/site.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/media.css')); ?>" />
     <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/animate.css')); ?>" />
+    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/owl.carousel.min.css')); ?>" />
+    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/owl.theme.default.min.css')); ?>" />
+    <link media="all" type="text/css" rel="stylesheet" href="<?php echo e(URL::asset('assets/frontend/css/font-awesome.min.css')); ?>" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="<?php echo e(URL::asset('assets/frontend/js/site.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/focus/js/jquery.2.1.1.min.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/libs/bootstrap/js/bootstrap.min.js')); ?>"></script>
-    <script src="<?php echo e(URL::asset('assets/libs/slick/slick.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/libs/number/autoNumeric.js')); ?>"></script>
+    
+    <script src="<?php echo e(URL::asset('assets/frontend/js/owl.carousel.js')); ?>"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
 	<?php echo CGlobal::$extraHeaderCSS; ?>
 
 	<?php echo CGlobal::$extraHeaderJS; ?>

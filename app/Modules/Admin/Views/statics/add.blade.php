@@ -66,14 +66,6 @@ use App\Library\PHPDev\ThumbImg;
                                                         <div class="clearfix"></div>
                                                         <div class="col-sm-12">
                                                             <div class="form-group">
-                                                                <label for="" class="form-label">Link Video</label>
-                                                                <div class="controls">
-                                                                    <input type="text" class="form-control" name="statics_video" value="@if(isset($data['statics_video'])){{ $data['statics_video']}} @endif">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
                                                                 <label class="control-label">Ảnh</label>
                                                                 <div class="controls">
                                                                     <a href="javascript:;"class="btn btn-primary link-button btn-sm" onclick="UploadAdmin.uploadMultipleImages(6);">Upload ảnh</a>

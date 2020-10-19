@@ -16,7 +16,7 @@ class Contact extends Model{
     public $timestamps = false;
 
     protected $fillable = [
-        'contact_id', 'contact_name', 'contact_phone', 'contact_content', 'contact_created', 'contact_status'
+        'contact_id','contact_name', 'contact_email', 'contact_phone', 'contact_content', 'contact_address' ,'contact_created','contact_type', 'contact_status'
     ];
 
     public static function searchByCondition($dataSearch = array(), $limit = 0, $offset = 0, &$total){
@@ -86,29 +86,31 @@ class Contact extends Model{
     }
 
     public static function addData($dataInput = array()){
-        try {
-            DB::connection()->getPdo()->beginTransaction();
 
+            DB::connection()->getPdo()->beginTransaction();
+            
             $data = new Contact();
             if (is_array($dataInput) && count($dataInput) > 0){
                 foreach ($dataInput as $k => $v){
                     $data->$k = $v;
                 }
             }
-            if ($data->save()){
+            $data->save();
+
+                
                 DB::connection()->getPdo()->commit();
+                
                 if ($data->contact_id && Memcache::CACHE_ON){
                     Contact::removeCacheId($data->contact_id);
                 }
                 return $data->contact_id;
-            }
+            
+            
+            
             DB::connection()->getPdo()->commit();
             return false;
 
-        }catch (PDOException $e){
-            DB::connection()->getPdo()->rollback();
-            throw new PDOException();
-        }
+
     }
 
     public static function saveData($id = 0, $data = array()){
