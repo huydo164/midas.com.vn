@@ -73,27 +73,31 @@ use App\Library\PHPDev\ThumbImg;
 
     <!----------service----------->
 
-    <div class="keyword">
-        <h2><?php echo isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : ''; ?></h2>
-        <div class="list-key">
-            <?php if(isset($arrCategory) && !empty($arrCategory)): ?>
-                <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php if($item->category_id == 680): ?>
-                        <ul>
-                            <li><a href="">Tượng</a></li>
-                            <li><a href="">Vàng</a></li>
-                            <li><a href="">Mạ vàng</a></li>
-                            <li><a href="">Vật phẩm</a></li>
-                            <li><a href="">Kích thước</a></li>
-                            <li><a href="">Video</a></li>
-                            <li><a href="">Tin dùng</a></li>
-                            <li><a href="">Giá tiền</a></li>
-                        </ul>
-                    <?php endif; ?>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <?php endif; ?>
+    <?php if(isset($data) && !empty($data) || isset($pageDetail) && !empty($pageDetail)): ?>
+        <div class="keyword">
+            <h2><?php echo isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : ''; ?></h2>
+            <div class="list-key">
+                <?php $statics_tag = (isset($data->statics_tag) && $data->statics_tag != '') ? json_decode($data->statics_tag, true) : []; ?>
+                <?php $statics_tag = (isset($pageDetail->statics_tag) && $pageDetail->statics_tag != '') ? json_decode($pageDetail->statics_tag, true) : []; ?>
+                <ul>
+                    <?php $__currentLoopData = $statics_tag; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><a href="<?php echo e($key); ?>"><?php echo e($item); ?></a></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
+
+   <?php if(isset($dataTags)): ?>
+        <div class="list-key mgb">
+            <ul>
+                <?php $__currentLoopData = $dataTags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><a href="<?php echo e($key); ?>"><?php echo e($tag); ?></a></li>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </ul>
+        </div>
+   <?php endif; ?>
+
 
     <!------------keyword--------------->
 

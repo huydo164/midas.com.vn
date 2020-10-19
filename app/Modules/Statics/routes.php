@@ -36,7 +36,9 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
     Route::get('contact', array('as' => 'site.pageContact', 'uses' => 'StaticsController@pageContact'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
     Route::post('lien-he', array('as' => 'site.pageContactPost', 'uses' => 'StaticsController@pageContactPost'));
 
-
+    Route::get('{name}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
+    Route::get('dich-vu/{name}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
+    Route::get('tag', array('as' => 'site.pageTagDetail', 'uses' => 'StaticsController@pageTagDetail'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');;
 
 
 });

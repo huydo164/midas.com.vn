@@ -49,4 +49,7 @@ class Memcache{
     const CACHE_CONTACT_ID = 'cache_contact_id_';
     //Buy
     const CACHE_BUY_ID = 'cache_buy_id_';
+    //Tag
+    const CACHE_TAG_ID = 'cache_tag_id_';
+    const CACHE_ALL_TAG = 'cache_all_tag';
 }

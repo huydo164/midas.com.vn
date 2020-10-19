@@ -26,4 +26,6 @@ class CDatabase{
     const feedback = 'feedback';
     const comment = 'comment';
     const buy = 'buy';
+    const tag = 'tag';
+    const tag_statics = 'tag_statics';
 }

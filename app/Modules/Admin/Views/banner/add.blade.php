@@ -51,7 +51,7 @@ use App\Library\PHPDev\ThumbImg;
                                                 <div class="clearfix"></div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label class="control-label">Tiêu đề hiển thị<span>*</span></label>
+                                                        <label class="control-label">Tiêu đề hiển thị</label>
                                                         <input type="text" class="form-control input-sm" name="banner_title_show" value="@if(isset($data['banner_title_show'])){{$data['banner_title_show']}}@endif">
                                                     </div>
                                                 </div>

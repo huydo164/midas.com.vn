@@ -25,7 +25,7 @@ class Statics extends Model {
 
     protected $fillable = array(
         'statics_id', 'statics_catid', 'statics_cat_name', 'statics_cat_alias', 'statics_title', 'statics_intro', 'statics_content', 'statics_view_num',
-        'statics_image', 'statics_image_other', 'statics_created', 'statics_order_no', 'statics_focus', 'statics_status', 'statics_word', 'meta_title', 'meta_keywords', 'meta_description');
+        'statics_image', 'statics_image_other', 'statics_created', 'statics_order_no', 'statics_focus', 'statics_status', 'statics_word', 'meta_title', 'meta_keywords', 'meta_description', 'statics_tag');
 
     public static function searchByCondition($dataSearch=array(), $limit=0, $offset=0, &$total){
         try{
@@ -48,6 +48,16 @@ class Statics extends Model {
                 }
             }
 
+            if (isset($dataSearch['statics_id'])) {
+                if(is_array($dataSearch['statics_id']) && !empty($dataSearch['statics_id'])){
+                    $query->whereIn('statics_id', $dataSearch['statics_id']);
+                }else{
+                    if($dataSearch['statics_id'] > 0){
+                        $query->where('statics_id', $dataSearch['statics_id']);
+                    }
+                }
+            }
+
             $total = $query->count(['statics_id']);
             $query->orderBy('statics_id', 'asc');
 
@@ -65,6 +75,7 @@ class Statics extends Model {
     }
 
     public static function getById($id=0){
+
         $result = (Memcache::CACHE_ON) ? Cache::get(Memcache::CACHE_STATICS_ID.$id) : array();
         try {
             if(empty($result)){
@@ -92,7 +103,7 @@ class Statics extends Model {
                 }
             }
             DB::connection()->getPdo()->commit();
-            return true;
+            return $id;
         } catch (PDOException $e) {
             DB::connection()->getPdo()->rollBack();
             throw new PDOException();
@@ -132,13 +143,13 @@ class Statics extends Model {
             }
         }
         if($id > 0){
-            Statics::updateData($id, $data_post);
+            $id = Statics::updateData($id, $data_post);
             Utility::messages('messages', 'Cập nhật thành công!');
         }else{
-            Statics::addData($data_post);
+            $id = Statics::addData($data_post);
             Utility::messages('messages', 'Thêm mới thành công!');
         }
-
+        return $id;
     }
 
     public static function deleteId($id=0){

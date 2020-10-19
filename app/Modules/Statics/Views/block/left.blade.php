@@ -70,27 +70,31 @@ use App\Library\PHPDev\ThumbImg;
 
     <!----------service----------->
 
-    <div class="keyword">
-        <h2>{!! isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : '' !!}</h2>
-        <div class="list-key">
-            @if(isset($arrCategory) && !empty($arrCategory))
-                @foreach($arrCategory as $item)
-                    @if($item->category_id == 680)
-                        <ul>
-                            <li><a href="">Tượng</a></li>
-                            <li><a href="">Vàng</a></li>
-                            <li><a href="">Mạ vàng</a></li>
-                            <li><a href="">Vật phẩm</a></li>
-                            <li><a href="">Kích thước</a></li>
-                            <li><a href="">Video</a></li>
-                            <li><a href="">Tin dùng</a></li>
-                            <li><a href="">Giá tiền</a></li>
-                        </ul>
-                    @endif
-                @endforeach
-            @endif
+    @if(isset($data) && !empty($data) || isset($pageDetail) && !empty($pageDetail))
+        <div class="keyword">
+            <h2>{!! isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : '' !!}</h2>
+            <div class="list-key">
+                <?php $statics_tag = (isset($data->statics_tag) && $data->statics_tag != '') ? json_decode($data->statics_tag, true) : []; ?>
+                <?php $statics_tag = (isset($pageDetail->statics_tag) && $pageDetail->statics_tag != '') ? json_decode($pageDetail->statics_tag, true) : []; ?>
+                <ul>
+                    @foreach($statics_tag as $key => $item)
+                        <li><a href="{{$key}}">{{ $item }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-    </div>
+    @endif
+
+   @if(isset($dataTags))
+        <div class="list-key mgb">
+            <ul>
+                @foreach($dataTags as $key => $tag)
+                    <li><a href="{{$key}}">{{$tag}}</a></li>
+                @endforeach
+            </ul>
+        </div>
+   @endif
+
 
     <!------------keyword--------------->
 

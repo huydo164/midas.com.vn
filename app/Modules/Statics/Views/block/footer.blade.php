@@ -64,5 +64,8 @@ use App\Library\PHPDev\ThumbImg;
             <p>{!! $text_bot->info_content !!}</p>
         </div>
     </div>
+    <div class="scroll-top">
+        <button class="btnTop"><i class="fas fa-chevron-up"></i></button>
+    </div>
 </div>
 

@@ -47,6 +47,10 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::post('buy/delete', array('as' => 'admin.buy_delete', 'uses' => 'BuyController@delete', 'permission_name' => 'Xóa mua sản phẩm'));
 
     Route::get('tag', array('as' => 'admin.tag', 'uses' => 'TagController@listView', 'permission_name' => 'Danh sách từ khóa', 'display_menu' => 1, 'display_icon_sub' => 'fa fa-globe'));
+    Route::get('tag/edit/{id?}', array('as' => 'admin.tag_edit', 'uses' => 'TagController@getItem', 'permission_name' => 'Chi tiết từ khóa'))->where('id', '[0-9]+');
+    Route::post('tag/edit/{id?}', array('as' => 'admin.tag_edit', 'uses' => 'TagController@postItem', 'permission_name' => 'Sửa từ khóa'))->where('id', '[0-9]+');
+    Route::post('tag/delete', array('as' => 'admin.tag_delete', 'uses' => 'TagController@delete', 'permission_name' => 'Xóa từ khóa'));
+
 
 });
 

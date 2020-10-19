@@ -17,6 +17,9 @@ use App\Modules\Models\Category;
 use App\Modules\Models\Contact;
 use App\Modules\Models\Info;
 use App\Modules\Models\Statics;
+use App\Modules\Models\Tag;
+use App\Modules\Models\TagStatics;
+use App\Modules\Models\Type;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 
@@ -181,7 +184,7 @@ class StaticsController extends BaseStaticsController{
     public function pageStaticsDetail($catname, $catid){
         $pageNo = (int)Request::get('page', 1);
         $pageScroll = CGlobal::num_scroll_page;
-        $limit  =12;
+        $limit  = 12;
         $offset = ($pageNo - 1)* $limit;
         $total = 0;
         $data = $search = $dataCate = array();
@@ -191,11 +194,14 @@ class StaticsController extends BaseStaticsController{
             $search['statics_cat_name'] = $catname;
             $search['statics_catid'] = $catid;
             $search['statics_status'] = CGlobal::status_show;
-            $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created';
+            $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created,statics_tag';
             $data  = Statics::searchByCondition($search, $limit, $offset, $total);
             $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
             $dataCate = Category::getById($catid);
+
+            $pageDetail = Statics::getById($catid);
         }
+
 
         $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
         $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
@@ -207,14 +213,22 @@ class StaticsController extends BaseStaticsController{
             $data_search_dich_vu['statics_catid'] = $cat_dich_vu;
             $data_search_dich_vu['statics_order_no'] = 'asc';
             $data_dich_vu = Statics::getFocus($data_search_dich_vu, $limit = 10);
-
         }
 
+        $dataTags=[];
+        if(!empty($data)){
+            foreach ($data as $item){
+                $tmp = ($item->statics_tag != '') ? json_decode($item->statics_tag, true) : [];
+
+                $dataTags = $dataTags + $tmp;
+            }
+        }
 
         return view('Statics::content.pageStaticsDetail',[
             'data' => $data,
+            'pageDetail' => $pageDetail,
+            'dataTags' => $dataTags,
             'dataCate' => $dataCate,
-            'paging' => $paging,
             'text_dich_vu' => $text_dich_vu,
             'text_tu_khoa' => $text_tu_khoa,
             'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
@@ -230,7 +244,9 @@ class StaticsController extends BaseStaticsController{
 
 
         if($id_page > 0){
+
             $arrSame = array();
+
             $data = Statics::getById($id_page);
 
             if ($data->statics_catid > 0){
@@ -240,6 +256,13 @@ class StaticsController extends BaseStaticsController{
                 }
             }
 
+            $cat_id = (int)strip_tags(self::viewShareVal('CAT_ID_DICH_VU_DETAIL'));
+            $data_cat_id = [];
+            if ($cat_id > 0){
+                $data_search_cat_id['statics_catid'] = $cat_id;
+                $data_cat_id = Statics::getFocus($data_search_cat_id, $limit = 10);
+            }
+
             $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
             $text_san_pham_noi_bat = self::viewShareVal('TEXT_SAN_PHAM_CUA_CHUNG_TOI');
@@ -247,6 +270,7 @@ class StaticsController extends BaseStaticsController{
 
             return view('Statics::content.pageServices',[
                 'data' => $data,
+                'data_cat_id' => $data_cat_id,
                 'text_dich_vu' => $text_dich_vu,
                 'arrSame' => $arrSame,
                 'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
@@ -258,14 +282,41 @@ class StaticsController extends BaseStaticsController{
 
     public function pageProject(){
 
+        $pageNo = (int)Request::get('page', 1);
+        $pageScroll  = CGlobal::num_scroll_page;
+        $limit = 10;
+        $offset = ($pageNo - 1) *$limit;
+        $total = 0;
+        $search = $data = $dataCate = array();
+
+        $search['statics_title'] = addslashes(Request::get('statics_title', ''));
+        $search['statics_status'] = (int)Request::get('statics_status', -1);
+        $search['submit'] = (int)Request::get('submit', 0);
+        $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created,statics_tag';
+
         $cat_finish   = (int)strip_tags(self::viewShareVal('CAT_ID_DUANTHUCHIEN'));
         $data_finish  = [];
-        if ($data_finish  > 0){
+        if ($cat_finish  > 0){
             $data_search_finish ['statics_catid'] = $cat_finish ;
             $data_search_finish ['statics_order_no'] = 'asc';
             $data_finish  = Statics::getFocus($data_search_finish, $limit = 10);
         }
-        $dataCate = Category::getById($cat_finish);
+
+        $data = Statics::searchByCondition($search, $limit, $offset, $total);
+
+
+        $dataTags=[];
+        if(!empty($data)){
+            foreach ($data as $item){
+                $tmp = ($item->statics_tag != '') ? json_decode($item->statics_tag, true) : [];
+
+                $dataTags = $dataTags + $tmp;
+            }
+        }
+
+        if($cat_finish > 0){
+            $dataCate = Category::getById($cat_finish);
+        }
 
         $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
         $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
@@ -277,6 +328,8 @@ class StaticsController extends BaseStaticsController{
         $text_comment = self::viewShareVal('TEXT_COMMENT');
 
         return view('Statics::content.pageProject',[
+            'data' => $data,
+            'dataTags' => $dataTags,
             'dataCate' => $dataCate,
             'data_finish' => $data_finish,
             'text_dich_vu' => $text_dich_vu,
@@ -313,7 +366,6 @@ class StaticsController extends BaseStaticsController{
                 '$dataCate' => $arrCategory,
                 'data_id' => $data_id,
                 'text_dvct' => $text_dvct,
-
                 'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
             ]);
 
@@ -330,13 +382,16 @@ class StaticsController extends BaseStaticsController{
 
             $data_thu_vien = Statics::getFocus($data_search_thu_vien);
         }
-
+        $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
         $text_dvct = self::viewShareVal('TEXT_DICH_VU_CONG_TY');
+        $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
 
         return view('Statics::content.pageLibrary',[
             'statics_image_other' => $statics_image_other,
             'text_dvct' => $text_dvct,
             'data_thu_vien' => $data_thu_vien,
+            'text_tu_khoa' => $text_tu_khoa,
+            'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
         ]);
     }
 
@@ -346,22 +401,33 @@ class StaticsController extends BaseStaticsController{
         $limit = 10;
         $offset = ($pageNo - 1) *$limit;
         $total = 0;
-        $search = $data = array();
+        $search = $data = $dataCate = array();
 
         $search['statics_title'] = addslashes(Request::get('statics_title', ''));
         $search['statics_status'] = (int)Request::get('statics_status', -1);
         $search['submit'] = (int)Request::get('submit', 0);
-        $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created';
+        $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created,statics_tag';
 
-        $dataSearch = Statics::searchByCondition($search, $limit, $offset, $total);
-        foreach ($dataSearch as $item){
+        $data = Statics::searchByCondition($search, $limit, $offset, $total);
+
+
+
+        foreach ($data as $item){
             if($item->statics_id > 0 && isset($item->statics_id)){
                 $catId = $item->statics_id;
                 $dataCate = Statics::getById($catId);
-
             }
         }
         $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
+
+        $dataTags=[];
+        if(!empty($data)){
+            foreach ($data as $item){
+                $tmp = ($item->statics_tag != '') ? json_decode($item->statics_tag, true) : [];
+
+                $dataTags = $dataTags + $tmp;
+            }
+        }
 
         if (isset($dataCate)){
 
@@ -373,8 +439,9 @@ class StaticsController extends BaseStaticsController{
             $text_comment = self::viewShareVal('TEXT_COMMENT');
 
             return view('Statics::content.pageSearch',[
-                'data' => $dataSearch,
+                'data' => $data,
                 'search' => $search,
+                'dataTags' => $dataTags,
                 'dataCate' => $dataCate,
                 'paging' => $paging,
                 'text_dich_vu' => $text_dich_vu,
@@ -383,20 +450,6 @@ class StaticsController extends BaseStaticsController{
                 'text_continue' => $text_continue,
                 'text_post_in' => $text_post_in,
                 'text_comment' => $text_comment
-            ]);
-        }
-        else{
-            $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
-            $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
-            $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
-
-            return view('Statics::content.pageSearch',[
-                'data' => $dataSearch,
-                'search' => $search,
-                'paging' => $paging,
-                'text_dich_vu' => $text_dich_vu,
-                'text_tu_khoa' => $text_tu_khoa,
-                'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
             ]);
         }
     }
@@ -429,6 +482,69 @@ class StaticsController extends BaseStaticsController{
                Utility::messages('messages' , 'Thông tin liên hệ chưa chính sác. Bạn hãy đăng ký lại!');
                return Redirect::route('SIndex');
            }
+        }
+    }
+
+    public function pageTag($id = 0){
+        if ($id > 0){
+
+            $pageNo = (int)Request::get('page', 1);
+            $pageScroll  = CGlobal::num_scroll_page;
+            $limit = 10;
+            $offset = ($pageNo - 1) *$limit;
+            $total = 0;
+            $search = $data  =  array();
+
+            $objTags = Tag::getById($id);
+
+            $arrPost = [];
+            $listPostTag = TagStatics::where('tag_id', $id)->get();
+            if($listPostTag->count() > 0){
+                foreach ($listPostTag as $post){
+                    $arrPost[$post->statics_id] = $post->statics_id;
+                }
+            }
+
+            $search['statics_id'] = $arrPost;
+            $search['statics_status'] = (int)Request::get('statics_status', -1);
+            $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created,statics_tag';
+
+            $data = Statics::searchByCondition($search, $limit, $offset, $total);
+            $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
+
+            $dataTags=[];
+            if(!empty($data)){
+                foreach ($data as $item){
+                    $tmp = ($item->statics_tag != '') ? json_decode($item->statics_tag, true) : [];
+
+                    $dataTags = $dataTags + $tmp;
+                }
+            }
+
+            $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
+            $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
+            $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
+            $text_post = self::viewShareVal('TEXT_POST');
+            $text_by = self::viewShareVal('TEXT_BY');
+            $text_continue = self::viewShareVal('TEXT_CONTINUE');
+            $text_post_in = self::viewShareVal('TEXT_POSTIN');
+            $text_comment = self::viewShareVal('TEXT_COMMENT');
+
+            return view('Statics::content.pageTag', [
+                'data' => $data,
+                'objTags' => $objTags,
+                'dataTags' => $dataTags,
+                'search' => $search,
+                'paging' => $paging,
+                'text_dich_vu'=> $text_dich_vu,
+                'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
+                'text_tu_khoa' => $text_tu_khoa,
+                'text_post' => $text_post,
+                'text_by' => $text_by,
+                'text_continue' => $text_continue,
+                'text_post_in' => $text_post_in,
+                'text_comment' => $text_comment
+            ]);
         }
     }
 

@@ -14,7 +14,9 @@ use App\Library\PHPDev\ThumbImg;
 @stop
 @section('content')
 
+<div class="slide-web">
 
+</div>
 <div class="service">
     <div class="container">
         <div class="title">

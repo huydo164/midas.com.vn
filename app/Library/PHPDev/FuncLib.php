@@ -335,9 +335,16 @@ class FuncLib{
     }
 
     //Buid Link Statics Detail
-    static function buildLinkDetailStatic($id = 0, $statics_title = 'Tin-tuc'){
+    static function buildLinkDetailStatic($id = 0, $statics_title = 'dich-vu'){
         if ($id > 0) {
             return URL::route('site.pageStaticsDetail', array('id' => $id, 'name' => strtolower(FuncLib::safeTitle($statics_title))));
+        }
+        return '#';
+    }
+
+    static function buildLinkDetailTag($id = 0, $tag_title = 'Từ khóa'){
+        if ($id > 0){
+            return URL::route('site.pageTagDetail', array('id' => $id, 'name' => strtolower(FuncLib::safeTitle($tag_title))));
         }
         return '#';
     }

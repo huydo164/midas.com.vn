@@ -64,6 +64,9 @@ use App\Library\PHPDev\ThumbImg;
             <p><?php echo $text_bot->info_content; ?></p>
         </div>
     </div>
+    <div class="scroll-top">
+        <button class="btnTop"><i class="fas fa-chevron-up"></i></button>
+    </div>
 </div>
 
 <?php /**PATH D:\wamp64\www\project.vn\midas.com.vn\app\Modules/Statics/Views/block/footer.blade.php ENDPATH**/ ?>

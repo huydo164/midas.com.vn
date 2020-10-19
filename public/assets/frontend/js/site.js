@@ -1,6 +1,7 @@
 $(document).ready(function ($) {
     STATICS.navigationIcon();
     STATICS.carousel();
+    STATICS.btnTop();
 });
 
 STATICS = {
@@ -36,5 +37,26 @@ STATICS = {
                 }
             }
         });
-    }
+    },
+
+    btnTop:function () {
+        if ($('.btnTop').length > 0){
+            $(window).scroll(function () {
+                var e = $(window).scrollTop();
+                if (e > 500){
+                    $('.btnTop').fadeIn(500);
+                }
+                else {
+                    $('.btnTop').fadeOut(500);
+                }
+            });
+
+            $('.btnTop').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                },700)
+            })
+        }
+    },
+
 };
