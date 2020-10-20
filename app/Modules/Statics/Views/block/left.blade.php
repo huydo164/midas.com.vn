@@ -7,6 +7,33 @@ use App\Library\PHPDev\ThumbImg;
 ?>
 
 <div id="left-page">
+    @if(isset($objData) && !empty($objData) && $objData  > 0 || isset($arrData->category_id) && !empty($arrData->category_id) && $arrData->category_id > 0)
+        <h4><i class="fas fa-bars"></i> {{ isset($text_danh_muc_san_pham) ? strip_tags($text_danh_muc_san_pham) : ''}}</h4>
+        <div class="list-service">
+            <ul>
+                @if(isset($arrCategory) && !empty($arrCategory))
+                    @foreach($arrCategory as $cat)
+
+                        @if($cat->category_id == $cat_dmsp)
+                            <ul class="menu-sub">
+                                @foreach($arrCategory as $sub)
+                                    @if( $sub->category_parent_id == $cat->category_id)
+                                        <li>
+                                            <a title="{{$sub->category_title}}" href="@if($sub->category_link_replace != ''){{$sub->category_link_replace}}@else{{FuncLib::buildLinkDetailProduct($sub->category_id, $sub->category_title)}}@endif">
+                                                {{stripcslashes($sub->category_title)}}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        @endif
+
+                    @endforeach
+                @endif
+
+            </ul>
+        </div>
+    @endif
     <div class="info-service">
         @if(isset($arrCategory) && !empty($arrCategory))
 
