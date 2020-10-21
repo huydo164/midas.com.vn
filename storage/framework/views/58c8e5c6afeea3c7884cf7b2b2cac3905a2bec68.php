@@ -15,7 +15,18 @@ use App\Library\PHPDev\ThumbImg;
 <?php $__env->startSection('content'); ?>
 
 <div class="slide-web">
+    <div class="carousel-wrap">
+        <div class="carousel" data-flickity='{  "lazyLoad": true , "prevNextButtons": false }'>
 
+            <?php $__currentLoopData = $dataBannerHeader; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="carousel-cell">
+                    <img class="carousel-cell-image"
+                         data-flickity-lazyload="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $item['banner_id'],$item['banner_image'], 0,0, '', true, true, false)); ?>" />
+                </div>
+
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </div>
+    </div>
 </div>
 <div class="service">
     <div class="container">
@@ -99,10 +110,7 @@ use App\Library\PHPDev\ThumbImg;
 
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-
-
         </div>
-
     </div>
 </div>
 <?php endif; ?>
@@ -173,6 +181,7 @@ use App\Library\PHPDev\ThumbImg;
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
+
     </div>
 </div>
 

@@ -36,6 +36,9 @@ class StaticsController extends BaseStaticsController{
 
         $messages = Utility::messages('messages');
 
+
+
+
         $cat_dich_vu = (int)strip_tags(self::viewShareVal('CAT_ID_DICHVU'));
         $name_cat_dich_vu = Info::getItemByKeyword('CAT_ID_DICHVU');
         $data_cat_dich_vu = [];

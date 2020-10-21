@@ -15,7 +15,18 @@ use App\Library\PHPDev\ThumbImg;
 @section('content')
 
 <div class="slide-web">
+    <div class="carousel-wrap">
+        <div class="carousel" data-flickity='{  "lazyLoad": true , "prevNextButtons": false }'>
 
+            @foreach($dataBannerHeader as $item)
+                <div class="carousel-cell">
+                    <img class="carousel-cell-image"
+                         data-flickity-lazyload="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $item['banner_id'],$item['banner_image'], 0,0, '', true, true, false) }}" />
+                </div>
+
+            @endforeach
+        </div>
+    </div>
 </div>
 <div class="service">
     <div class="container">
