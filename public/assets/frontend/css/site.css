@@ -85,34 +85,45 @@ body {
     box-shadow: inset 0px 0px 0px 0px #fff, 0px 1px 0 0 #38301d;
 }
 
-.header ul {
+.bg-close{
+    display: none;
+}
+
+.header .logo{
+    position: relative;
+    text-align: center;
+}
+.navigation{
+    position: relative;
+}
+.navigation ul {
     padding: 0;
     margin: 0;
     position: relative;
 }
 
-.header>ul {
+.navigation>ul {
     margin: 0 90px;
     margin: 0
 }
 
-.header ul li {
+.navigation ul li {
     padding-right: 49px;
     display: inline-block;
     font-weight: normal;
     font-size: 12px;
     vertical-align: top;
-    line-height: 90px;
     margin: 0;
     position: relative;
+    line-height: 83px;
 }
 
-.header ul li.first a {
+.navigation ul li.first a {
     padding-left: 0;
 }
 
-.header ul li a {
-    font-size: 15px;
+.navigation ul li a {
+    font-size: 17px;
     text-transform: uppercase;
     color: white;
     font-weight: bold;
@@ -120,12 +131,12 @@ body {
     display: block;
 }
 
-.header ul li a:hover,
-.header ul li.act a {
+.navigation ul li a:hover,
+.navigation ul li.act a {
     color: #ff9500
 }
 
-.header li ul {
+.navigation li ul {
     background: #002020;
     position: absolute;
     top: 61px;
@@ -140,11 +151,11 @@ body {
     border-radius: 0;
 }
 
-.header li:hover ul {
+.navigation li:hover ul {
     display: block
 }
 
-.header li ul li {
+.navigation li ul li {
     padding-right: 0px;
     width: 100%;
     display: block;
@@ -154,7 +165,7 @@ body {
     border-bottom: 1px solid;
 }
 
-.header li ul li a {
+.navigation li ul li a {
     text-transform: none;
     font-weight: normal;
     padding: 10px 0px;
@@ -165,20 +176,20 @@ body {
     transition: all .2s ease-in-out;
 }
 
-.header li ul li:hover {
+.navigation li ul li:hover {
     background: #fecd43;
 }
 
-.header li ul li:hover a {
+.navigation li ul li:hover a {
     color: black;
     /* border: none; */
 }
 
-.header ul li:last-child {
+.navigation ul li:last-child {
     padding-right: 0;
 }
 
-.header ul li.search {
+.navigation ul li.search {
     display: none;
 }
 

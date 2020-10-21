@@ -5,7 +5,6 @@ use App\Library\PHPDev\CGlobal;
 use App\Library\PHPDev\Utility;
 use App\Library\PHPDev\ThumbImg;
 ?>
-
 @extends('Statics::layout.html')
 @section('header')
     @include('Statics::block.header')
@@ -40,7 +39,7 @@ use App\Library\PHPDev\ThumbImg;
                                         {!! $item->statics_content !!}
                                     </p>
                                     <?php
-                                        $statics_image_other = ($item->statics_image_other != '') ? unserialize($item->statics_image_other) : [];
+                                        $statics_image_other = ($item->statics_image_other != '') ? unserialize($item->statics_image_other) : [] ;
                                     ?>
                                     <div class="carousel-wrap">
                                         <div class="owl-carousel owl-theme">
@@ -57,7 +56,6 @@ use App\Library\PHPDev\ThumbImg;
                                     </div>
                                 @endforeach
                             @endif
-
                         </div>
                     </div>
                 </div>

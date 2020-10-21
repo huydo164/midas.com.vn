@@ -137,25 +137,25 @@ use App\Library\PHPDev\ThumbImg;
 
     <div class="Contact-form">
         <h2>{!! isset($text_lien_he_voi_chung_toi) ? strip_tags($text_lien_he_voi_chung_toi) : '' !!}</h2>
-        <form class="iForm" action="" method="POST">
+        <form class="iForm" action="{{ URL::route('site.pageContactPost') }}" method="POST">
             <div class="form-group">
-                <input type="text" name="" class="form-control" id="name" placeholder="Họ và tên">
+                <input type="text" name="contact_name" class="form-control" id="name" placeholder="Họ và tên">
             </div>
             <div class="form-group">
-                <input type="text" name="" class="form-control" id="phone" placeholder="Số điện thoại">
+                <input type="text" name="contact_phone" class="form-control" id="phone" placeholder="Số điện thoại">
             </div>
             <div class="form-group">
-                <input type="email" name="" class="form-control" id="email" placeholder="Email">
+                <input type="text" name="contact_email" class="form-control" id="email" placeholder="Email">
                 <i class="fa fa-envelope-o icon-mail" aria-hidden="true"></i>
 
             </div>
             <div class="form-group">
-                <textarea cols="30" rows="2" name="" id="contentBox"  class="form-control" placeholder="Ghi chú"></textarea>
+                <textarea cols="30" rows="2" name="contact_content" id="contentBox"  class="form-control" placeholder="Ghi chú"></textarea>
             </div>
             <div class="btn-click">
-                <button class="btn btn-primary btnBox" type="button">Gửi ngay</button>
-                {!! csrf_field() !!}
+                <button class="btn btn-primary btnBox" type="submit">Gửi ngay</button>
             </div>
+            {!! csrf_field() !!}
         </form>
     </div>
 </div>

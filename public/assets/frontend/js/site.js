@@ -6,25 +6,26 @@ $(document).ready(function ($) {
     STATICS.searchColor();
     STATICS.minusButton();
     STATICS.plusButton();
-
-    STATICS.carousel();
+            
     STATICS.btnTop();
+    STATICS.menuList();
 
 });
 
 STATICS = {
     navigationIcon:function () {
-        $('.navigationIcon, .backdropNav').click(function () {
-            var backdrop = $('.backdropNav');
-            var navigation = $('.navigation');
-            $('.logo-web').toggleClass('open-logo');
-            $('.navigation').toggleClass('nav-open');
-            if (!(navigation).hasClass('nav-open')){
-                backdrop.hide();
-            }
-            else{
-                backdrop.show();
-            }
+        $('.navigationIcon').click(function () {
+            $('.navigationIcon').toggleClass('open');
+            $('.menu-parent').toggleClass('nav-open');
+            $('.bg-close').toggleClass('bg-open')
+        })
+    },
+
+    menuList:function () {
+        $('#menuList li').on( 'click',function () {
+            $('#menuList li.act').removeClass('act');
+            $(this).addClass('act');
+            $('.active').removeClass();
         })
     },
 

@@ -6,7 +6,6 @@ use App\Library\PHPDev\Utility;
 use App\Library\PHPDev\ThumbImg;
 ?>
 
-
 <?php $__env->startSection('header'); ?>
     <?php echo $__env->make('Statics::block.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
@@ -41,7 +40,7 @@ use App\Library\PHPDev\ThumbImg;
 
                                     </p>
                                     <?php
-                                        $statics_image_other = ($item->statics_image_other != '') ? unserialize($item->statics_image_other) : [];
+                                        $statics_image_other = ($item->statics_image_other != '') ? unserialize($item->statics_image_other) : [] ;
                                     ?>
                                     <div class="carousel-wrap">
                                         <div class="owl-carousel owl-theme">
@@ -58,7 +57,6 @@ use App\Library\PHPDev\ThumbImg;
                                     </div>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             <?php endif; ?>
-
                         </div>
                     </div>
                 </div>

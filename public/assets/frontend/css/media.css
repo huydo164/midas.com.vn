@@ -1,0 +1,110 @@
+@media (max-width: 768px) {
+    .header{
+        max-height: 118px;
+    }
+    .navigation > ul {
+        width: 40%;
+        padding: 24px;
+        display: block;
+        position: fixed;
+        height: 100%;
+        left: -350px;
+        top: -500px;
+        transition: all ease 0.5s;
+        background: #333;
+        z-index: 999;
+    }
+    .navigation ul li{
+        display: block;
+        text-align: left;
+        width: 100%;
+        line-height: 56px;
+    }
+    .top{
+        padding: 0;
+    }
+    .navigationIcon{
+        border: 2px solid #FFF;
+        border-radius: 5px;
+        position: fixed;
+        width: 45px;
+        height: 38px;
+        display: inline-block;
+        padding: 7px;
+        cursor: pointer;
+        transition: all ease-in-out 0.3s ;
+        left: 5%;
+        top: 5%;
+        z-index: 9999;
+    }
+    .line{
+        background: #FFF;
+        width: 69%;
+        display: block;
+        height: 3px;
+        border-radius: 3px;
+        position: absolute;
+        transition: all cubic-bezier(0.25, 0.1, 0.27, 1.55 ) 0.35s ;
+    }
+    .top{
+        top: 21%;
+    }
+    .mid{
+        top: 45%;
+    }
+    .bot{
+        top: 70%;
+    }
+    .navigationIcon.open{
+        left: 50%;
+        z-index: 9999;
+    }
+    .navigationIcon.open .top{
+        transform: rotate(45deg);
+        top: 47%;
+    }
+    .navigationIcon.open .mid, .navigationIcon.open .bot{
+        transform: rotate(-45deg);
+        top: 47%;
+    }
+    .navigation ul.nav-open{
+        left: 0;
+        top: 0;
+    }
+    .navigation li ul{
+        max-height: 0;
+        position: relative;
+        left: 0;
+        border: none;
+        background: none;
+    }
+    .navigation li ul li{
+        border-bottom: none;
+        text-align: left;
+    }
+    .navigation li ul li:hover{
+        background: none;
+        border-bottom: 1px solid ;
+    }
+    .navigation li ul li:hover a{
+        color: #fff;
+    }
+    .navigation ul li:hover > .menu-sub{
+        max-height: initial;
+        opacity: 1;
+        visibility: visible;
+        top: auto;
+        left: 30px;
+    }
+    .bg-close.bg-open{
+        position: fixed;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #0b0b0b;
+        opacity: .8;
+        z-index: 999;
+        top: 0;
+        left: 0;
+    }
+}

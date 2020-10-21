@@ -17,6 +17,7 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
 
 
     Route::get('contact', array('as' => 'site.PageContact','uses' => 'StaticsController@pageContact'));
+    Route::post('contact', array('as' => 'site.pageContactPost','uses' => 'StaticsController@pageContactPost'));
 
 
     Route::get('dich-vu', array('as' => 'site.pageServices', 'uses' => 'StaticsController@pageServices'));
