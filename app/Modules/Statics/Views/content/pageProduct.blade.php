@@ -18,7 +18,7 @@ use App\Library\PHPDev\ThumbImg;
     <div class="top">
         <div class="container">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-lg-7 col-md-12">
                     <div class="slide-img">
 
                         <div class="container">
@@ -50,12 +50,12 @@ use App\Library\PHPDev\ThumbImg;
 
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-lg-5 col-md-12">
                     <div class="detail">
                         <div class="breadcrums">
                             <a href="#">Trang chủ</a>
                             <span>/</span>
-                            <a href="#">Tượng vĩ nhân</a>
+                            <a href="@if($data->category_link_replace != ''){{$data->category_link_replace}}@else{{FuncLib::buildLinkDetailProduct($data->category_id, $data->category_title)}}@endif">{{ stripslashes($data->product_title) }}</a>
                         </div>
 
                         <h1 class="product-title">{{ stripslashes($data->product_title) }}</h1>
@@ -297,22 +297,7 @@ use App\Library\PHPDev\ThumbImg;
                     <b></b>
                 </h3>
             </div>
-            <div class="carousel-wrap">
-                <div class="carousel carousel-main" data-flickity='{"pageDots": false }'>
-                    @foreach($dataSame as $item)
-                        <div class="carousel-cell">
-                            <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item['product_id'], $item['product_image'], 2000,0, '', true, true, false) }}"/>
-                            <div class="nd">
-                                <a title="{{$item->product_title}}" href="{{FuncLib::buildLinkProduct($item->product_id, $item->product_title)}}">
-                                    <p class="name">{{ stripslashes($item->product_title) }}</p>
-                                </a>
-                                <p class="price">{{FuncLib::numberFormat ($item->product_price) }}₫</p>
-                            </div>
-                        </div>
-
-                    @endforeach
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

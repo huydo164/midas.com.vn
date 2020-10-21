@@ -36,6 +36,9 @@ class StaticsController extends BaseStaticsController{
 
         $messages = Utility::messages('messages');
 
+
+
+
         $cat_dich_vu = (int)strip_tags(self::viewShareVal('CAT_ID_DICHVU'));
         $name_cat_dich_vu = Info::getItemByKeyword('CAT_ID_DICHVU');
         $data_cat_dich_vu = [];
@@ -56,6 +59,14 @@ class StaticsController extends BaseStaticsController{
         }
 
 
+
+        $name_cat_hightlight = Info::getItemByKeyword('CAT_ID_SPNB');
+        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
+        $hightligt = Product::getData($limit = 10 , $searchSame);
+
+        
+
+
         $cat_collection  = (int)strip_tags(self::viewShareVal('CAT_ID_BST'));
         $name_cat_collection = Info::getItemByKeyword('CAT_ID_BST');
         $data_collection = [];
@@ -66,13 +77,17 @@ class StaticsController extends BaseStaticsController{
         }
 
         $cat_finish   = (int)strip_tags(self::viewShareVal('CAT_ID_DUANTHUCHIEN'));
+        
         $name_cat_finish  = Info::getItemByKeyword('CAT_ID_DUANTHUCHIEN');
+
+        
         $data_finish  = [];
         if ($data_finish  > 0){
             $data_search_finish ['statics_catid'] = $cat_finish ;
             $data_search_finish ['statics_order_no'] = 'asc';
             $data_finish  = Statics::getFocus($data_search_finish, $limit = 10);
         }
+        
 
         $cat_testimonials   = (int)strip_tags(self::viewShareVal('CAT_ID_CAMNHAN'));
         $name_cat_testimonials  = Info::getItemByKeyword('CAT_ID_CAMNHAN');
@@ -101,6 +116,8 @@ class StaticsController extends BaseStaticsController{
             'name_cat_dich_vu' => $name_cat_dich_vu,
             'data_commitment' => $data_commitment,
             'name_cat_commitment' => $name_cat_commitment,
+            'name_cat_hightlight' => $name_cat_hightlight,
+            'hightlight' => $hightligt,
             'data_collection' => $data_collection,
             'name_cat_collection' => $name_cat_collection,
             'data_finish' => $data_finish,
@@ -136,11 +153,22 @@ class StaticsController extends BaseStaticsController{
     public function pageContact(){
         Loader::loadJS('libs/owl.carousel/owl.carousel.min.js', CGlobal::$postEnd);
         Loader::loadCSS('libs/owl.carousel/owl.carousel.min.css', CGlobal::$postHead);
+        $contact_title = strip_tags(self::viewShareVal('SITE_CONTACT_TITLE'));
+        $contact_hotline1 = strip_tags(self::viewShareVal('SITE_CONTACT_HOTLINE_1'));
+        $contact_hotline2 = strip_tags(self::viewShareVal('SITE_CONTACT_HOTLINE_2'));
+        $contact_address = strip_tags(self::viewShareVal('SITE_CONTACT_ADDRESS'));
+        $contact_intro = strip_tags(self::viewShareVal('SITE_CONTACT_INTRO'));
 
 
         $messages = Utility::messages('messages');
         return view('Statics::content.contact',[
-            'messages' => $messages
+            'messages' => $messages,
+            'contact_title' => $contact_title,
+            'contact_hotline1' => $contact_hotline1,
+            'contact_hotline2' => $contact_hotline2,
+            'contact_address' => $contact_address,
+            'contact_intro' => $contact_intro,
+
         ]);
     }
 
@@ -860,6 +888,25 @@ class StaticsController extends BaseStaticsController{
                 'text_comment' => $text_comment
             ]);
         }
+    }
+
+    public function  aboutme(){
+
+    }
+
+    public function PageCustomer(){
+        $cat_testimonials   = (int)strip_tags(self::viewShareVal('CAT_ID_CAMNHAN'));
+        $name_cat_testimonials  = Info::getItemByKeyword('CAT_ID_CAMNHAN');
+        $data_testimonials  = [];
+        if ($data_testimonials  > 0){
+            $data_search_testimonials ['statics_catid'] = $cat_testimonials ;
+            $data_search_testimonials ['statics_order_no'] = 'asc';
+            $data_testimonials  = Statics::getFocus($data_search_testimonials, $limit = 10);
+        }
+        return view('Statics::content.pageCustomer', [
+            'name_cat_testimonials' => $name_cat_testimonials,
+            'data_testimonials' => $data_testimonials,
+        ]);
     }
 
 }

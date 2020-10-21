@@ -302,4 +302,20 @@ class Product extends Model {
         }
         return $result;
     }
+    public static function getData( $limit=10, $dataSearch=array()){
+        $result = array();
+        try{
+            if($limit > 0){
+                $query = Product::where('product_id','>', 0);
+                $query->where('product_status', CGlobal::status_show);
+                $query->orderBy('product_id', 'desc');
+                $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+                $result = $query->take($limit)->get($fields);
+            }
+
+        }catch (PDOException $e){
+            throw new PDOException();
+        }
+        return $result;
+    }
 }
