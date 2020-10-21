@@ -61,6 +61,7 @@ class BaseStaticsController extends Controller{
         $arrCategory = Category::getAllCategory(0, array(), 0);
         View::share('arrCategory',$arrCategory);
 
+
         $arrTextLogo = Info::getItemByKeyword('SITE_LOGO');
         View::share('arrTextLogo',$arrTextLogo);
 

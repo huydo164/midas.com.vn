@@ -16,7 +16,7 @@ use App\Library\PHPDev\ThumbImg;
     <div class="cart">
         <div class="container">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-lg-7 col-md-12">
                     <table class="shop_table shop_table_responsive cart woocommerce-cart-form__contents" cellspacing="0">
                         <thead>
                         <tr>
@@ -84,7 +84,7 @@ use App\Library\PHPDev\ThumbImg;
                         </tbody>
                     </table>
                 </div>
-                <div class="col-md-5">
+                <div class="col-lg-5 col-md-12">
                     <div class="cart_totals ">
 
                         <table cellspacing="0">

@@ -24,6 +24,7 @@ use App\Library\PHPDev\ThumbImg;
                             <li>
                                 <a @if($i > 0) @endif title="{{$cat->category_title}}" href="@if($cat->category_link_replace != ''){{$cat->category_link_replace}}@else{{FuncLib::buildLinkCategory($cat->category_id, $cat->category_title)}}@endif" >
                                     {{$cat->category_title}}
+                                    @if($i>0) <i class="fas fa-angle-down"></i> @endif
                                 </a>
                                 @if($i > 0)
                                     <ul class="menu-sub">

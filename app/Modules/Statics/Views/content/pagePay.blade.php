@@ -18,7 +18,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="container">
             <form action="{{ URL::Route('site.pageOrder') }}" method="post">
                 {{ csrf_field() }}
-                <div class="col-md-7">
+                <div class="col-lg-7 col-md-12 col-sm-12">
                     <p class="tk">
                         Bạn đã có tài khoản? <a href="#">Ấn vào đây để đăng nhập</a>
                     </p>
@@ -65,7 +65,7 @@ use App\Library\PHPDev\ThumbImg;
 
 
                 </div>
-                <div class="col-md-5">
+                <div class="col-lg-7 col-md-12 col-sm-12">
 
                         <div class="col-inner has-border">
                             <div class="checkout-sidebar sm-touch-scroll cc_cursor">

@@ -21,11 +21,11 @@ use App\Library\PHPDev\ThumbImg;
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>MIDAS - VẬT PHẨM DÁT VÀNG</h2>
-                <p class="phone"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-phone.png"> Hotline: <span class="sdt">01159.865.523</span> </p>
-                <p class="phone"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-phone.png"> Hotline: <span class="sdt">01159.865.523</span> </p>
-                <p class="home"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-home.png"> Địa chỉ: Số 12 ngõ 34 đường lĩnh nam – Hoàng Mai – Hà Nội </p>
-                <p class="content">MIDAS là một trong những cơ sở mạ vàng lớn – uy tín – chất lượng. Chúng tôi chuyên sản xuất và phân phối các sản phẩm mạ vàng với nhiều mẫu mã đa dạng và phong phú với mong muốn đem lại những sản phẩm tốt nhất cho người dùng cả về chất lượng kỹ thuật và mỹ thuật. Với đặc thù sản xuất trực tiếp, giao hàng tận tay không qua bất kì khâu trung gian nào nên giá thành sản phẩm của chúng tôi luôn rẻ nhất, cạnh tranh nhất so với những sản phẩm cùng loại. </p>
+                <h2>{{ strip_tags($contact_title) }}</h2>
+                <p class="phone"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-phone.png"> {{ strip_tags($contact_hotline1) }}  </p>
+                <p class="phone"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-phone.png">{{ strip_tags($contact_hotline2)}}  </p>
+                <p class="home"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-home.png"> {{ strip_tags($contact_address)}} </p>
+                <p class="content"> {{ $contact_intro }}</p>
             </div>
             <div class="col-md-6">
                 <h2>LIÊN HỆ VỚI CHÚNG TÔI</h2>
