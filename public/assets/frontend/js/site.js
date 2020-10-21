@@ -7,12 +7,13 @@ $(document).ready(function($) {
     STATICS.minusButton();
     STATICS.plusButton();
 
-
     STATICS.btnTop();
+    STATICS.menuList();
 
 });
 
 STATICS = {
+
     navigationIcon: function() {
         $('.navigationIcon, .backdropNav').click(function() {
             var backdrop = $('.backdropNav');
@@ -24,6 +25,23 @@ STATICS = {
             } else {
                 backdrop.show();
             }
+        })
+    },
+
+    navigationIcon:function () {
+        $('.navigationIcon').click(function () {
+            $('.navigationIcon').toggleClass('open');
+            $('.menu-parent').toggleClass('nav-open');
+            $('.bg-close').toggleClass('bg-open')
+        })
+    },
+
+    menuList:function () {
+        $('#menuList li').on( 'click',function () {
+            $('#menuList li.act').removeClass('act');
+            $(this).addClass('act');
+            $('.active').removeClass();
+
         })
     },
 

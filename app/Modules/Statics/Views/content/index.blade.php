@@ -100,7 +100,6 @@ use App\Library\PHPDev\ThumbImg;
                 @endforeach
             </div>
         </div>
-
     </div>
 </div>
 @endif
@@ -171,6 +170,7 @@ use App\Library\PHPDev\ThumbImg;
                 @endforeach
             </div>
         </div>
+
     </div>
 </div>
 

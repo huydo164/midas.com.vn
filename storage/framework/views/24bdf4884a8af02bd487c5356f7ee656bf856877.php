@@ -7,6 +7,34 @@ use App\Library\PHPDev\ThumbImg;
 ?>
 
 <div id="left-page">
+    <?php if(isset($objData) && !empty($objData) && $objData  > 0 || isset($arrData->category_id) && !empty($arrData->category_id) && $arrData->category_id > 0): ?>
+        <h4><i class="fas fa-bars"></i> <?php echo e(isset($text_danh_muc_san_pham) ? strip_tags($text_danh_muc_san_pham) : ''); ?></h4>
+        <div class="list-service">
+            <ul>
+                <?php if(isset($arrCategory) && !empty($arrCategory)): ?>
+                    <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                        <?php if($cat->category_id == $cat_dmsp): ?>
+                            <ul class="menu-sub">
+                                <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php if( $sub->category_parent_id == $cat->category_id): ?>
+                                        <li>
+                                            <a title="<?php echo e($sub->category_title); ?>" href="<?php if($sub->category_link_replace != ''): ?><?php echo e($sub->category_link_replace); ?><?php else: ?><?php echo e(FuncLib::buildLinkDetailProduct($sub->category_id, $sub->category_title)); ?><?php endif; ?>">
+                                                <?php echo e(stripcslashes($sub->category_title)); ?>
+
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
+                        <?php endif; ?>
+
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
+
+            </ul>
+        </div>
+    <?php endif; ?>
     <div class="info-service">
         <?php if(isset($arrCategory) && !empty($arrCategory)): ?>
 
@@ -113,26 +141,26 @@ use App\Library\PHPDev\ThumbImg;
 
     <div class="Contact-form">
         <h2><?php echo isset($text_lien_he_voi_chung_toi) ? strip_tags($text_lien_he_voi_chung_toi) : ''; ?></h2>
-        <form class="iForm" action="" method="POST">
+        <form class="iForm" action="<?php echo e(URL::route('site.pageContactPost')); ?>" method="POST">
             <div class="form-group">
-                <input type="text" name="" class="form-control" id="name" placeholder="Họ và tên">
+                <input type="text" name="contact_name" class="form-control" id="name" placeholder="Họ và tên">
             </div>
             <div class="form-group">
-                <input type="text" name="" class="form-control" id="phone" placeholder="Số điện thoại">
+                <input type="text" name="contact_phone" class="form-control" id="phone" placeholder="Số điện thoại">
             </div>
             <div class="form-group">
-                <input type="email" name="" class="form-control" id="email" placeholder="Email">
+                <input type="text" name="contact_email" class="form-control" id="email" placeholder="Email">
                 <i class="fa fa-envelope-o icon-mail" aria-hidden="true"></i>
 
             </div>
             <div class="form-group">
-                <textarea cols="30" rows="2" name="" id="contentBox"  class="form-control" placeholder="Ghi chú"></textarea>
+                <textarea cols="30" rows="2" name="contact_content" id="contentBox"  class="form-control" placeholder="Ghi chú"></textarea>
             </div>
             <div class="btn-click">
-                <button class="btn btn-primary btnBox" type="button">Gửi ngay</button>
-                <?php echo csrf_field(); ?>
-
+                <button class="btn btn-primary btnBox" type="submit">Gửi ngay</button>
             </div>
+            <?php echo csrf_field(); ?>
+
         </form>
     </div>
 </div>

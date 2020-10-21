@@ -7,6 +7,33 @@ use App\Library\PHPDev\ThumbImg;
 ?>
 
 <div id="left-page">
+    @if(isset($objData) && !empty($objData) && $objData  > 0 || isset($arrData->category_id) && !empty($arrData->category_id) && $arrData->category_id > 0)
+        <h4><i class="fas fa-bars"></i> {{ isset($text_danh_muc_san_pham) ? strip_tags($text_danh_muc_san_pham) : ''}}</h4>
+        <div class="list-service">
+            <ul>
+                @if(isset($arrCategory) && !empty($arrCategory))
+                    @foreach($arrCategory as $cat)
+
+                        @if($cat->category_id == $cat_dmsp)
+                            <ul class="menu-sub">
+                                @foreach($arrCategory as $sub)
+                                    @if( $sub->category_parent_id == $cat->category_id)
+                                        <li>
+                                            <a title="{{$sub->category_title}}" href="@if($sub->category_link_replace != ''){{$sub->category_link_replace}}@else{{FuncLib::buildLinkDetailProduct($sub->category_id, $sub->category_title)}}@endif">
+                                                {{stripcslashes($sub->category_title)}}
+                                            </a>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        @endif
+
+                    @endforeach
+                @endif
+
+            </ul>
+        </div>
+    @endif
     <div class="info-service">
         @if(isset($arrCategory) && !empty($arrCategory))
 
@@ -110,25 +137,25 @@ use App\Library\PHPDev\ThumbImg;
 
     <div class="Contact-form">
         <h2>{!! isset($text_lien_he_voi_chung_toi) ? strip_tags($text_lien_he_voi_chung_toi) : '' !!}</h2>
-        <form class="iForm" action="" method="POST">
+        <form class="iForm" action="{{ URL::route('site.pageContactPost') }}" method="POST">
             <div class="form-group">
-                <input type="text" name="" class="form-control" id="name" placeholder="Họ và tên">
+                <input type="text" name="contact_name" class="form-control" id="name" placeholder="Họ và tên">
             </div>
             <div class="form-group">
-                <input type="text" name="" class="form-control" id="phone" placeholder="Số điện thoại">
+                <input type="text" name="contact_phone" class="form-control" id="phone" placeholder="Số điện thoại">
             </div>
             <div class="form-group">
-                <input type="email" name="" class="form-control" id="email" placeholder="Email">
+                <input type="text" name="contact_email" class="form-control" id="email" placeholder="Email">
                 <i class="fa fa-envelope-o icon-mail" aria-hidden="true"></i>
 
             </div>
             <div class="form-group">
-                <textarea cols="30" rows="2" name="" id="contentBox"  class="form-control" placeholder="Ghi chú"></textarea>
+                <textarea cols="30" rows="2" name="contact_content" id="contentBox"  class="form-control" placeholder="Ghi chú"></textarea>
             </div>
             <div class="btn-click">
-                <button class="btn btn-primary btnBox" type="button">Gửi ngay</button>
-                {!! csrf_field() !!}
+                <button class="btn btn-primary btnBox" type="submit">Gửi ngay</button>
             </div>
+            {!! csrf_field() !!}
         </form>
     </div>
 </div>

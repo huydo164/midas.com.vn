@@ -380,23 +380,29 @@ class StaticsController extends BaseStaticsController{
         $arrInfo = Info::getItemByKeyword('CAT_ID_CONG_TY');
         $id = isset($arrInfo->info_id) ? strip_tags($arrInfo->info_content) : 0;
 
-        $arrCategory = array();
+        $objData = array();
         if ($id > 0){
+
             $data = Statics::getById($id);
            if ($data->statics_id > 0){
-               $arrCategory = $data->statics_catid;
+               $objData = $data->statics_catid;
            }
 
             $catid_dv = Info::getItemByKeyword('CAT_ID_DICH_VU_DETAIL');
             $cat_id = isset($catid_dv->info_id) ? strip_tags($catid_dv->info_content) : 0;
             $data_id = Category::getSubCate($cat_id);
 
+            $cat_dmsp = (int)strip_tags(self::viewShareVal('CAT_ID_MENU_DANH_MUC_SAN_PHAM'));
+
+            $text_danh_muc_san_pham = self::viewShareVal('TEXT_DANH_MUC_SAN_PHAM');
             $text_dvct = self::viewShareVal('TEXT_DICH_VU_CONG_TY');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
 
             return view('Statics::content.pageCompany',[
                 'data' => $data,
-                '$dataCate' => $arrCategory,
+                'objData' => $objData,
+                'cat_dmsp' => $cat_dmsp,
+                'text_danh_muc_san_pham' => $text_danh_muc_san_pham,
                 'data_id' => $data_id,
                 'text_dvct' => $text_dvct,
                 'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
@@ -409,22 +415,35 @@ class StaticsController extends BaseStaticsController{
         $cat_id_thu_vien = (int)strip_tags(self::viewShareVal('CAT_ID_THU_VIEN'));
         $data_thu_vien = [];
         $statics_image_other = array();
+
         if ($cat_id_thu_vien > 0){
             $data_search_thu_vien['statics_catid'] = $cat_id_thu_vien;
             $data_search_thu_vien['statics_order_no'] = 'asc';
 
             $data_thu_vien = Statics::getFocus($data_search_thu_vien);
         }
+
+        $arrData = array();
+
+        if (isset($cat_id_thu_vien) && $cat_id_thu_vien > 0){
+            $arrData = Category::getById($cat_id_thu_vien);
+        }
+
+        $cat_dmsp = (int)strip_tags(self::viewShareVal('CAT_ID_MENU_DANH_MUC_SAN_PHAM'));
+        $text_danh_muc_san_pham = self::viewShareVal('TEXT_DANH_MUC_SAN_PHAM');
         $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
         $text_dvct = self::viewShareVal('TEXT_DICH_VU_CONG_TY');
         $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
 
         return view('Statics::content.pageLibrary',[
+            'arrData' => $arrData,
             'statics_image_other' => $statics_image_other,
             'text_dvct' => $text_dvct,
             'data_thu_vien' => $data_thu_vien,
             'text_tu_khoa' => $text_tu_khoa,
             'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
+            'cat_dmsp' => $cat_dmsp,
+            'text_danh_muc_san_pham' => $text_danh_muc_san_pham,
         ]);
     }
 
