@@ -59,7 +59,6 @@ class StaticsController extends BaseStaticsController{
         }
 
 
-
         $name_cat_hightlight = Info::getItemByKeyword('CAT_ID_SPNB');
         $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
         $hightligt = Product::getData($limit = 10 , $searchSame);
@@ -107,8 +106,6 @@ class StaticsController extends BaseStaticsController{
             $data_search_aboutme ['statics_order_no'] = 'asc';
             $data_aboutme  = Statics::getFocus($data_search_aboutme, $limit = 1);
         }
-
-        
 
         return view('Statics::content.index',[
             'messages' => $messages,
@@ -223,7 +220,7 @@ class StaticsController extends BaseStaticsController{
         $limit  = 12;
         $offset = ($pageNo - 1)* $limit;
         $total = 0;
-        $data = $search = $dataCate = array();
+        $data = $search = $dataCate = $pageDetail = array();
         $paging = '';
 
         if ($catid > 0){
@@ -276,12 +273,11 @@ class StaticsController extends BaseStaticsController{
     public function pageServices(){
 
         $arrInfo = Info::getItemByKeyword('CAT_ID_DICH_VU');
-        $id_page = isset($arrInfo->info_id) ? $arrInfo->info_content : 0;
-
+        $id_page = isset($arrInfo->info_id) ? (int)strip_tags($arrInfo->info_content) : 0;
 
         if($id_page > 0){
 
-            $arrSame = array();
+            $arrSame  =  array();
 
             $data = Statics::getById($id_page);
 
@@ -299,6 +295,14 @@ class StaticsController extends BaseStaticsController{
                 $data_cat_id = Statics::getFocus($data_search_cat_id, $limit = 10);
             }
 
+            $cat_product = (int)strip_tags(self::viewShareVal('CAT_ID_SAN_PHAM_NOI_BAT'));
+            $data_product = [];
+            if ($cat_product > 0){
+                $data_search_product['product_catid'] = $cat_product;
+                $data_product = Product::getFocus($data_search_product, $limit = 10);
+            }
+
+
             $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
             $text_san_pham_noi_bat = self::viewShareVal('TEXT_SAN_PHAM_CUA_CHUNG_TOI');
@@ -306,6 +310,7 @@ class StaticsController extends BaseStaticsController{
 
             return view('Statics::content.pageServices',[
                 'data' => $data,
+                'data_product' => $data_product,
                 'data_cat_id' => $data_cat_id,
                 'text_dich_vu' => $text_dich_vu,
                 'arrSame' => $arrSame,
@@ -362,6 +367,7 @@ class StaticsController extends BaseStaticsController{
         $text_continue = self::viewShareVal('TEXT_CONTINUE');
         $text_post_in = self::viewShareVal('TEXT_POSTIN');
         $text_comment = self::viewShareVal('TEXT_COMMENT');
+        $text_tagged = self::viewShareVal('TEXT_TAGGED');
 
         return view('Statics::content.pageProject',[
             'data' => $data,
@@ -376,6 +382,7 @@ class StaticsController extends BaseStaticsController{
             'text_continue' => $text_continue,
             'text_post_in' => $text_post_in,
             'text_comment' => $text_comment,
+            'text_tagged' => $text_tagged,
         ]);
     }
 
@@ -456,7 +463,7 @@ class StaticsController extends BaseStaticsController{
         $limit = 10;
         $offset = ($pageNo - 1) *$limit;
         $total = 0;
-        $search = $data = $dataCate = array();
+        $search = $data = $objSearch = array();
 
         $search['statics_title'] = addslashes(Request::get('statics_title', ''));
         $search['statics_status'] = (int)Request::get('statics_status', -1);
@@ -470,7 +477,7 @@ class StaticsController extends BaseStaticsController{
         foreach ($data as $item){
             if($item->statics_id > 0 && isset($item->statics_id)){
                 $catId = $item->statics_id;
-                $dataCate = Statics::getById($catId);
+                $objSearch = Statics::getById($catId);
             }
         }
         $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
@@ -484,7 +491,7 @@ class StaticsController extends BaseStaticsController{
             }
         }
 
-        if (isset($dataCate)){
+        if (isset($objSearch)){
 
             $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
@@ -492,19 +499,25 @@ class StaticsController extends BaseStaticsController{
             $text_continue = self::viewShareVal('TEXT_CONTINUE');
             $text_post_in = self::viewShareVal('TEXT_POSTIN');
             $text_comment = self::viewShareVal('TEXT_COMMENT');
+            $text_tagged = self::viewShareVal('TEXT_TAGGED');
+            $text_post = self::viewShareVal('TEXT_POST');
+            $text_by = self::viewShareVal('TEXT_BY');
 
             return view('Statics::content.pageSearch',[
                 'data' => $data,
                 'search' => $search,
                 'dataTags' => $dataTags,
-                'dataCate' => $dataCate,
+                'objSearch' => $objSearch,
                 'paging' => $paging,
                 'text_dich_vu' => $text_dich_vu,
                 'text_tu_khoa' => $text_tu_khoa,
                 'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
                 'text_continue' => $text_continue,
                 'text_post_in' => $text_post_in,
-                'text_comment' => $text_comment
+                'text_comment' => $text_comment,
+                'text_tagged' => $text_tagged,
+                'text_post' => $text_post,
+                'text_by' => $text_by,
             ]);
         }
     }
@@ -576,8 +589,6 @@ class StaticsController extends BaseStaticsController{
         $size = Product::groupBy('product_size')->selectRaw('count(*) as total, product_size')->get();
 
         $color = Product::groupBy('product_color')->selectRaw('count(*) as total, product_color')->get();
-  
-
 
 
         return view('Statics::content.productDetail',[
@@ -827,17 +838,18 @@ class StaticsController extends BaseStaticsController{
         }
     }
 
-    public function pageTag($id = 0){
-        if ($id > 0){
+    public function pageTag( $id = 0){
+        if ( $id > 0){
 
             $pageNo = (int)Request::get('page', 1);
             $pageScroll  = CGlobal::num_scroll_page;
             $limit = 10;
             $offset = ($pageNo - 1) *$limit;
             $total = 0;
-            $search = $data  =  array();
+            $search = $data  = $pageDetail =  array();
 
             $objTags = Tag::getById($id);
+            $objSearch = Statics::getById($id);
 
             $arrPost = [];
             $listPostTag = TagStatics::where('tag_id', $id)->get();
@@ -871,9 +883,11 @@ class StaticsController extends BaseStaticsController{
             $text_continue = self::viewShareVal('TEXT_CONTINUE');
             $text_post_in = self::viewShareVal('TEXT_POSTIN');
             $text_comment = self::viewShareVal('TEXT_COMMENT');
+            $text_tagged = self::viewShareVal('TEXT_TAGGED');
 
             return view('Statics::content.pageTag', [
                 'data' => $data,
+                'objSearch' => $objSearch,
                 'objTags' => $objTags,
                 'dataTags' => $dataTags,
                 'search' => $search,
@@ -885,7 +899,8 @@ class StaticsController extends BaseStaticsController{
                 'text_by' => $text_by,
                 'text_continue' => $text_continue,
                 'text_post_in' => $text_post_in,
-                'text_comment' => $text_comment
+                'text_comment' => $text_comment,
+                'text_tagged' => $text_tagged,
             ]);
         }
     }

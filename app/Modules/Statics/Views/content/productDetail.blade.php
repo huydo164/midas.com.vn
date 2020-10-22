@@ -22,7 +22,9 @@ use App\Library\PHPDev\ThumbImg;
                     <a href="{{ FuncLib::getBaseURL() }}">Trang chủ</a>
                 </li>
                 <li class="active">
-                    <a href="#">Tượng địa danh</a>
+                    @if(isset($dataCate) && !empty($dataCate))
+                        <a href="#">{!! $dataCate->category_title !!}</a>
+                    @endif
                 </li>
             </ul>
         </div>
@@ -57,17 +59,12 @@ use App\Library\PHPDev\ThumbImg;
                                 </ul>
                             </div>
                         </div>
-                        <div class="search">
-                            <form action="">
-                                <div class="input">
-                                    <input type="text" placeholder="Tìm kiếm ..." />
-                                </div>
-                                <div class="icon">
-                                    <button type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-
-                                </div>
+                        <div class="search-box">
+                            <form action="{{ URL::route('site.pageSearch') }}" method="GET" id="formSearch">
+                                <input type="text" class="form-control" name="statics_title" autocomplete="off" id="inputBox" placeholder="Tìm kiếm...">
+                                <button type="submit" class="btn btn-primary btn-search">
+                                    <i class="fas fa-search"></i>
+                                </button>
                             </form>
                         </div>
                         <div class="price">
@@ -121,7 +118,7 @@ use App\Library\PHPDev\ThumbImg;
                                         </span>
                                     </li>
                                     @endforeach
-                                    
+
                                 </ul>
                             </div>
 

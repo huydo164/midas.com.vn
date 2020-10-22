@@ -25,10 +25,10 @@ use App\Library\PHPDev\ThumbImg;
                     @endif
                 </div>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-md-3">
                         @include('Statics::block.left')
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-9 col-md-9">
                         <div class="project-done">
                             @if(isset($data) && !empty($data))
                                 @foreach($data as $key => $item)
@@ -60,6 +60,11 @@ use App\Library\PHPDev\ThumbImg;
                                                 <div class="float-left">
                                                     {!! isset($text_post_in) ? strip_tags($text_post_in) : '' !!}
                                                     <span>{{ $item->statics_title }}</span>
+                                                    |
+                                                    {!! isset($text_tagged) ? strip_tags($text_tagged) : '' !!}
+                                                    @foreach($dataTags as $key => $item)
+                                                        <span><a href="{{ FuncLib::buildLinkTag($key, $item) }}" title="{{ $item }}">{{ $item }}</a></span>
+                                                    @endforeach
                                                 </div>
                                                 <div class="float-right"><a href="">{{ isset($text_comment) ? strip_tags($text_comment) : '' }}</a></div>
                                             </div>

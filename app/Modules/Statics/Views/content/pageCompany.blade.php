@@ -15,16 +15,20 @@ use App\Library\PHPDev\ThumbImg;
 @stop
 @section('content')
     <div class="thumb-header">
-        <img src="http://localhost:8080/project.vn/midas.com.vn/public/assets/frontend/img/banner01.jpg" alt="">
+        @if(isset($dataBannerPage) && !empty($dataBannerPage))
+            @foreach($dataBannerPage as $item)
+                <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $item['banner_id'],$item['banner_image'], 0,0, '', true, true, false) }}" alt="">
+            @endforeach
+        @endif
     </div>
     <div id="pd-page">
         <div class="container">
             <div class="page-company">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-md-3">
                         @include('Statics::block.left')
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-9 col-md-9">
                         <div class="commitment">
                             <h3>
                                 <b></b>

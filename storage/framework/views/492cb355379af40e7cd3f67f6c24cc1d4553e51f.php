@@ -20,10 +20,10 @@ use App\Library\PHPDev\ThumbImg;
         <div class="container">
             <div class="page-library">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-md-3">
                         <?php echo $__env->make('Statics::block.left', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-9 col-md-9">
                         <div class="commitment">
                             <h3>
                                 <b></b>
@@ -42,14 +42,15 @@ use App\Library\PHPDev\ThumbImg;
                                     <?php
                                         $statics_image_other = ($item->statics_image_other != '') ? unserialize($item->statics_image_other) : [] ;
                                     ?>
-                                    <div class="carousel-wrap">
-                                        <div class="owl-carousel owl-theme">
+                                    <div class="carousel-wrap slide-library">
+                                        <div class="carousel" data-flickity='{  "lazyLoad": true , "prevNextButtons": false, "groupCells": true, "freeScroll": true, "wrapAround": true, "pageDots" : false}'>
+
                                             <?php if( !empty($statics_image_other)): ?>
                                                 <?php $__currentLoopData = $statics_image_other; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $img): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($img != ''): ?>
-                                                    <div class="item">
-                                                        <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $img, 800, 0, '', true, true)); ?>" />
-                                                    </div>
+                                                        <div class="carousel-cell">
+                                                            <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $img, 800, 0, '', true, true)); ?>" />
+                                                        </div>
                                                     <?php endif; ?>
                                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                             <?php endif; ?>

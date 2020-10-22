@@ -8,16 +8,16 @@ use App\Library\PHPDev\ThumbImg;
     <div class="bg-close"></div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="logo">
                     @if(isset($arrTextLogo) && !empty($arrTextLogo))
-                        <a href="">
+                        <a href="{{ FuncLib::getBaseURL() }}">
                             <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $arrTextLogo->info_id, $arrTextLogo->info_img, 800,0, '', true, true) }}" />
                         </a>
                     @endif
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                 <div class="menu-top">
                     <div class="navigation">
                         <span class="navigationIcon">
@@ -42,7 +42,7 @@ use App\Library\PHPDev\ThumbImg;
                                             @if($i > 0)
                                                 <ul class="menu-sub">
                                                     @foreach($arrCategory as $sub)
-                                                        @if($sub->category_menu == CGlobal::status_show && $sub->category_parent_id == $cat->category_id)
+                                                        @if($sub->category_menu == CGlobal::status_show && $sub->category_parent_id == $cat->category_id && $sub->category_type_id == 39)
                                                             <li>
                                                                 <a title="{{$sub->category_title}}" href="@if($sub->category_link_replace != ''){{$sub->category_link_replace}}@else{{FuncLib::buildLinkDetailStatic($sub->category_id, $sub->category_title)}}@endif">{{stripcslashes($sub->category_title)}}
                                                                 </a>

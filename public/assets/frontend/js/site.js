@@ -1,7 +1,6 @@
 $(document).ready(function($) {
     STATICS.navigationIcon();
 
-    // STATICS.carousel();
     STATICS.searchSize();
     STATICS.searchColor();
     STATICS.minusButton();
@@ -29,7 +28,8 @@ STATICS = {
     },
 
     navigationIcon:function () {
-        $('.navigationIcon').click(function () {
+        $('.navigationIcon').unbind('click').click(function () {
+
             $('.navigationIcon').toggleClass('open');
             $('.menu-parent').toggleClass('nav-open');
             $('.bg-close').toggleClass('bg-open')
