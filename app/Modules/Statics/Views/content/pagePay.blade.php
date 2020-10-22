@@ -19,9 +19,7 @@ use App\Library\PHPDev\ThumbImg;
             <form action="{{ URL::Route('site.pageOrder') }}" method="post">
                 {{ csrf_field() }}
                 <div class="col-lg-7 col-md-12 col-sm-12">
-                    <p class="tk">
-                        Bạn đã có tài khoản? <a href="#">Ấn vào đây để đăng nhập</a>
-                    </p>
+
                     <div class="thong-tin">
                         <h3>Thông tin thanh toán</h3>
                         <div class="name">

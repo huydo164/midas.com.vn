@@ -9,6 +9,7 @@ $(document).ready(function($) {
 
     STATICS.btnTop();
     STATICS.menuList();
+    STATICS.ratingSubmit();
 
 });
 
@@ -88,7 +89,6 @@ STATICS = {
                 data: { dataColor: dataColor, _token: _token },
                 success: function(data) {
                     $('#right').html(data);
-
                 }
             });
         });
@@ -147,5 +147,31 @@ STATICS = {
             })
         }
     },
+    ratingSubmit: function () {
+        $('#rating_submit').unbind('click').on('click', function () {
+            var url = BASE_URL + 'danh-gia-san-pham';
+            var rating = $('#rating-value').val();
+            var comment = $('#rating_comment').val();
+            var author = $('#rating_author').val();
+            var gmail = $('#rating_gmail').val();
+            var product_id = $('#product_id').val();
+            var _token = jQuery('input[name="_token"]').val();
+            jConfirm('Bạn có muốn đánh giá không [OK]:Đồng ý [Cancel]:Bỏ qua ?', 'Xác nhận', function (r) {
+                if (r) {
+                    jQuery.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {product_id: product_id ,rating: rating ,comment : comment , author:author , gmail:gmail  , _token: _token},
+                        success: function (data) {
+                            window.location.reload();
+                        },
+                        error: function (data) {
+                            alert('khong the danh gia');
+                        }
+                    })
+                }
+            })
+        })
+    }
 
 };

@@ -19,6 +19,7 @@ use App\Modules\Models\Contact;
 use App\Modules\Models\Info;
 use App\Modules\Models\Orders;
 use App\Modules\Models\Product;
+use App\Modules\Models\Rating;
 use App\Modules\Models\Statics;
 use App\Modules\Models\Tag;
 use App\Modules\Models\TagStatics;
@@ -542,11 +543,16 @@ class StaticsController extends BaseStaticsController{
 
 
     public function pageProPor($catname, $catid){
-
         $arrCategory = Category::getAllCategory(0, array(), 0);
-    
+        $size = Product::groupBy('product_size')->selectRaw('count(*) as total, product_size')->get();
+
+        $color = Product::groupBy('product_color')->selectRaw('count(*) as total, product_color')->get();
+
+
         return view('Statics::content.product_portfolio',[
             'arrCategory' => $arrCategory,
+            'size' => $size,
+            'color' => $color,
         ]);
     }
 
@@ -576,8 +582,9 @@ class StaticsController extends BaseStaticsController{
         $size = Product::groupBy('product_size')->selectRaw('count(*) as total, product_size')->get();
 
         $color = Product::groupBy('product_color')->selectRaw('count(*) as total, product_color')->get();
-  
 
+        $min = Product::orderBy('product_price')->min('product_price');
+        $max = Product::orderBy('product_price')->max('product_price');
 
 
         return view('Statics::content.productDetail',[
@@ -586,6 +593,8 @@ class StaticsController extends BaseStaticsController{
             'paging' => $paging,
             'size' => $size,
             'color' => $color,
+            'min' => $min,
+            'max' => $max,
 
         ]);
         }
@@ -596,12 +605,59 @@ class StaticsController extends BaseStaticsController{
             $data = Product::getById($id);
             $dataCate = Category::getById($data->product_catid);
         }
+
         $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
         $dataSame = Product::getSameData($id, $data->product_catid, $limit = 6, $searchSame);
 
+
+
+        $pageNo = (int) Request::get('page', 1);
+        $pageScroll = CGlobal::num_scroll_page;
+        $limit = CGlobal::num_record_per_page;
+        $offset = ($pageNo - 1) * $limit;
+        $search = $data1 = array();
+        $total = 0;
+        $dataSearch['product_id'] = $id;
+        $dataSearch['rating_status'] = 1;
+        $rating = Rating::searchByCondition($dataSearch,$limit,$offset,$total);
+
+
+        $rating_star = Rating::getByProudctId($id);
+        if(sizeof($rating_star) > 0)
+        {
+            $total = 0;
+            foreach ($rating_star as $item)
+            {
+                $total += $item['rating_star'];
+            }
+            $avg_rate = round($total / count($rating_star));
+        }
+        else
+        {
+            $avg_rate = 0;
+        }
+
+        $ip = Request::ip();
+        $checkip = Rating::checkIp($id,$ip);
+        $check = 0;
+        if(sizeof($checkip)>0)
+        {
+            $check = 1;
+        }
+        else
+        {
+            $check = 0;
+        }
+
+
+
+
         return view('Statics::content.pageProduct',[
            'data' => $data,
-            'dataSame' => $dataSame
+            'dataSame' => $dataSame,
+            'rating' => $rating,
+            'avg_rate' => $avg_rate,
+            'check'=>$check,
         ]);
     }
 
@@ -629,7 +685,7 @@ class StaticsController extends BaseStaticsController{
                                         <img src=" '. ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item["product_id"], $item["product_image"], 2000,0, "", true, true, false).'  " />
                                     </div>
                                     <div class="nd">
-                                        <a title="{{$item->product_title}}" href="{{FuncLib::buildLinkProduct($item->product_id, $item->product_title)}}">
+                                        <a title="'.$item["product_title"].'" href="'.FuncLib::buildLinkProduct($item["product_id"], $item["product_title"]).'">
                                             <p class="name">'.stripslashes($item->product_title).'</p>
                                         </a>
                                         <p class="price">'.FuncLib::numberFormat($item->product_price).'₫</p>
@@ -668,7 +724,7 @@ class StaticsController extends BaseStaticsController{
                                         <img src=" '. ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item["product_id"], $item["product_image"], 2000,0, "", true, true, false).'  " />
                                     </div>
                                     <div class="nd">
-                                        <a title="{{$item->product_title}}" href="{{FuncLib::buildLinkProduct($item->product_id, $item->product_title)}}">
+                                        <a title="'.$item["product_title"].'" href="'.FuncLib::buildLinkProduct($item["product_id"], $item["product_title"]).'">
                                             <p class="name">'.stripslashes($item->product_title).'</p>
                                         </a>
                                         <p class="price">'.FuncLib::numberFormat($item->product_price).'₫</p>
@@ -908,5 +964,37 @@ class StaticsController extends BaseStaticsController{
             'data_testimonials' => $data_testimonials,
         ]);
     }
+    public function ratingProduct()
+    {
+
+            $rating  = Request::get('rating',0);
+            $comment =  Request::get('comment','');
+            $gmail =  Request::get('gmail','');
+            $author =  Request::get('author','');
+            $product_id = Request::get('product_id','');
+            $ip = Request::ip();
+            if ($rating != '' && $comment != '' && $author != ''){
+                $dataInput = array(
+                    'product_id' => $product_id,
+                    'rating_name' => $author,
+                    'rating_email' => $gmail,
+                    'rating_detail'=>$comment,
+                    'rating_star'=>$rating,
+                    'rating_ip'=>$ip,
+                    'rating_status'=>0
+
+                );
+                $query = Rating::addData($dataInput);
+
+                if ($query > 0){
+                    Utility::messages('messages', 'Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ với bạn sớm nhất');
+
+                }
+            }
+            else{
+                Utility::messages('messages' , 'Thông tin liên hệ chưa chính sác. Bạn hãy đăng ký lại!');
+
+            }
+        }
 
 }

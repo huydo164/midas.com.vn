@@ -176,7 +176,9 @@ use App\Library\PHPDev\ThumbImg;
             <div class="carousel" data-flickity='{ "fullscreen": true, "lazyLoad": 2 , "contain" : true}'>
                 @foreach($data_finish as $key => $item)
                     <div class="carousel-cell">
-                        <img data-flickity-lazyload="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true) }}" />
+                        <a href="{{FuncLib::buildLinkDetailStatic($item->statics_id, $item->statics_title)}}">
+                            <img data-flickity-lazyload="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true) }}" />
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -218,7 +220,7 @@ use App\Library\PHPDev\ThumbImg;
 </div>
 <div class="introduce">
     <div class="container">
-        @foreach($data_aboutme as $item):
+        @foreach($data_aboutme as $item)
         <div class="row">
 
             <div class="col-md-6">
@@ -230,7 +232,7 @@ use App\Library\PHPDev\ThumbImg;
                 <div class="about-me">
                     <h5>{{ $item->statics_title }}</h5>
                     <p>{{ strip_tags($item->statics_content) }}</p>
-                    <button>XEM NGAY</button>
+                    <a href="{{FuncLib::buildLinkDetailStatic($item->statics_id, $item->statics_title)}}"><button >XEM NGAY</button></a>
                 </div>
             </div>
         </div>

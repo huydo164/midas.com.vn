@@ -99,6 +99,7 @@ class BaseStaticsController extends Controller{
             $data_search_chinhsach ['statics_order_no'] = 'asc';
             $data_chinhsach  = Statics::getFocus($data_search_chinhsach, $limit = 10);
         }
+
         View::share('data_chinhsach',$data_chinhsach);
         View::share('name_cat_chinhsach',$name_cat_chinhsach);
 
@@ -112,6 +113,10 @@ class BaseStaticsController extends Controller{
         }
         View::share('data_hotline',$data_hotline);
         View::share('name_cat_hotline',$name_cat_hotline);
+
+        $data_search_news ['statics_id'] = 'asc';
+        $news = Statics::getFocus($data_search_news,5);
+        View::share('news',$news);
 
 
     }

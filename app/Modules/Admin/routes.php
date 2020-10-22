@@ -64,6 +64,11 @@ Route::group(['middleware' => ['web', 'checkPermission'], 'prefix' => 'admin', '
     Route::post('tag/edit/{id?}', array('as' => 'admin.tag_edit', 'uses' => 'TagController@postItem', 'permission_name' => 'Sửa từ khóa'))->where('id', '[0-9]+');
     Route::post('tag/delete', array('as' => 'admin.tag_delete', 'uses' => 'TagController@delete', 'permission_name' => 'Xóa từ khóa'));
 
+    Route::get('rating', array('as' => 'admin.rating', 'uses' => 'RatingController@listView', 'permission_name' => 'Danh sách đánh giá', 'display_menu' => 1, 'display_icon_sub' => 'fa fa-globe'));
+    Route::get('rating/edit/{id?}', array('as' => 'admin.rating_edit', 'uses' => 'RatingController@getItem', 'permission_name' => 'Chi tiết đánh giá'))->where('id', '[0-9]+');
+    Route::post('rating/edit/{id?}', array('as' => 'admin.rating_edit', 'uses' => 'RatingController@postItem', 'permission_name' => 'Sửa đánh giá'))->where('id', '[0-9]+');
+    Route::post('rating/delete', array('as' => 'admin.rating_delete', 'uses' => 'RatingController@delete', 'permission_name' => 'Xóa đánh giá'));
+
 
 
 });

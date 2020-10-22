@@ -55,6 +55,8 @@ class Memcache{
 
     //Orders
     const CACHE_ORDERS_ID = 'cache_orders_id_';
+    //Rating
+    const CACHE_RATING_ID = 'cache_rating_id_';
 
     //Tag
     const CACHE_TAG_ID = 'cache_tag_id_';
