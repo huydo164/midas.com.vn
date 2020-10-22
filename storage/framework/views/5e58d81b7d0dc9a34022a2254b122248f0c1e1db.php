@@ -39,15 +39,25 @@ use App\Library\PHPDev\ThumbImg;
                                             <a <?php if($i > 0): ?> <?php endif; ?> title="<?php echo e($cat->category_title); ?>" href="<?php if($cat->category_link_replace != ''): ?><?php echo e($cat->category_link_replace); ?><?php else: ?><?php echo e(FuncLib::buildLinkCategory($cat->category_id, $cat->category_title)); ?><?php endif; ?>" >
                                                 <?php echo e($cat->category_title); ?>
 
+                                                <?php if($i>0): ?> <i class="fas fa-angle-down"></i> <?php endif; ?>
                                             </a>
                                             <?php if($i > 0): ?>
                                                 <ul class="menu-sub">
+
                                                     <?php $__currentLoopData = $arrCategory; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <?php if($sub->category_menu == CGlobal::status_show && $sub->category_parent_id == $cat->category_id): ?>
+                                                        <?php if($sub->category_menu == CGlobal::status_show && $sub->category_parent_id == $cat->category_id &&  $cat->category_id == 681): ?>
+                                                            <li>
+                                                                <a title="<?php echo e($sub->category_title); ?>" href="<?php if($sub->category_link_replace != ''): ?><?php echo e($sub->category_link_replace); ?><?php else: ?><?php echo e(FuncLib::buildLinkDetailProduct($sub->category_id, $sub->category_title)); ?><?php endif; ?>">
+                                                                    <?php echo e(stripcslashes($sub->category_title)); ?>
+
+                                                                </a>
+                                                            </li>
+                                                        <?php elseif($sub->category_menu == CGlobal::status_show && $sub->category_parent_id == $cat->category_id): ?>
                                                             <li>
                                                                 <a title="<?php echo e($sub->category_title); ?>" href="<?php if($sub->category_link_replace != ''): ?><?php echo e($sub->category_link_replace); ?><?php else: ?><?php echo e(FuncLib::buildLinkDetailStatic($sub->category_id, $sub->category_title)); ?><?php endif; ?>"><?php echo e(stripcslashes($sub->category_title)); ?>
 
                                                                 </a>
+
                                                             </li>
                                                         <?php endif; ?>
                                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

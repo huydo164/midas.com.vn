@@ -22,7 +22,7 @@ use App\Library\PHPDev\ThumbImg;
                     <a href="{{ FuncLib::getBaseURL() }}">Trang chủ</a>
                 </li>
                 <li class="active">
-                    <a href="#">Tượng địa danh</a>
+                    <a href="#">{!!  isset($dataCate['category_title']) ? $dataCate['category_title'] : '' !!}</a>
                 </li>
             </ul>
         </div>
@@ -57,18 +57,15 @@ use App\Library\PHPDev\ThumbImg;
                                 </ul>
                             </div>
                         </div>
-                        <div class="search">
-                            <form action="">
-                                <div class="input">
-                                    <input type="text" placeholder="Tìm kiếm ..." />
-                                </div>
-                                <div class="icon">
-                                    <button type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
+                        <div class="search-box">
 
-                                </div>
+                            <form action="{{ URL::route('site.pageSearch') }}" method="GET" id="formSearch">
+                                <input type="text" class="form-control" name="statics_title" autocomplete="off" id="inputBox" placeholder="Tìm kiếm...">
+                                <button type="submit" class="btn btn-primary btn-search">
+                                    <i class="fas fa-search"></i>
+                                </button>
                             </form>
+
                         </div>
                         <div class="price">
 
@@ -78,8 +75,8 @@ use App\Library\PHPDev\ThumbImg;
                                 <p>
                                     <button type="submit">Lọc</button>
                                     <input type="text" id="amount" readonly style="border:0; color:white; font-weight:bold;">
-                                    <input type="hidden" name="min" id="price_min" value="4200000" />
-                                    <input type="hidden" name="max" id="price_max" value="7600000" />
+                                    <input type="hidden" name="min" id="price_min" value="{{ $min }}" />
+                                    <input type="hidden" name="max" id="price_max" value="{{ $max }}" />
                                 </p>
                             </form>
 
@@ -87,9 +84,9 @@ use App\Library\PHPDev\ThumbImg;
                                 $(function() {
                                     $("#slider-range").slider({
                                         range: true,
-                                        min: 4200000,
-                                        max: 7600000,
-                                        values: [4200000, 7600000],
+                                        min: {{ $min }},
+                                        max: {{ $max }},
+                                        values: [{{ $min }}, {{ $max }}],
                                         slide: function(event, ui) {
                                             $("#amount").val("Giá : " + ui.values[0] + "₫ - " + ui.values[1] + " ₫ ");
                                             $("#price_min").val(ui.values[0]);
@@ -154,111 +151,31 @@ use App\Library\PHPDev\ThumbImg;
                         <div class="news">
                             <h4><i class="fas fa-bars"></i> TIN TỨC</h4>
                             <ul>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
+                                @if(isset($news) && !empty($news))
+                                    @foreach($news as $item)
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <a href="#">
+                                                        <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 2000,0, '', true, true) }}" />
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-7">
 
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
+                                                    <a href="#">
+                                                        <span class="name">
+                                                            {{ $item->statics_title }}
+                                                        </span>
+                                                    </a>
 
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
-
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
-
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
-
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
-
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
+                                                    <p class="time">
+                                                        {{ date("d-m-Y",$item->statics_created) }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                         <div class="fanpage">

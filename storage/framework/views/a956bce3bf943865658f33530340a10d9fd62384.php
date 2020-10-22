@@ -60,6 +60,26 @@ use App\Library\PHPDev\ThumbImg;
 
                         <h1 class="product-title"><?php echo e(stripslashes($data->product_title)); ?></h1>
                         <div class="product-price"><?php echo e(FuncLib::numberFormat($data->product_price)); ?>₫</div>
+                        <?php if(isset($avg_rate) && $avg_rate != 0): ?>
+                        <div class="rating-box">
+                            <div class="ratings-1">
+                                <?php
+
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $avg_rate) {
+                                ?>
+                                <span class="fa fa-star"></span>
+                                <?php
+                                    } else {
+                                ?>
+                                    <span class="fa fa-star-o"></span>
+                                <?php
+                                }
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <?php endif; ?>
                         <form class="cart" action="<?php echo e(URL::route('site.pageCart')); ?>" method="post" >
                             <div class="quantity buttons_added">
                                 <span class="md-number">Số lượng:</span>
@@ -100,35 +120,104 @@ use App\Library\PHPDev\ThumbImg;
                         </div>
 
                         <div id="review" class="tabcontent" style="display: none;">
+                            <?php if(!isset($rating)): ?>
                             <h3 class="reply-title">
                                 Hãy là người đầu tiên nhận xét “tượng mạ vàng bác hồ 01”
                             </h3>
-                            <form action="">
+                            <?php endif; ?>
+                                <?php if($check == 0): ?>
                                 <div class="rating">
                                     <p>Đánh giá của bạn</p>
+                                    <div class="rating-box">
+                                        <div class="ratings">
+                                            <span class="fa fa-star-o"></span>
+                                            <span class="fa fa-star-o"></span>
+                                            <span class="fa fa-star-o"></span>
+                                            <span class="fa fa-star-o"></span>
+                                            <span class="fa fa-star-o"></span>
+                                        </div>
+                                        <input type="hidden" name="rating" id="rating-value" value="">
+
+                                    </div>
                                 </div>
+                                <script>
+                                    const stars = document.querySelector(".ratings").children;
+                                    const ratingValue = document.querySelector("#rating-value");
+                                    let index;
+
+                                    for (let i = 0; i < stars.length; i++) {
+                                        stars[i].addEventListener("mouseover", function() {
+                                            // console.log(i)
+                                            for (let j = 0; j < stars.length; j++) {
+                                                stars[j].classList.remove("fa-star");
+                                                stars[j].classList.add("fa-star-o");
+                                            }
+                                            for (let j = 0; j <= i; j++) {
+                                                stars[j].classList.remove("fa-star-o");
+                                                stars[j].classList.add("fa-star");
+                                            }
+                                        })
+                                        stars[i].addEventListener("click", function() {
+                                            ratingValue.value = i + 1;
+                                            index = i;
+                                        })
+                                        stars[i].addEventListener("mouseout", function() {
+
+                                            for (let j = 0; j < stars.length; j++) {
+                                                stars[j].classList.remove("fa-star");
+                                                stars[j].classList.add("fa-star-o");
+                                            }
+                                            for (let j = 0; j <= index; j++) {
+                                                stars[j].classList.remove("fa-star-o");
+                                                stars[j].classList.add("fa-star");
+                                            }
+                                        })
+                                    }
+                                </script>
                                 <div class="comment">
                                     <label for="comment">Nhận xét của bạn</label>
-                                    <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+                                    <textarea  name="rating_comment" id="rating_comment" cols="45" rows="8" aria-required="true"></textarea>
                                 </div>
                                 <div class="author">
                                     <p class="name">
                                         <label>Tên *</label>
-                                        <input id="author" name="author" type="text" />
+                                        <input  name="rating_author" id="rating_author" type="text" />
                                     </p>
                                     <p class="email">
                                         <label for="gmail">Gmail *</label>
-                                        <input id="gmail" name="gmail" type="text" />
+                                        <input  name="rating_gmail" id="rating_gmail"  type="text" />
                                     </p>
                                 </div>
-                                <div class="form-cookie">
-                                    <input name="form-cookie" type="checkbox" />
-                                    <label for="form-cookie">Lưu tên của tôi, email, và trang web trong trình duyệt này cho lần bình luận kế tiếp của tôi.</label>
-                                </div>
+
+
+
+
                                 <div class="form-submit">
-                                    <input name="submit" type="submit" id="submit" class="submit" value="Gửi đi">
+                                    <input name="submit" type="submit" id="rating_submit" class="submit" value="Gửi đi">
                                 </div>
-                            </form>
+                                <?php endif; ?>
+                                <div class="list-comment">
+                                    <h5>Danh sách bình luận</h5>
+                                    <ul>
+                                        <?php if(isset($rating) && sizeof($rating) > 0): ?>
+                                            <?php $__currentLoopData = $rating; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <li>
+                                                    <div class="user-comment">
+                                                        <p class="user">
+                                                            <span class="username"><?php echo e(isset($item->rating_name) ? $item->rating_name : ''); ?></span>
+                                                            <span class="email"><?php echo e(isset($item->rating_email) ? $item->rating_email : ''); ?></span>
+                                                        </p>
+                                                        <p class="comment-details">
+                                                            <?php echo e(isset($item->rating_detail) ? $item->rating_detail : ''); ?>
+
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+
                         </div>
 
                         <script>
@@ -158,133 +247,49 @@ use App\Library\PHPDev\ThumbImg;
                 <div class="col-md-3">
                     <div class="sidebar">
                         <div class="news">
-                            <h4> TIN TỨC</h4>
+                            <h4><i class="fas fa-bars"></i> TIN TỨC</h4>
                             <ul>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
+                                <?php if(isset($news) && !empty($news)): ?>
+                                    <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <a href="#">
+                                                        <img src="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 2000,0, '', true, true)); ?>" />
+                                                    </a>
+                                                </div>
+                                                <div class="col-md-7">
 
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
+                                                    <a href="#">
+                                                        <span class="name">
+                                                            <?php echo e($item->statics_title); ?>
 
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
+                                                        </span>
+                                                    </a>
 
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
+                                                    <p class="time">
+                                                        <?php echo e(date("d-m-Y",$item->statics_created)); ?>
 
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
-
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
-
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <a href="#">
-                                                <img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/07-350x240.jpg" />
-                                            </a>
-                                        </div>
-                                        <div class="col-md-8">
-
-                                            <a href="#">
-                                                <span class="name">
-                                                    Tượng dê vàng
-                                                </span>
-                                            </a>
-
-                                            <p class="time">
-                                                3 Tháng Tư , 2018
-                                            </p>
-                                        </div>
-                                    </div>
-                                </li>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php endif; ?>
                             </ul>
                         </div>
                         <div class="lich">
                             <iframe style="padding:0;border:none;overflow:hidden; width: 100%;height:300px" src="//amlich.com/#type=7&amp;bg=2&amp;color=3"></iframe>
                         </div>
-                        <div class="keyword">
-                            <h2>Từ khóa</h2>
-                            <div class="list-key">
+                        <?php if(isset($dataTags)): ?>
+                            <div class="list-key mgb">
                                 <ul>
-                                    <li><a href="">Tượng</a></li>
-                                    <li><a href="">Vàng</a></li>
-                                    <li><a href="">Mạ vàng</a></li>
-                                    <li><a href="">Vật phẩm</a></li>
-                                    <li><a href="">Kích thước</a></li>
-                                    <li><a href="">Video</a></li>
-                                    <li><a href="">Tin dùng</a></li>
-                                    <li><a href="">Giá tiền</a></li>
+                                    <?php $__currentLoopData = $dataTags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <li><a href="<?php echo e($key); ?>"><?php echo e($tag); ?></a></li>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </ul>
                             </div>
-                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

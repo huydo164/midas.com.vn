@@ -176,7 +176,9 @@ use App\Library\PHPDev\ThumbImg;
             <div class="carousel" data-flickity='{ "fullscreen": true, "lazyLoad": 2 , "contain" : true}'>
                 <?php $__currentLoopData = $data_finish; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="carousel-cell">
-                        <img data-flickity-lazyload="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                        <a href="<?php echo e(FuncLib::buildLinkDetailStatic($item->statics_id, $item->statics_title)); ?>">
+                            <img data-flickity-lazyload="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true)); ?>" />
+                        </a>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
@@ -218,7 +220,7 @@ use App\Library\PHPDev\ThumbImg;
 </div>
 <div class="introduce">
     <div class="container">
-        <?php $__currentLoopData = $data_aboutme; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>:
+        <?php $__currentLoopData = $data_aboutme; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="row">
 
             <div class="col-md-6">
@@ -230,7 +232,7 @@ use App\Library\PHPDev\ThumbImg;
                 <div class="about-me">
                     <h5><?php echo e($item->statics_title); ?></h5>
                     <p><?php echo e(strip_tags($item->statics_content)); ?></p>
-                    <button>XEM NGAY</button>
+                    <a href="<?php echo e(FuncLib::buildLinkDetailStatic($item->statics_id, $item->statics_title)); ?>"><button >XEM NGAY</button></a>
                 </div>
             </div>
         </div>

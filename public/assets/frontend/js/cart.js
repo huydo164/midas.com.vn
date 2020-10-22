@@ -16,9 +16,8 @@ CART={
 				data: {pid:pid , _token:_token},
 				success: function(data){
 					if(data != ''){
-
-					window.location.reload();
-				}
+						window.location.reload();
+					}
 				},
 				error: function (data){
 					alert('khong the xoa');
