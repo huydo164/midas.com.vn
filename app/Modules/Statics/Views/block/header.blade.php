@@ -8,16 +8,16 @@ use App\Library\PHPDev\ThumbImg;
     <div class="bg-close"></div>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+            <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="logo">
                     @if(isset($arrTextLogo) && !empty($arrTextLogo))
-                        <a href="">
+                        <a href="{{ FuncLib::getBaseURL() }}">
                             <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $arrTextLogo->info_id, $arrTextLogo->info_img, 800,0, '', true, true) }}" />
                         </a>
                     @endif
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+            <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
                 <div class="menu-top">
                     <div class="navigation">
                         <span class="navigationIcon">

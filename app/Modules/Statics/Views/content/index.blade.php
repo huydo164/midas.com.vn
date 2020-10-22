@@ -16,7 +16,7 @@ use App\Library\PHPDev\ThumbImg;
 
 <div class="slide-web">
     <div class="carousel-wrap">
-        <div class="carousel" data-flickity='{  "lazyLoad": true , "prevNextButtons": false }'>
+        <div class="carousel" data-flickity='{  "lazyLoad": true , "prevNextButtons": false , "pageDots" : false}'>
 
             @foreach($dataBannerHeader as $item)
                 <div class="carousel-cell">
@@ -33,7 +33,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>{{ $name_cat_dich_vu->info_intro }}</span>
+                <span>{!! isset($name_cat_dich_vu['info_intro']) ? $name_cat_dich_vu['info_intro'] : '' !!}</span>
                 <b></b>
             </h3>
             <div class="row">
@@ -60,7 +60,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>{{ $name_cat_commitment->info_intro }}</span>
+                <span>{{ isset($name_cat_commitment->info_intro) ? $name_cat_commitment->info_intro : '' }}</span>
                 <b></b>
             </h3>
         </div>
@@ -95,7 +95,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>{{ $name_cat_hightlight->info_intro }}</span>
+                <span>{{ isset($name_cat_hightlight->info_intro) ? $name_cat_hightlight->info_intro : '' }}</span>
                 <b></b>
             </h3>
         </div>
@@ -119,7 +119,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>{{ $name_cat_collection->info_intro}}</span>
+                <span>{{ isset($name_cat_collection->info_intro) ? $name_cat_collection->info_intro : ''}}</span>
                 <b></b>
             </h3>
         </div>
@@ -168,7 +168,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>{{ $name_cat_finish->info_intro }}</span>
+                <span>{{ isset($name_cat_finish->info_intro) ? $name_cat_finish->info_intro : '' }}</span>
                 <b></b>
             </h3>
         </div>
@@ -192,7 +192,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="title">
             <h3>
                 <b></b>
-                <span>{{ $name_cat_testimonials->info_intro }}</span>
+                <span>{{ isset($name_cat_testimonials->info_intro) ? $name_cat_testimonials->info_intro : '' }}</span>
                 <b></b>
             </h3>
         </div>

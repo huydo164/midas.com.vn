@@ -22,7 +22,9 @@ use App\Library\PHPDev\ThumbImg;
                     <a href="{{ FuncLib::getBaseURL() }}">Trang chủ</a>
                 </li>
                 <li class="active">
+
                     <a href="#">{!!  isset($dataCate['category_title']) ? $dataCate['category_title'] : '' !!}</a>
+
                 </li>
             </ul>
         </div>
@@ -58,7 +60,6 @@ use App\Library\PHPDev\ThumbImg;
                             </div>
                         </div>
                         <div class="search-box">
-
                             <form action="{{ URL::route('site.pageSearch') }}" method="GET" id="formSearch">
                                 <input type="text" class="form-control" name="statics_title" autocomplete="off" id="inputBox" placeholder="Tìm kiếm...">
                                 <button type="submit" class="btn btn-primary btn-search">
@@ -118,7 +119,7 @@ use App\Library\PHPDev\ThumbImg;
                                         </span>
                                     </li>
                                     @endforeach
-                                    
+
                                 </ul>
                             </div>
 

@@ -363,4 +363,13 @@ class FuncLib{
         return '#';
     }
 
+    static function buildLinkTag($id = 0, $tag_title = 'Từ khóa'){
+        if ($id > 0){
+            return URL::route('site.pageTag', array('id' => $id, 'name' => strtolower(FuncLib::safeTitle($tag_title))));
+        }
+        return '#';
+    }
+
+
+
 }

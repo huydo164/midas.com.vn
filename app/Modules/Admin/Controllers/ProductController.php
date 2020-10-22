@@ -32,7 +32,7 @@ class productController extends BaseAdminController{
         Loader::loadCSS('libs/jAlert/jquery.alerts.css', CGlobal::$postHead);
         Loader::loadJS('libs/jAlert/jquery.alerts.js', CGlobal::$postEnd);
 
-        $typeId = Type::getIdByKeyword('group_static');
+        $typeId = Type::getIdByKeyword('group_product');
         $this->arrCate = CategoryController::getArrCategory($typeId);
     }
     public function listView(){
@@ -59,7 +59,7 @@ class productController extends BaseAdminController{
         $optionFocus = Utility::getOption($this->arrFocus, $search['product_focus']);
 
         $messages = Utility::messages('messages');
-        $typeId = Type::getIdByKeyword('group_static');
+        $typeId = Type::getIdByKeyword('group_product');
         $this->strCategoryProduct = CategoryController::createOptionCategory($typeId, isset($search['product_catid']) ? $search['product_catid'] : 0);
 
 
@@ -103,7 +103,7 @@ class productController extends BaseAdminController{
 
         $optionStatus = Utility::getOption($this->arrStatus, isset($data['product_status'])? $data['product_status'] : CGlobal::status_show);
         $optionFocus = Utility::getOption($this->arrFocus, isset($data['product_focus'])? $data['product_focus'] : CGlobal::status_hide);
-        $typeId = Type::getIdByKeyword('group_static');
+        $typeId = Type::getIdByKeyword('group_product');
         $this->strCategoryProduct = CategoryController::createOptionCategory($typeId, isset($data['product_catid'])? $data['product_catid'] : 0);
 
         return view('Admin::product.add',[
@@ -184,10 +184,9 @@ class productController extends BaseAdminController{
                 $data[$key] = $val['value'];
             }
         }
-        dd($data);
         $optionStatus = Utility::getOption($this->arrStatus, isset($data['product_status'])? $data['product_status'] : -1);
         $optionFocus = Utility::getOption($this->arrFocus, isset($data['product_focus'])? $data['product_focus'] : CGlobal::status_hide);
-        $typeId = Type::getIdByKeyword('group_static');
+        $typeId = Type::getIdByKeyword('group_product');
         $this->strCategoryProduct = CategoryController::createOptionCategory($typeId, isset($data['product_catid'])? $data['product_catid'] : 0);
 
         return view('Admin::product.add',[

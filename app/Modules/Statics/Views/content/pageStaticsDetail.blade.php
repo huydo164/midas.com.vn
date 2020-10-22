@@ -25,10 +25,10 @@ use App\Library\PHPDev\ThumbImg;
         <div id="pd-page">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-md-3">
                         @include('Statics::block.left')
                     </div>
-                    <div class="col-lg-9">
+                    <div class="col-lg-9 col-md-9">
                         <div class="dich-vu">
                             @if(isset($data) && !empty($data))
                                 @foreach($data as $item)

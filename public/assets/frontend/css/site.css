@@ -317,7 +317,7 @@ h2 {
 }
 .service {
     padding: 20px 0px;
-    background-image: url('http://localhost:8080/midas.com.vn/public/assets/frontend/img/bg.png');
+    background-image: url('../img/bg.png');
     color: white;
 }
 
@@ -470,7 +470,7 @@ h2 {
 
 .highlights {
     padding: 24px;
-    background-image: url('http://localhost:8080/midas.com.vn/public/assets/frontend/img/bg.png');
+    background-image: url('../img/bg.png');
 }
 
 .highlights b {
@@ -633,7 +633,7 @@ h2 {
 }
 
 .introduce {
-    background-image: url('http://localhost:8080/midas.com.vn/public/assets/frontend/img/bg.png');
+    background-image: url('../img/bg.png');
     padding-top: 50px;
     padding-bottom: 50px;
 }
@@ -901,6 +901,12 @@ h2 {
     background-size: 20px;
 }
 
+.slide-service .carousel-cell{
+    width: 28%;
+    height: 200px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
 
 /*----------------page Service Detail *--------------------*/
 
@@ -1101,7 +1107,9 @@ h2 {
 .float-left {
     float: left;
 }
-
+.float-left a :hover{
+    color: #fecd43;
+}
 .float-right {
     float: right;
 }
@@ -1124,6 +1132,10 @@ p.price {
     background-image: url('http://localhost:8080/midas.com.vn/public/assets/frontend/img/bg.png');
     padding: 40px 10px;
     background-repeat: round;
+}
+.float-right a{
+    color: #fff;
+    font-size: 17px;
 }
 
 .top h1.product-title {
@@ -1246,7 +1258,6 @@ button {
 }
 .category-page-title ul li a {
     color: #545454;
-    font-size: 12px;
 }
 
 .category-page-title ul li.active a {
@@ -2194,6 +2205,36 @@ h3 {
     bottom: 3px;
     color: gray;
 }
+
+.slide-library .carousel, .slide-service .carousel {
+    background: transparent;
+}
+
+.slide-library .carousel-cell {
+    width: 28%;
+    height: 200px;
+    margin-right: 10px;
+    background: #8C8;
+    border-radius: 5px;
+
+}
+
+.slide-library .carousel-cell.is-selected {
+    background: #ED2;
+}
+
+/* cell number */
+.slide-library .carousel-cell:before, .slide-service .carousel-cell::before {
+    display: block;
+    text-align: center;
+    line-height: 200px;
+    font-size: 80px;
+    color: white;
+}
+.slide-library img, .slide-service img {
+    height: 100%;
+}
+
 
 
 /* ------------ customer ------------- */
