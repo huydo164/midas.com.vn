@@ -55,6 +55,11 @@ use App\Library\PHPDev\ThumbImg;
                                             <div class="float-left">
                                                 {!! isset($text_post_in) ? strip_tags($text_post_in) : '' !!}
                                                 <span>{{ isset($dataCate->category_id) ? $dataCate->category_title : '' }}</span>
+                                                |
+                                                {!! isset($text_tagged) ? strip_tags($text_tagged) : '' !!}
+                                                @foreach($dataTags as $key => $item)
+                                                    <span><a href="{{ FuncLib::buildLinkTag($key, $item) }}" title="{{ $item }}">{{ $item }}</a></span>
+                                                @endforeach
                                             </div>
                                             <div class="float-right"><a href="">{{ isset($text_comment) ? strip_tags($text_comment) : '' }}</a></div>
                                         </div>

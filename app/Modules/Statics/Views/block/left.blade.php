@@ -83,8 +83,17 @@ use App\Library\PHPDev\ThumbImg;
                     </button>
                 </form>
             @endif
-        @elseif(isset($dataCate->statics_id) && !empty($dataCate->statics_id))
-            @if($dataCate->statics_id > 0)
+        @elseif(isset($pageDetail->statics_id) && !empty($pageDetail->statics_id))
+            @if($pageDetail->statics_id > 0)
+                <form action="{{ URL::route('site.pageSearch') }}" method="GET" id="formSearch">
+                    <input type="text" class="form-control" name="statics_title" autocomplete="off" id="inputBox" placeholder="Tìm kiếm...">
+                    <button type="submit" class="btn btn-primary btn-search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            @endif
+        @elseif(isset($objSearch->statics_id) && !empty($objSearch->statics_id))
+            @if($objSearch->statics_id > 0)
                 <form action="{{ URL::route('site.pageSearch') }}" method="GET" id="formSearch">
                     <input type="text" class="form-control" name="statics_title" autocomplete="off" id="inputBox" placeholder="Tìm kiếm...">
                     <button type="submit" class="btn btn-primary btn-search">

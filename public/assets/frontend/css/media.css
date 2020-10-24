@@ -1,6 +1,66 @@
+@media (max-width: 1200px) {
+
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+    /*----------- header --------------*/
+    .navigation ul li{
+        padding-right: 40px;
+        line-height: 40px;
+    }
+    .navigation li ul{
+        top: 45px;
+    }
+    #pd-page{
+        padding-top: 40px;
+    }
+
+    /*------- page Library ----------*/
+    .slide-library .carousel-cell{
+        height: 170px;
+    }
+
+    /*------- page Search ---------*/
+    .float-left, .float-right{
+        float: none !important;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .container{
+        width: 900px !important;
+    }
+    .container, .container-md, .container-sm{
+        max-width: 100%;
+    }
+    /*----------- Header --------------*/
+    .header .col-md-9{
+        padding-left: 0;
+    }
+    .navigation ul li{
+        line-height: 60px;
+        padding-right: 18px;
+    }
+    .slide-library .carousel-cell{
+        height: 170px;
+    }
+    .float-right {
+        margin-top: 10px ;
+    }
+    .float-left, .float-right{
+        float: none !important;
+    }
+}
+
 @media (max-width: 768px) {
+    /*-------- header --------*/
     .header{
         max-height: 118px;
+    }
+    .header .col-md-3{
+        flex: 0 0 100%;
+        max-width: 100%;
     }
     .navigation > ul {
         width: 40%;
@@ -107,4 +167,13 @@
         top: 0;
         left: 0;
     }
+
+    /*-----------page Search ----------*/
+    .float-left, .float-right{
+        float: none !important;
+    }
+    .float-right {
+        margin-top: 10px ;
+    }
+
 }
