@@ -6,19 +6,21 @@ use App\Library\PHPDev\Utility;
 use App\Library\PHPDev\ThumbImg;
 ?>
 
-@extends('Statics::layout.html')
-@section('header')
-    @include('Statics::block.header')
-@stop
-@section('footer')
-    @include('Statics::block.footer')
-@stop
-@section('content')
+
+<?php $__env->startSection('header'); ?>
+    <?php echo $__env->make('Statics::block.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('footer'); ?>
+    <?php echo $__env->make('Statics::block.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="pay">
-        {!! isset($messages) && ($messages != '') ? $messages : '' !!}
+        <?php echo isset($messages) && ($messages != '') ? $messages : ''; ?>
+
         <div class="container">
-            <form action="{{ URL::Route('site.pageOrder') }}" method="post">
-                {{ csrf_field() }}
+            <form action="<?php echo e(URL::Route('site.pageOrder')); ?>" method="post">
+                <?php echo e(csrf_field()); ?>
+
                 <div class="col-lg-7 col-md-12 col-sm-12">
 
                     <div class="thong-tin">
@@ -79,26 +81,27 @@ use App\Library\PHPDev\ThumbImg;
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @if(isset($info) && sizeof($info) > 0 )
-                                            @foreach($info as $data)
+                                        <?php if(isset($info) && sizeof($info) > 0 ): ?>
+                                            <?php $__currentLoopData = $info; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                                             <tr class="cart_item">
                                                 <td class="product-name">
-                                                    {{ stripslashes($data['title']) }}
-                                                    <strong class="product-quantity">× {{ $data['num'] }}</strong>
+                                                    <?php echo e(stripslashes($data['title'])); ?>
+
+                                                    <strong class="product-quantity">× <?php echo e($data['num']); ?></strong>
                                                 </td>
                                                 <td class="product-total">
-                                                    <span class="woocommerce-Price-amount amount">{{FuncLib::numberFormat($data['price'] * $data['num'])}}<span class="woocommerce-Price-currencySymbol">₫</span></span>
+                                                    <span class="woocommerce-Price-amount amount"><?php echo e(FuncLib::numberFormat($data['price'] * $data['num'])); ?><span class="woocommerce-Price-currencySymbol">₫</span></span>
                                                 </td>
                                             </tr>
-                                            @endforeach
-                                        @endif
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        <?php endif; ?>
                                         </tbody>
                                         <tfoot>
                                         <tr class="order-total">
                                             <th>Tổng cộng</th>
-                                            <td><strong><span class="woocommerce-Price-amount amount">{{ FuncLib::numberFormat($total_price) }}<span class="woocommerce-Price-currencySymbol">₫</span></span></strong> </td>
-                                            <input type="hidden" value="{{ isset($total_price) ? $total_price : '' }}" name="total_price" />
+                                            <td><strong><span class="woocommerce-Price-amount amount"><?php echo e(FuncLib::numberFormat($total_price)); ?><span class="woocommerce-Price-currencySymbol">₫</span></span></strong> </td>
+                                            <input type="hidden" value="<?php echo e(isset($total_price) ? $total_price : ''); ?>" name="total_price" />
                                         </tr>
 
 
@@ -142,4 +145,6 @@ use App\Library\PHPDev\ThumbImg;
 
         </div>
     </div>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('Statics::layout.html', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\midas.com.vn\app\Modules/Statics/Views/content/pagePay.blade.php ENDPATH**/ ?>

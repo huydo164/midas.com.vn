@@ -27,6 +27,7 @@ use App\Modules\Models\Type;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 
 class StaticsController extends BaseStaticsController{
 
@@ -623,6 +624,7 @@ class StaticsController extends BaseStaticsController{
 
 
         $rating_star = Rating::getByProudctId($id);
+
         if(sizeof($rating_star) > 0)
         {
             $total = 0;
@@ -636,6 +638,8 @@ class StaticsController extends BaseStaticsController{
         {
             $avg_rate = 0;
         }
+
+
 
         $ip = Request::ip();
         $checkip = Rating::checkIp($id,$ip);
@@ -651,6 +655,20 @@ class StaticsController extends BaseStaticsController{
 
 
 
+        $text_sl = Info::getItemByKeyword('SITE_PRODUCT_TEXT_SL');
+        $text_nxcb = Info::getItemByKeyword('SITE_PRODUCT_TEXT_NXCB');
+
+        $text_ten = Info::getItemByKeyword('SITE_PRODUCT_TEXT_TEN');
+
+        $text_gmail = Info::getItemByKeyword('SITE_PRODUCT_TEXT_GMAIL');
+
+        $text_dsbl = Info::getItemByKeyword('SITE_PRODUCT_TEXT_DSBL');
+
+        $text_tt = Info::getItemByKeyword('SITE_PRODUCT_TEXT_TT');
+
+        $text_sptt= Info::getItemByKeyword('SITE_PRODUCT_TEXT_SPTT');
+
+
 
         return view('Statics::content.pageProduct',[
            'data' => $data,
@@ -658,6 +676,13 @@ class StaticsController extends BaseStaticsController{
             'rating' => $rating,
             'avg_rate' => $avg_rate,
             'check'=>$check,
+            'text_sl' =>$text_sl,
+            'text_nxcb' =>$text_nxcb,
+            'text_ten' =>$text_ten,
+            'text_gmail' =>$text_gmail,
+            'text_dsbl' =>$text_dsbl,
+            'text_tt' =>$text_tt,
+            'text_sptt' =>$text_sptt,
         ]);
     }
 
@@ -877,8 +902,7 @@ class StaticsController extends BaseStaticsController{
                     return Redirect::route('SIndex');
                 }
             } else {
-                Utility::messages('messages', 'Thông tin liên hệ chưa chính sác. Bạn hãy đăng ký lại!');
-                return Redirect::route('SIndex');
+                return Redirect::route('site.pagePay');
             }
         }
     }
@@ -946,9 +970,7 @@ class StaticsController extends BaseStaticsController{
         }
     }
 
-    public function  aboutme(){
 
-    }
 
     public function PageCustomer(){
         $cat_testimonials   = (int)strip_tags(self::viewShareVal('CAT_ID_CAMNHAN'));

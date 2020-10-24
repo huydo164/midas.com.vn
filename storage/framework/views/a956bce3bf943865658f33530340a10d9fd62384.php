@@ -82,7 +82,7 @@ use App\Library\PHPDev\ThumbImg;
                         <?php endif; ?>
                         <form class="cart" action="<?php echo e(URL::route('site.pageCart')); ?>" method="post" >
                             <div class="quantity buttons_added">
-                                <span class="md-number">Số lượng:</span>
+                                <span class="md-number"><?php echo e(isset($text_sl->info_intro) ? stripslashes($text_sl->info_intro)  : ''); ?></span>
                                 <input type="button" value="-" class="minus product-detail button is-form">
 
                                 <input type="number" name="product_num"  id="productNum" class="input-text qty text" step="1" min="1" max="9999" name="quantity" value="1" title="SL" size="4" pattern="[0-9]*" inputmode="numeric">
@@ -115,7 +115,7 @@ use App\Library\PHPDev\ThumbImg;
 
                         <!-- Tab content -->
                         <div id="descripton" class="tabcontent" style="display: block;">
-                            <?php echo stripslashes($data->product_content); ?>
+                            <?php echo isset($data->product_content) ? stripslashes($data->product_content) : 'Mô tả đang được cập nhật'; ?>
 
                         </div>
 
@@ -175,16 +175,16 @@ use App\Library\PHPDev\ThumbImg;
                                     }
                                 </script>
                                 <div class="comment">
-                                    <label for="comment">Nhận xét của bạn</label>
+                                    <label for="comment"><?php echo e(isset($text_nxcb->info_intro) ? stripslashes($text_nxcb->info_intro) : ''); ?></label>
                                     <textarea  name="rating_comment" id="rating_comment" cols="45" rows="8" aria-required="true"></textarea>
                                 </div>
                                 <div class="author">
                                     <p class="name">
-                                        <label>Tên *</label>
+                                        <label><?php echo e(isset($text_ten->info_intro) ? stripslashes($text_ten->info_intro) : ''); ?></label>
                                         <input  name="rating_author" id="rating_author" type="text" />
                                     </p>
                                     <p class="email">
-                                        <label for="gmail">Gmail *</label>
+                                        <label for="gmail"><?php echo e(isset($text_gmail->info_intro) ? stripslashes($text_gmail->info_intro) : ''); ?></label>
                                         <input  name="rating_gmail" id="rating_gmail"  type="text" />
                                     </p>
                                 </div>
@@ -197,7 +197,7 @@ use App\Library\PHPDev\ThumbImg;
                                 </div>
                                 <?php endif; ?>
                                 <div class="list-comment">
-                                    <h5>Danh sách bình luận</h5>
+                                    <h5><?php echo e(isset($text_dsbl->info_intro) ? stripslashes($text_dsbl->info_intro) : ''); ?></h5>
                                     <ul>
                                         <?php if(isset($rating) && sizeof($rating) > 0): ?>
                                             <?php $__currentLoopData = $rating; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -247,7 +247,7 @@ use App\Library\PHPDev\ThumbImg;
                 <div class="col-md-3">
                     <div class="sidebar">
                         <div class="news">
-                            <h4><i class="fas fa-bars"></i> TIN TỨC</h4>
+                            <h4><i class="fas fa-bars"></i><?php echo e(isset($text_tt->info_intro) ? stripslashes($text_tt->info_intro) : ''); ?></h4>
                             <ul>
                                 <?php if(isset($news) && !empty($news)): ?>
                                     <?php $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -281,15 +281,7 @@ use App\Library\PHPDev\ThumbImg;
                         <div class="lich">
                             <iframe style="padding:0;border:none;overflow:hidden; width: 100%;height:300px" src="//amlich.com/#type=7&amp;bg=2&amp;color=3"></iframe>
                         </div>
-                        <?php if(isset($dataTags)): ?>
-                            <div class="list-key mgb">
-                                <ul>
-                                    <?php $__currentLoopData = $dataTags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <li><a href="<?php echo e($key); ?>"><?php echo e($tag); ?></a></li>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
+
                     </div>
                 </div>
             </div>
@@ -300,11 +292,24 @@ use App\Library\PHPDev\ThumbImg;
             <div class="title">
                 <h3>
                     <b></b>
-                    <span>SẢN PHẨM TƯƠNG TỰ</span>
+                    <span><?php echo e(isset($text_sptt->info_intro) ? stripslashes($text_sptt->info_intro) : ''); ?></span>
                     <b></b>
                 </h3>
             </div>
-            
+            <?php if(isset($dataSame) && sizeof($dataSame) > 0): ?>
+            <div class="carousel-wrap">
+                <div class="carousel" data-flickity='{ "fullscreen": true, "lazyLoad": 2 , "pageDots" : false , "contain" : true }'>
+                    <?php $__currentLoopData = $dataSame; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="carousel-cell">
+                            <a href="<?php echo e(FuncLib::buildLinkProduct($item->product_id, $item->product_title)); ?>">
+                                <img class="carousel-image" data-flickity-lazyload="<?php echo e(ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item->product_id,$item->product_image, 0,0, '', true, true, false)); ?>" width="435px" height="300px" />
+                            </a>
+                        </div>
+
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

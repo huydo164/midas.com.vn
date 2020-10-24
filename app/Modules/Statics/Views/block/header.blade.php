@@ -5,6 +5,7 @@ use App\Library\PHPDev\FuncLib;
 use App\Library\PHPDev\ThumbImg;
 ?>
 <div class="header">
+    {!! isset($messages) && ($messages != '') ? $messages : '' !!}
     <div class="bg-close"></div>
     <div class="container">
         <div class="row">

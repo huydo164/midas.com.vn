@@ -82,7 +82,7 @@ use App\Library\PHPDev\ThumbImg;
                         @endif
                         <form class="cart" action="{{ URL::route('site.pageCart') }}" method="post" >
                             <div class="quantity buttons_added">
-                                <span class="md-number">Số lượng:</span>
+                                <span class="md-number">{{ isset($text_sl->info_intro) ? stripslashes($text_sl->info_intro)  : '' }}</span>
                                 <input type="button" value="-" class="minus product-detail button is-form">
 
                                 <input type="number" name="product_num"  id="productNum" class="input-text qty text" step="1" min="1" max="9999" name="quantity" value="1" title="SL" size="4" pattern="[0-9]*" inputmode="numeric">
@@ -114,7 +114,7 @@ use App\Library\PHPDev\ThumbImg;
 
                         <!-- Tab content -->
                         <div id="descripton" class="tabcontent" style="display: block;">
-                            {!! stripslashes($data->product_content) !!}
+                            {!! isset($data->product_content) ? stripslashes($data->product_content) : 'Mô tả đang được cập nhật' !!}
                         </div>
 
                         <div id="review" class="tabcontent" style="display: none;">
@@ -173,16 +173,16 @@ use App\Library\PHPDev\ThumbImg;
                                     }
                                 </script>
                                 <div class="comment">
-                                    <label for="comment">Nhận xét của bạn</label>
+                                    <label for="comment">{{ isset($text_nxcb->info_intro) ? stripslashes($text_nxcb->info_intro) : '' }}</label>
                                     <textarea  name="rating_comment" id="rating_comment" cols="45" rows="8" aria-required="true"></textarea>
                                 </div>
                                 <div class="author">
                                     <p class="name">
-                                        <label>Tên *</label>
+                                        <label>{{ isset($text_ten->info_intro) ? stripslashes($text_ten->info_intro) : '' }}</label>
                                         <input  name="rating_author" id="rating_author" type="text" />
                                     </p>
                                     <p class="email">
-                                        <label for="gmail">Gmail *</label>
+                                        <label for="gmail">{{ isset($text_gmail->info_intro) ? stripslashes($text_gmail->info_intro) : '' }}</label>
                                         <input  name="rating_gmail" id="rating_gmail"  type="text" />
                                     </p>
                                 </div>
@@ -195,7 +195,7 @@ use App\Library\PHPDev\ThumbImg;
                                 </div>
                                 @endif
                                 <div class="list-comment">
-                                    <h5>Danh sách bình luận</h5>
+                                    <h5>{{ isset($text_dsbl->info_intro) ? stripslashes($text_dsbl->info_intro) : '' }}</h5>
                                     <ul>
                                         @if(isset($rating) && sizeof($rating) > 0)
                                             @foreach($rating as $item)
@@ -244,7 +244,7 @@ use App\Library\PHPDev\ThumbImg;
                 <div class="col-md-3">
                     <div class="sidebar">
                         <div class="news">
-                            <h4><i class="fas fa-bars"></i> TIN TỨC</h4>
+                            <h4><i class="fas fa-bars"></i>{{ isset($text_tt->info_intro) ? stripslashes($text_tt->info_intro) : '' }}</h4>
                             <ul>
                                 @if(isset($news) && !empty($news))
                                     @foreach($news as $item)
@@ -276,15 +276,7 @@ use App\Library\PHPDev\ThumbImg;
                         <div class="lich">
                             <iframe style="padding:0;border:none;overflow:hidden; width: 100%;height:300px" src="//amlich.com/#type=7&amp;bg=2&amp;color=3"></iframe>
                         </div>
-                        @if(isset($dataTags))
-                            <div class="list-key mgb">
-                                <ul>
-                                    @foreach($dataTags as $key => $tag)
-                                        <li><a href="{{$key}}">{{$tag}}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
+
                     </div>
                 </div>
             </div>
@@ -295,11 +287,24 @@ use App\Library\PHPDev\ThumbImg;
             <div class="title">
                 <h3>
                     <b></b>
-                    <span>SẢN PHẨM TƯƠNG TỰ</span>
+                    <span>{{ isset($text_sptt->info_intro) ? stripslashes($text_sptt->info_intro) : '' }}</span>
                     <b></b>
                 </h3>
             </div>
-            
+            @if(isset($dataSame) && sizeof($dataSame) > 0)
+            <div class="carousel-wrap">
+                <div class="carousel" data-flickity='{ "fullscreen": true, "lazyLoad": 2 , "pageDots" : false , "contain" : true }'>
+                    @foreach($dataSame as $item)
+                        <div class="carousel-cell">
+                            <a href="{{FuncLib::buildLinkProduct($item->product_id, $item->product_title)}}">
+                                <img class="carousel-image" data-flickity-lazyload="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item->product_id,$item->product_image, 0,0, '', true, true, false) }}" width="435px" height="300px" />
+                            </a>
+                        </div>
+
+                    @endforeach
+                </div>
+            </div>
+            @endif
         </div>
     </div>
 </div>

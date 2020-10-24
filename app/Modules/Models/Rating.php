@@ -72,20 +72,7 @@ class Rating extends Model {
         return $result;
     }
     public static function getByProudctId($id=0){
-
-        $result = (Memcache::CACHE_ON) ? Cache::get(Memcache::CACHE_RATING_ID.$id) : array();
-        try {
-            if(empty($result)){
-                $result = Rating::where('product_id', $id)->get();
-
-                if($result && Memcache::CACHE_ON){
-                    Cache::put(Memcache::CACHE_RATING_ID.$id, $result, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
-                }
-            }
-        } catch (PDOException $e) {
-            throw new PDOException();
-        }
-
+        $result = Rating::where('product_id', $id)->get();
         return $result;
     }
 
