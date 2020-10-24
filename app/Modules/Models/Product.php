@@ -20,13 +20,13 @@ use PDOException;
 
 class Product extends Model {
 
-    protected $table = 'product';
+    protected $table = CDatabase::product;
     protected $primaryKey = 'product_id';
     public  $timestamps = false;
 
     protected $fillable = array(
         'product_id', 'product_catid', 'product_cat_name', 'product_cat_alias', 'product_title', 'product_intro', 'product_content', 'product_price', 'product_size', 'product_color' , 'product_view_num',
-        'product_image', 'product_image_other', 'product_created', 'product_order_no', 'product_focus', 'product_status', 'product_word', 'meta_title', 'meta_keywords', 'meta_description');
+        'product_image', 'product_image_other', 'product_created', 'product_order_no', 'product_focus', 'product_status', 'product_word', 'meta_title', 'meta_keywords', 'meta_description', 'product_tag');
 
     public static function searchByCondition($dataSearch=array(), $limit=0, $offset=0, &$total){
         try{
@@ -114,7 +114,7 @@ class Product extends Model {
                 }
             }
             DB::connection()->getPdo()->commit();
-            return true;
+            return $id;
         } catch (PDOException $e) {
             DB::connection()->getPdo()->rollBack();
             throw new PDOException();
@@ -159,13 +159,15 @@ class Product extends Model {
         
         if($id > 0){
  
-            Product::updateData($id, $data_post);
+            $id =  Product::updateData($id, $data_post);
             Utility::messages('messages', 'Cập nhật thành công!');
         }else{
 
-            Product::addData($data_post);
+            $id =  Product::addData($data_post);
             Utility::messages('messages', 'Thêm mới thành công!');
         }
+
+        return $id;
 
     }
 
