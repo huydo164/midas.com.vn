@@ -54,8 +54,8 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
     Route::post('dat-hang', array('as'=>'site.pageOrder', 'uses'=>'StaticsController@pageOrder'));
 
     Route::get('{id}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
+
     Route::get('dich-vu/{id}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
-    Route::get('tag', array('as' => 'site.pageTagDetail', 'uses' => 'StaticsController@pageTagDetail'))->where('name', '[A-Z0-9a-z_\-]+')->where('id', '[0-9]+');
 
     Route::post('danh-gia-san-pham' , array('as'=>'site.ratingProduct', 'uses'=>'StaticsController@ratingProduct'));
 

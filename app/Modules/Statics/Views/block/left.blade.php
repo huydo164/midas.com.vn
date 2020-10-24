@@ -110,7 +110,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="keyword">
             <h2>{!! isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : '' !!}</h2>
             <div class="list-key">
-                <?php $statics_tag = (isset($data->statics_tag) && $data->statics_tag != '') ? json_decode($data->statics_tag, true) : []; ?>
+                <?php $statics_tag = (isset($data->statics_tag) && $data->statics_tag != '') ? json_decode($data->statics_tag, true) : [];?>
                 <ul>
                     @foreach($statics_tag as $key => $item)
                         <li><a href="{{$key}}">{{ $item }}</a></li>
