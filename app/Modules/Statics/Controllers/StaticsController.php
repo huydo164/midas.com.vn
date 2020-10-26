@@ -62,7 +62,7 @@ class StaticsController extends BaseStaticsController{
 
 
         $name_cat_hightlight = Info::getItemByKeyword('CAT_ID_SPNB');
-        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
+        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price,product_tag';
         $hightligt = Product::getData($limit = 10 , $searchSame);
 
         
@@ -587,7 +587,7 @@ class StaticsController extends BaseStaticsController{
             $search['product_max'] = (int)Request::get('max', -1);
             
             $search['product_status'] = CGlobal::status_show;
-            $search['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
+            $search['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price,product_tag';
             $data  = Product::searchByCondition($search, $limit, $offset, $total);
             $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
             $dataCate = Category::getById($id);
@@ -621,9 +621,10 @@ class StaticsController extends BaseStaticsController{
             $dataCate = Category::getById($data->product_catid);
         }
 
-        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
+        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price,product_tag';
         $dataSame = Product::getSameData($id, $data->product_catid, $limit = 6, $searchSame);
 
+        $arrTag = Tag::getAllTag(array(),$limit);
 
 
         $pageNo = (int) Request::get('page', 1);
@@ -685,7 +686,8 @@ class StaticsController extends BaseStaticsController{
 
 
         return view('Statics::content.pageProduct',[
-           'data' => $data,
+            'arrTag' => $arrTag,
+            'data' => $data,
             'dataSame' => $dataSame,
             'rating' => $rating,
             'avg_rate' => $avg_rate,
@@ -922,6 +924,7 @@ class StaticsController extends BaseStaticsController{
     }
 
     public function pageTag( $id = 0){
+
         if ( $id > 0){
 
             $pageNo = (int)Request::get('page', 1);
@@ -929,7 +932,7 @@ class StaticsController extends BaseStaticsController{
             $limit = 10;
             $offset = ($pageNo - 1) *$limit;
             $total = 0;
-            $search = $data  = $pageDetail =  array();
+            $search = $data = $pageDetail = array();
 
             $objTags = Tag::getById($id);
             $objSearch = Statics::getById($id);
@@ -942,12 +945,11 @@ class StaticsController extends BaseStaticsController{
                 }
             }
 
-            $search['statics_id'] = $arrPost;
-            $search['statics_status'] = (int)Request::get('statics_status', -1);
+            $search['statics_status'] = CGlobal::status_show;
+            $search['submit'] = (int)Request::get('submit', 0);
             $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created,statics_tag';
 
             $data = Statics::searchByCondition($search, $limit, $offset, $total);
-            $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
 
             $dataTags=[];
             if(!empty($data)){
@@ -957,6 +959,8 @@ class StaticsController extends BaseStaticsController{
                     $dataTags = $dataTags + $tmp;
                 }
             }
+
+            $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
 
             $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
@@ -970,11 +974,11 @@ class StaticsController extends BaseStaticsController{
 
             return view('Statics::content.pageTag', [
                 'data' => $data,
+                'search' => $search,
+                'paging' => $paging,
                 'objSearch' => $objSearch,
                 'objTags' => $objTags,
                 'dataTags' => $dataTags,
-                'search' => $search,
-                'paging' => $paging,
                 'text_dich_vu'=> $text_dich_vu,
                 'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
                 'text_tu_khoa' => $text_tu_khoa,

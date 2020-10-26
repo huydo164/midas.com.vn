@@ -128,9 +128,4 @@ use App\Library\PHPDev\CGlobal;
             </div>
         </div>
     </div>
-<<<<<<< HEAD:app/Modules/Admin/Views/rating/list.blade.php
 @stop
-=======
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('Admin::layout.html', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\wamp64\www\project.vn\midas.com.vn\app\Modules/Admin/Views/info/list.blade.php ENDPATH**/ ?>
->>>>>>> huy:app/Modules/Admin/Views/rating/2185de3319989b1a298a09c6d1928b5c5571ed5a.php

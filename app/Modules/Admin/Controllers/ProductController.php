@@ -2,7 +2,10 @@
 namespace App\Modules\Admin\Controllers;
 
 use App\Library\PHPDev\FuncLib;
-use App\Modules\Models\product;
+use App\Modules\Models\Product;
+use App\Modules\Models\Tag;
+use App\Modules\Models\TagProduct;
+use App\Modules\Models\TagStatics;
 use App\Modules\Models\Type;
 use App\Modules\Models\Category;
 use Illuminate\Support\Facades\Redirect;
@@ -15,7 +18,7 @@ use App\Library\PHPDev\Utility;
 use App\Library\PHPDev\ValidForm;
 use App\Library\PHPDev\ThumbImg;
 
-class productController extends BaseAdminController{
+class ProductController extends BaseAdminController{
 
     private $arrStatus = array(-1 => 'Chọn', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
     private $arrFocus = array(-1 => 'Chọn', CGlobal::status_hide => 'Ẩn', CGlobal::status_show => 'Hiện');
@@ -52,7 +55,7 @@ class productController extends BaseAdminController{
         $search['submit'] = (int)Request::get('submit', 0);
         $search['field_get'] = '';
 
-        $dataSearch = product::searchByCondition($search, $limit, $offset, $total);
+        $dataSearch = Product::searchByCondition($search, $limit, $offset, $total);
         $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
 
         $optionStatus = Utility::getOption($this->arrStatus, $search['product_status']);
@@ -83,6 +86,7 @@ class productController extends BaseAdminController{
         $data = array();
         $product_image = '';
         $product_image_other = array();
+        $arrTag = array();
 
         if($id > 0) {
             $data = product::getById($id);
@@ -99,7 +103,10 @@ class productController extends BaseAdminController{
                 //Main Img
                 $product_image = trim($data->product_image);
             }
+
         }
+
+        $arrTag = Tag::getAllTag(array(), $limit = 0);
 
         $optionStatus = Utility::getOption($this->arrStatus, isset($data['product_status'])? $data['product_status'] : CGlobal::status_show);
         $optionFocus = Utility::getOption($this->arrFocus, isset($data['product_focus'])? $data['product_focus'] : CGlobal::status_hide);
@@ -109,6 +116,7 @@ class productController extends BaseAdminController{
         return view('Admin::product.add',[
             'id'=>$id,
             'data'=>$data,
+            'arrTag' => $arrTag,
             'optionStatus'=>$optionStatus,
             'optionFocus'=>$optionFocus,
             'news_image'=>$product_image,
@@ -140,6 +148,7 @@ class productController extends BaseAdminController{
             'meta_title'=>array('value'=>addslashes(Request::get('meta_title')),'require'=>0),
             'meta_keywords'=>array('value'=>addslashes(Request::get('meta_keywords')),'require'=>0),
             'meta_description'=>array('value'=>addslashes(Request::get('meta_description')),'require'=>0),
+            'product_tag' => array('value' => Request::get('product_tag', []), 'require' => 0)
         );
 
         //get product_cat_name, product_cat_alias
@@ -150,6 +159,9 @@ class productController extends BaseAdminController{
                 $dataSave['product_cat_alias']['value'] = $arrCat->category_title_alias;
             }
         }
+
+        $product_tag = $dataSave['product_tag']['value'];
+        $dataSave['product_tag']['value'] = json_encode($product_tag);
 
         //Main Img
         $image_primary = addslashes(Request::get('image_primary', ''));
@@ -177,7 +189,17 @@ class productController extends BaseAdminController{
         $this->error = ValidForm::validInputData($dataSave);
         if($this->error == ''){
             $id = ($id == 0) ? $id_hiden : $id;
-            product::saveData($id, $dataSave);
+            $id = Product::saveData($id, $dataSave);
+            if ($id > 0){
+                TagStatics::where('product_id', $id)->delete();
+                foreach($product_tag as $key => $item){
+                    $tmp = [
+                        'tag_id' => $key,
+                        'product_id' => $id,
+                    ];
+                    TagStatics::create($tmp);
+                }
+            }
             return Redirect::route('admin.product');
         }else{
             foreach($dataSave as $key=>$val){
@@ -207,7 +229,7 @@ class productController extends BaseAdminController{
         if(Session::token() === $token){
             if(!empty($listId) && is_array($listId)){
                 foreach($listId as $id){
-                    product::deleteId($id);
+                    Product::deleteId($id);
                 }
                 Utility::messages('messages', 'Xóa thành công!', 'success');
             }

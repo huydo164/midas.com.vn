@@ -276,7 +276,6 @@ use App\Library\PHPDev\ThumbImg;
                         <div class="lich">
                             <iframe style="padding:0;border:none;overflow:hidden; width: 100%;height:300px" src="//amlich.com/#type=7&amp;bg=2&amp;color=3"></iframe>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -305,6 +304,7 @@ use App\Library\PHPDev\ThumbImg;
                 </div>
             </div>
             @endif
+
         </div>
     </div>
 </div>

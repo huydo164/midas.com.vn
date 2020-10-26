@@ -219,18 +219,17 @@ use App\Library\PHPDev\ThumbImg;
                                                         <label class="control-label">Từ Khóa</label>
                                                         <div class="controls">
                                                             <?php
-                                                            $statics_tag = (isset($data->statics_tag) && $data->statics_tag != '') ? json_decode($data->statics_tag, true) : [];
-                                                            $statics_tag_key = array_keys($statics_tag);
+                                                            $product_tag = (isset($data->product_tag) && $data->product_tag != '') ? json_decode($data->product_tag, true) : [];
+                                                            $product_tag_key = array_keys($product_tag);
                                                             ?>
-                                                            <?php if(isset($arrTag)): ?>
-                                                                <?php $__currentLoopData = $arrTag; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            @if(isset($arrTag))
+                                                                @foreach($arrTag as $item)
                                                                     <label>
-                                                                        <input type="checkbox" <?php if(in_array($item->tag_id, $statics_tag_key)): ?> checked <?php endif; ?> name="statics_tag[<?php echo e($item->tag_id); ?>]" value="<?php echo e($item->tag_title); ?>">
-                                                                        <?php echo e($item->tag_title); ?>
-
+                                                                        <input type="checkbox" @if(in_array($item->tag_id, $product_tag_key)) checked @endif name="product_tag[{{ $item->tag_id }}]" value="{{ $item->tag_title }}">
+                                                                        {{ $item->tag_title }}
                                                                     </label><br>
-                                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                            <?php endif; ?>
+                                                                @endforeach
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>

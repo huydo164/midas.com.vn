@@ -18,6 +18,6 @@ class TagStatics extends Model{
     public $timestamps = false;
 
     protected $fillable = array(
-        'id', 'tag_id', 'statics_id'
+        'id', 'tag_id', 'statics_id', 'product_id'
     );
 }
