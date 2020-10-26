@@ -5,7 +5,7 @@
 @media (min-width: 992px) and (max-width: 1200px) {
     /*----------- header --------------*/
     .navigation ul li{
-        padding-right: 40px;
+        padding-right: 37px;
         line-height: 40px;
     }
     .navigation li ul{
@@ -40,7 +40,7 @@
     }
     .navigation ul li{
         line-height: 60px;
-        padding-right: 18px;
+        padding-right: 11px;
     }
     .slide-library .carousel-cell{
         height: 170px;
@@ -176,4 +176,14 @@
         margin-top: 10px ;
     }
 
+    /*-----------page Service ----------*/
+    .slide-service .carousel-cell{
+        height: 160px;
+    }
+}
+
+@media (max-width: 767px) {
+    .container{
+        max-width: 740px !important;
+    }
 }

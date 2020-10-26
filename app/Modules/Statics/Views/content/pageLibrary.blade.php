@@ -20,10 +20,10 @@ use App\Library\PHPDev\ThumbImg;
         <div class="container">
             <div class="page-library">
                 <div class="row">
-                    <div class="col-lg-3 col-md-3">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
                         @include('Statics::block.left')
                     </div>
-                    <div class="col-lg-9 col-md-9">
+                    <div class="col-lg-9 col-md-9 col-sm-9">
                         <div class="commitment">
                             <h3>
                                 <b></b>

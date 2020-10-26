@@ -21,7 +21,7 @@ use App\Library\PHPDev\ThumbImg;
             @foreach($dataBannerHeader as $item)
                 <div class="carousel-cell">
                     <img class="carousel-cell-image"
-                         data-flickity-lazyload="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $item['banner_id'],$item['banner_image'], 0,0, '', true, true, false) }}" />
+                         data-flickity-lazyload="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_BANNER, $item['banner_id'],$item['banner_image'], 1600,0, '', true, true, false) }}" />
                 </div>
 
             @endforeach
@@ -100,14 +100,20 @@ use App\Library\PHPDev\ThumbImg;
             </h3>
         </div>
         <div class="carousel-wrap">
-            <div class="carousel" data-flickity='{ "fullscreen": true, "lazyLoad": 2 , "pageDots" : false , "contain" : true }'>
+            <div class="carousel"
+                 data-flickity='{ "lazyLoad": true , "groupCells": 5 , "pageDots": false}'>
                 @foreach($hightlight as $item)
                     <div class="carousel-cell">
                         <a href="{{FuncLib::buildLinkProduct($item->product_id, $item->product_title)}}">
-                            <img class="carousel-image" data-flickity-lazyload="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item->product_id,$item->product_image, 0,0, '', true, true, false) }}" width="435px" height="300px" />
+                            <img class="carousel-cell-image" alt="walrus"
+                                 data-flickity-lazyload-src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item->product_id,$item->product_image, 0,0, '', true, true, false) }}"
+                                 data-flickity-lazyload-srcset="
+                                        {{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item->product_id,$item->product_image, 0,0, '', true, true, false) }} 520w,
+                                        {{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_PRODUCT, $item->product_id,$item->product_image, 0,0, '', true, true, false) }} 360w"
+                                 sizes="(min-width: 1024px) 520px, 360px"
+                            />
                         </a>
                     </div>
-
                 @endforeach
             </div>
         </div>
@@ -231,7 +237,7 @@ use App\Library\PHPDev\ThumbImg;
             <div class="col-md-6">
                 <div class="about-me">
                     <h5>{{ $item->statics_title }}</h5>
-                    <p>{{ strip_tags($item->statics_content) }}</p>
+                    <p>{!! strip_tags($item->statics_content) !!}</p>
                     <a href="{{FuncLib::buildLinkDetailStatic($item->statics_id, $item->statics_title)}}"><button >XEM NGAY</button></a>
                 </div>
             </div>

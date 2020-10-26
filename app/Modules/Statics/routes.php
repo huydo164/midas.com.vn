@@ -53,9 +53,9 @@ Route::group(['middleware' => ['web'], 'prefix' => '/', 'namespace' => $namespac
     Route::post('thanh-toan' , array('as'=>'site.pagePay', 'uses'=>'StaticsController@pagePay'));
     Route::post('dat-hang', array('as'=>'site.pageOrder', 'uses'=>'StaticsController@pageOrder'));
 
-    Route::get('{id}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
-
-    Route::get('dich-vu/{id}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
+    Route::get('tags/{id}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'))->where('id', '[0-9]+');
+    //Route::get('dich-vu/{id}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
+    //Route::get('chi-tiet-san-pham/{id}', array('as' => 'site.pageTag', 'uses' => 'StaticsController@pageTag'));
 
     Route::post('danh-gia-san-pham' , array('as'=>'site.ratingProduct', 'uses'=>'StaticsController@ratingProduct'));
 

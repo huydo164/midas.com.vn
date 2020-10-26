@@ -7,10 +7,10 @@
 */
 namespace App\Modules\Statics\Controllers;
 
-
 use App\Library\PHPDev\FuncLib;
 use App\Library\PHPDev\Loader;
 use App\Library\PHPDev\CGlobal;
+use App\Library\PHPDev\Memcache;
 use App\Library\PHPDev\Pagging;
 use App\Library\PHPDev\ThumbImg;
 use App\Library\PHPDev\Utility;
@@ -23,11 +23,10 @@ use App\Modules\Models\Rating;
 use App\Modules\Models\Statics;
 use App\Modules\Models\Tag;
 use App\Modules\Models\TagStatics;
-use App\Modules\Models\Type;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
 
 class StaticsController extends BaseStaticsController{
 
@@ -38,19 +37,16 @@ class StaticsController extends BaseStaticsController{
 
         $messages = Utility::messages('messages');
 
-
-
-
         $cat_dich_vu = (int)strip_tags(self::viewShareVal('CAT_ID_DICHVU'));
         $name_cat_dich_vu = Info::getItemByKeyword('CAT_ID_DICHVU');
+
         $data_cat_dich_vu = [];
         if ($data_cat_dich_vu > 0){
             $data_search_dich_vu['statics_catid'] = $cat_dich_vu;
             $data_search_dich_vu['statics_order_no'] = 'asc';
-           
-            $data_cat_dich_vu = Statics::getFocus($data_search_dich_vu, $limit = 10); 
-          
+            $data_cat_dich_vu = Statics::getFocus($data_search_dich_vu, $limit = 10);
         }
+
         $cat_commitment  = (int)strip_tags(self::viewShareVal('CAT_ID_TAISAO'));
         $name_cat_commitment = Info::getItemByKeyword('CAT_ID_TAISAO');
         $data_commitment = [];
@@ -60,16 +56,13 @@ class StaticsController extends BaseStaticsController{
             $data_commitment = Statics::getFocus($data_search_commitment, $limit = 10);
         }
 
-
         $name_cat_hightlight = Info::getItemByKeyword('CAT_ID_SPNB');
-        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price,product_tag';
+        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
         $hightligt = Product::getData($limit = 10 , $searchSame);
-
-        
-
 
         $cat_collection  = (int)strip_tags(self::viewShareVal('CAT_ID_BST'));
         $name_cat_collection = Info::getItemByKeyword('CAT_ID_BST');
+
         $data_collection = [];
         if ($data_collection > 0){
             $data_search_collection['statics_catid'] = $cat_collection;
@@ -77,18 +70,15 @@ class StaticsController extends BaseStaticsController{
             $data_collection = Statics::getFocus($data_search_collection, $limit = 10);
         }
 
-        $cat_finish   = (int)strip_tags(self::viewShareVal('CAT_ID_DUANTHUCHIEN'));
-        
-        $name_cat_finish  = Info::getItemByKeyword('CAT_ID_DUANTHUCHIEN');
+        $cat_finish = (int)strip_tags(self::viewShareVal('CAT_ID_DUANTHUCHIEN'));
+        $name_cat_finish = Info::getItemByKeyword('CAT_ID_DUANTHUCHIEN');
 
-        
         $data_finish  = [];
         if ($data_finish  > 0){
             $data_search_finish ['statics_catid'] = $cat_finish ;
             $data_search_finish ['statics_order_no'] = 'asc';
             $data_finish  = Statics::getFocus($data_search_finish, $limit = 10);
         }
-        
 
         $cat_testimonials   = (int)strip_tags(self::viewShareVal('CAT_ID_CAMNHAN'));
         $name_cat_testimonials  = Info::getItemByKeyword('CAT_ID_CAMNHAN');
@@ -98,8 +88,6 @@ class StaticsController extends BaseStaticsController{
             $data_search_testimonials ['statics_order_no'] = 'asc';
             $data_testimonials  = Statics::getFocus($data_search_testimonials, $limit = 10);
         }
-
-
 
         $cat_aboutme   = (int)strip_tags(self::viewShareVal('CAT_ID_ABOUTME'));
         $data_aboutme  = [];
@@ -158,7 +146,6 @@ class StaticsController extends BaseStaticsController{
         $contact_address = strip_tags(self::viewShareVal('SITE_CONTACT_ADDRESS'));
         $contact_intro = strip_tags(self::viewShareVal('SITE_CONTACT_INTRO'));
 
-
         $messages = Utility::messages('messages');
         return view('Statics::content.contact',[
             'messages' => $messages,
@@ -167,7 +154,6 @@ class StaticsController extends BaseStaticsController{
             'contact_hotline2' => $contact_hotline2,
             'contact_address' => $contact_address,
             'contact_intro' => $contact_intro,
-
         ]);
     }
 
@@ -290,20 +276,12 @@ class StaticsController extends BaseStaticsController{
                 }
             }
 
-            $cat_id = (int)strip_tags(self::viewShareVal('CAT_ID_DICH_VU_DETAIL'));
-            $data_cat_id = [];
-            if ($cat_id > 0){
-                $data_search_cat_id['statics_catid'] = $cat_id;
-                $data_cat_id = Statics::getFocus($data_search_cat_id, $limit = 10);
-            }
-
             $cat_product = (int)strip_tags(self::viewShareVal('CAT_ID_SAN_PHAM_NOI_BAT'));
             $data_product = [];
             if ($cat_product > 0){
                 $data_search_product['product_catid'] = $cat_product;
                 $data_product = Product::getFocus($data_search_product, $limit = 10);
             }
-
 
             $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
@@ -313,7 +291,6 @@ class StaticsController extends BaseStaticsController{
             return view('Statics::content.pageServices',[
                 'data' => $data,
                 'data_product' => $data_product,
-                'data_cat_id' => $data_cat_id,
                 'text_dich_vu' => $text_dich_vu,
                 'arrSame' => $arrSame,
                 'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
@@ -621,10 +598,8 @@ class StaticsController extends BaseStaticsController{
             $dataCate = Category::getById($data->product_catid);
         }
 
-        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price,product_tag';
+        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
         $dataSame = Product::getSameData($id, $data->product_catid, $limit = 6, $searchSame);
-
-        $arrTag = Tag::getAllTag(array(),$limit);
 
 
         $pageNo = (int) Request::get('page', 1);
@@ -683,10 +658,11 @@ class StaticsController extends BaseStaticsController{
 
         $text_sptt= Info::getItemByKeyword('SITE_PRODUCT_TEXT_SPTT');
 
+        $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
+
 
 
         return view('Statics::content.pageProduct',[
-            'arrTag' => $arrTag,
             'data' => $data,
             'dataSame' => $dataSame,
             'rating' => $rating,
@@ -699,6 +675,7 @@ class StaticsController extends BaseStaticsController{
             'text_dsbl' =>$text_dsbl,
             'text_tt' =>$text_tt,
             'text_sptt' =>$text_sptt,
+            'text_tu_khoa' => $text_tu_khoa,
         ]);
     }
 
