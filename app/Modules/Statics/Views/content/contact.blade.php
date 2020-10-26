@@ -21,11 +21,29 @@ use App\Library\PHPDev\ThumbImg;
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>{{ strip_tags($contact_title) }}</h2>
-                <p class="phone"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-phone.png"> {{ strip_tags($contact_hotline1) }}  </p>
-                <p class="phone"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-phone.png">{{ strip_tags($contact_hotline2)}}  </p>
-                <p class="home"><img src="http://localhost:8080/midas.com.vn/public/assets/frontend/img/icon-home.png"> {{ strip_tags($contact_address)}} </p>
-                <p class="content"> {{ $contact_intro }}</p>
+                <h2>{!! strip_tags($contact_title) !!}</h2>
+                <p class="phone">
+                    @if(isset($icon_phone) && !empty($icon_phone))
+                        <img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $icon_phone['info_id'],$icon_phone['info_img'], 200,0, '', true, true, false)}}">
+                    @endif
+
+                     {!! strip_tags($contact_hotline1) !!}
+                </p>
+                <p class="phone">
+                    @if(isset($icon_phone) && !empty($icon_phone))
+                        <img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $icon_phone['info_id'],$icon_phone['info_img'], 200,0, '', true, true, false)}}">
+                    @endif
+
+                    {!! strip_tags($contact_hotline2) !!}
+                </p>
+                <p class="home">
+                    @if(isset($icon_home) && !empty($icon_home))
+                        <img src="{{ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $icon_home['info_id'],$icon_home['info_img'], 200,0, '', true, true, false)}}">
+                    @endif
+
+                    {!! strip_tags($contact_address) !!}
+                </p>
+                <p class="content">{!! $contact_intro !!}</p>
             </div>
             <div class="col-md-6">
                 <h2>LIÊN HỆ VỚI CHÚNG TÔI</h2>

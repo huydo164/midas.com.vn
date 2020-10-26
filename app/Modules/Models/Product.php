@@ -252,34 +252,37 @@ class Product extends Model {
         }
     }
 
-    public static function getFocus($dataSearch=array(), $limit=10){
-        $result = array();
+    public static function getFocus($dataSearch=array(), $limit=10, $keyword = ''){
+        $result = (Memcache::CACHE_ON) ? Cache::get(Memcache::CACHE_PRODUCT_KEYWORD.$keyword) : array();
         try{
-            if($limit > 0){
-                $query = Product::where('product_id','>', 0);
-                $query->where('product_focus', CGlobal::status_show);
-                $query->where('product_status', CGlobal::status_show);
+            if (empty($result)){
+                if($limit > 0){
+                    $query = Product::where('product_id','>', 0);
+                    $query->where('product_focus', CGlobal::status_show);
+                    $query->where('product_status', CGlobal::status_show);
 
 
-                if(isset($dataSearch['product_catid']) && $dataSearch['product_catid'] != 0){
-                    $query->where('product_catid', $dataSearch['product_catid']);
+                    if(isset($dataSearch['product_catid']) && $dataSearch['product_catid'] != 0){
+                        $query->where('product_catid', $dataSearch['product_catid']);
+                    }
+
+                    if(isset($dataSearch['product_order_no']) && $dataSearch['product_order_no'] == 'asc'){
+                        $query->orderBy('product_order_no', 'asc');
+                    }else{
+                        $query->orderBy('product_id', 'desc');
+                    }
+
+                    $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
+                    if(!empty($fields)){
+                        $result = $query->take($limit)->get($fields);
+                    }else{
+                        $result = $query->take($limit)->get();
+                    }
                 }
-
-                if(isset($dataSearch['product_order_no']) && $dataSearch['product_order_no'] == 'asc'){
-                    $query->orderBy('product_order_no', 'asc');
-                }else{
-                    $query->orderBy('product_id', 'desc');
+                if ($result && Memcache::CACHE_ON){
+                    Cache::put(Memcache::CACHE_PRODUCT_KEYWORD.$keyword, $result, Memcache::CACHE_TIME_TO_LIVE_ONE_MONTH);
                 }
-
-                $fields = (isset($dataSearch['field_get']) && trim($dataSearch['field_get']) != '') ? explode(',',trim($dataSearch['field_get'])): array();
-                if(!empty($fields)){
-                    $result = $query->take($limit)->get($fields);
-                }else{
-                    $result = $query->take($limit)->get();
-                }
-                
             }
-
         }catch (PDOException $e){
             throw new PDOException();
         }

@@ -134,14 +134,12 @@ use App\Library\PHPDev\ThumbImg;
                 <div class="left">
                     <a data-fancybox="gallery" href="img/1.png" data-caption="Caption for single image">
                         @foreach($data_collection as $key => $item)
-                        @if($key
-                        < 1) <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true) }}" />
-                        @endif
+                            @if($key< 1)
+                                    <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_STATICS, $item->statics_id, $item->statics_image, 800,0, '', true, true) }}" />
+                            @endif
                         @endforeach
-
                     </a>
                 </div>
-
             </div>
             <div class="col-md-6">
                 <div class="right">

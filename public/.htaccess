@@ -1,3 +1,7 @@
+<FilesMatch "\.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl)(~|\.sw[op]|\.bak|\.orig|\.save\.env)?$|^(\..*|Entries.*|Repository|Root|Tag|Template)$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig\.save\.env)$">
+    Order allow,deny
+</FilesMatch>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
@@ -21,4 +25,4 @@
 </IfModule>
 
 #Gia tri toi da dc post len server
-php_value max_input_vars 3000
+#php_value max_input_vars 3000

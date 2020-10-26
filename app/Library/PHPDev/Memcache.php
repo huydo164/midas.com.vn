@@ -48,6 +48,7 @@ class Memcache{
 	// Product
 	const CACHE_PRODUCT_ID = 'cache_product_id_';
 	const CACHE_PRODUCT_CAT_ID = 'cache_product_cat_id_';
+	const CACHE_PRODUCT_KEYWORD = 'cache_product_keyword_';
 	//Contact
     const CACHE_CONTACT_ID = 'cache_contact_id_';
     //Buy
