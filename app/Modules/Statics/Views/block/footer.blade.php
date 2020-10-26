@@ -8,7 +8,7 @@ use App\Library\PHPDev\ThumbImg;
     <div class="footer-top">
         <div class="container">
             <img src="{{ ThumbImg::thumbBaseNormal(CGlobal::FOLDER_INFO, $arrTextLogo->info_id, $arrTextLogo->info_img, 800, 0, '', true, true) }}"/>
-            <h6>{!! isset($arrTextLogo->info_content) ? $arrTextLogo->info_content : '' !!}</h6>
+                <h6>{!! isset($arrTextLogo->info_content) ? $arrTextLogo->info_content : '' !!}</h6>
             <p>{!! isset($text1->info_content) ? $text1->info_content : '' !!}: <span>{!! isset($text_sdt->info_content) ? $text_sdt->info_content : ''  !!}</span> </p>
             <p>{!! isset($text_add->info_content) ? $text_add->info_content : ''  !!}</p>
             <p> <i class="far fa-envelope"></i> {!! isset($text_mail->info_content) ? $text_mail->info_content : ''  !!}</p>

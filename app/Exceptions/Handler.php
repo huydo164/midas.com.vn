@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler{
      */
     public function render($request, Exception $exception) {
         if(CGlobal::is_dev == 0){
-            //return Redirect::route('page.404');
+            return Redirect::route('SIndex');
         }
         return parent::render($request, $exception);
     }

@@ -276,6 +276,20 @@ use App\Library\PHPDev\ThumbImg;
                         <div class="lich">
                             <iframe style="padding:0;border:none;overflow:hidden; width: 100%;height:300px" src="//amlich.com/#type=7&amp;bg=2&amp;color=3"></iframe>
                         </div>
+
+                        @if(isset($data) && !empty($data))
+                            <div class="keyword">
+                                <h2>{!! isset($text_tu_khoa) ? strip_tags($text_tu_khoa) : '' !!}</h2>
+                                <div class="list-key">
+                                    <?php $product_tag = (isset($data->product_tag) && $data->product_tag != '') ? json_decode($data->product_tag, true) : [];?>
+                                    <ul>
+                                        @foreach($product_tag as $key => $item)
+                                            <li><a href="{{$key}}">{{ $item }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

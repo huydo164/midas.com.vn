@@ -113,7 +113,7 @@ use App\Library\PHPDev\ThumbImg;
                 <?php $statics_tag = (isset($data->statics_tag) && $data->statics_tag != '') ? json_decode($data->statics_tag, true) : [];?>
                 <ul>
                     @foreach($statics_tag as $key => $item)
-                        <li><a href="{{$key}}">{{ $item }}</a></li>
+                        <li><a href="{{ URL::route('site.pageTag', ['id'=>$key]) }}">{{ $item }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -124,7 +124,7 @@ use App\Library\PHPDev\ThumbImg;
         <div class="list-key mgb">
             <ul>
                 @foreach($dataTags as $key => $tag)
-                    <li><a href="{{$key}}">{{$tag}}</a></li>
+                    <li><a href="{{ URL::route('site.pageTag', ['id'=>$key]) }}">{{ $tag }}</a></li>
                 @endforeach
             </ul>
         </div>

@@ -7,10 +7,10 @@
 */
 namespace App\Modules\Statics\Controllers;
 
-
 use App\Library\PHPDev\FuncLib;
 use App\Library\PHPDev\Loader;
 use App\Library\PHPDev\CGlobal;
+use App\Library\PHPDev\Memcache;
 use App\Library\PHPDev\Pagging;
 use App\Library\PHPDev\ThumbImg;
 use App\Library\PHPDev\Utility;
@@ -23,23 +23,18 @@ use App\Modules\Models\Rating;
 use App\Modules\Models\Statics;
 use App\Modules\Models\Tag;
 use App\Modules\Models\TagStatics;
-use App\Modules\Models\Type;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\View;
 
 class StaticsController extends BaseStaticsController{
 
     public function index(){
-
         Loader::loadJS('libs/owl.carousel/owl.carousel.min.js', CGlobal::$postEnd);
         Loader::loadCSS('libs/owl.carousel/owl.carousel.min.css', CGlobal::$postHead);
 
         $messages = Utility::messages('messages');
-
-
-
 
         $cat_dich_vu = (int)strip_tags(self::viewShareVal('CAT_ID_DICHVU'));
         $name_cat_dich_vu = Info::getItemByKeyword('CAT_ID_DICHVU');
@@ -47,10 +42,9 @@ class StaticsController extends BaseStaticsController{
         if ($data_cat_dich_vu > 0){
             $data_search_dich_vu['statics_catid'] = $cat_dich_vu;
             $data_search_dich_vu['statics_order_no'] = 'asc';
-           
-            $data_cat_dich_vu = Statics::getFocus($data_search_dich_vu, $limit = 10); 
-          
+            $data_cat_dich_vu = Statics::getFocus($data_search_dich_vu, $limit = 10);
         }
+
         $cat_commitment  = (int)strip_tags(self::viewShareVal('CAT_ID_TAISAO'));
         $name_cat_commitment = Info::getItemByKeyword('CAT_ID_TAISAO');
         $data_commitment = [];
@@ -60,13 +54,9 @@ class StaticsController extends BaseStaticsController{
             $data_commitment = Statics::getFocus($data_search_commitment, $limit = 10);
         }
 
-
         $name_cat_hightlight = Info::getItemByKeyword('CAT_ID_SPNB');
-        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price,product_tag';
+        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
         $hightligt = Product::getData($limit = 10 , $searchSame);
-
-        
-
 
         $cat_collection  = (int)strip_tags(self::viewShareVal('CAT_ID_BST'));
         $name_cat_collection = Info::getItemByKeyword('CAT_ID_BST');
@@ -77,18 +67,14 @@ class StaticsController extends BaseStaticsController{
             $data_collection = Statics::getFocus($data_search_collection, $limit = 10);
         }
 
-        $cat_finish   = (int)strip_tags(self::viewShareVal('CAT_ID_DUANTHUCHIEN'));
-        
-        $name_cat_finish  = Info::getItemByKeyword('CAT_ID_DUANTHUCHIEN');
-
-        
+        $cat_finish = (int)strip_tags(self::viewShareVal('CAT_ID_DUANTHUCHIEN'));
+        $name_cat_finish = Info::getItemByKeyword('CAT_ID_DUANTHUCHIEN');
         $data_finish  = [];
         if ($data_finish  > 0){
             $data_search_finish ['statics_catid'] = $cat_finish ;
             $data_search_finish ['statics_order_no'] = 'asc';
             $data_finish  = Statics::getFocus($data_search_finish, $limit = 10);
         }
-        
 
         $cat_testimonials   = (int)strip_tags(self::viewShareVal('CAT_ID_CAMNHAN'));
         $name_cat_testimonials  = Info::getItemByKeyword('CAT_ID_CAMNHAN');
@@ -98,8 +84,6 @@ class StaticsController extends BaseStaticsController{
             $data_search_testimonials ['statics_order_no'] = 'asc';
             $data_testimonials  = Statics::getFocus($data_search_testimonials, $limit = 10);
         }
-
-
 
         $cat_aboutme   = (int)strip_tags(self::viewShareVal('CAT_ID_ABOUTME'));
         $data_aboutme  = [];
@@ -139,7 +123,6 @@ class StaticsController extends BaseStaticsController{
                 else if($type_keyword == 'group_product'){
                     return self::pageProductDetail($catname, $catid);
                 }
-
             }else{
                 return Redirect::route('page.404');
             }
@@ -147,7 +130,6 @@ class StaticsController extends BaseStaticsController{
             return Redirect::route('page.404');
         }
     }
-
 
     public function pageContact(){
         Loader::loadJS('libs/owl.carousel/owl.carousel.min.js', CGlobal::$postEnd);
@@ -157,9 +139,10 @@ class StaticsController extends BaseStaticsController{
         $contact_hotline2 = strip_tags(self::viewShareVal('SITE_CONTACT_HOTLINE_2'));
         $contact_address = strip_tags(self::viewShareVal('SITE_CONTACT_ADDRESS'));
         $contact_intro = strip_tags(self::viewShareVal('SITE_CONTACT_INTRO'));
-
-
+        $icon_phone = Info::getItemByKeyword('INCON_PHONE');
+        $icon_home = Info::getItemByKeyword('ICON_HOME');
         $messages = Utility::messages('messages');
+
         return view('Statics::content.contact',[
             'messages' => $messages,
             'contact_title' => $contact_title,
@@ -167,7 +150,8 @@ class StaticsController extends BaseStaticsController{
             'contact_hotline2' => $contact_hotline2,
             'contact_address' => $contact_address,
             'contact_intro' => $contact_intro,
-
+            'icon_phone' => $icon_phone,
+            'icon_home' => $icon_home
         ]);
     }
 
@@ -237,7 +221,6 @@ class StaticsController extends BaseStaticsController{
             $pageDetail = Statics::getById($catid);
         }
 
-
         $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
         $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
         $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
@@ -273,10 +256,8 @@ class StaticsController extends BaseStaticsController{
     }
 
     public function pageServices(){
-
         $arrInfo = Info::getItemByKeyword('CAT_ID_DICH_VU');
         $id_page = isset($arrInfo->info_id) ? (int)strip_tags($arrInfo->info_content) : 0;
-
         if($id_page > 0){
 
             $arrSame  =  array();
@@ -290,20 +271,12 @@ class StaticsController extends BaseStaticsController{
                 }
             }
 
-            $cat_id = (int)strip_tags(self::viewShareVal('CAT_ID_DICH_VU_DETAIL'));
-            $data_cat_id = [];
-            if ($cat_id > 0){
-                $data_search_cat_id['statics_catid'] = $cat_id;
-                $data_cat_id = Statics::getFocus($data_search_cat_id, $limit = 10);
-            }
-
             $cat_product = (int)strip_tags(self::viewShareVal('CAT_ID_SAN_PHAM_NOI_BAT'));
             $data_product = [];
             if ($cat_product > 0){
                 $data_search_product['product_catid'] = $cat_product;
                 $data_product = Product::getFocus($data_search_product, $limit = 10);
             }
-
 
             $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
@@ -313,7 +286,6 @@ class StaticsController extends BaseStaticsController{
             return view('Statics::content.pageServices',[
                 'data' => $data,
                 'data_product' => $data_product,
-                'data_cat_id' => $data_cat_id,
                 'text_dich_vu' => $text_dich_vu,
                 'arrSame' => $arrSame,
                 'text_lien_he_voi_chung_toi' => $text_lien_he_voi_chung_toi,
@@ -324,7 +296,6 @@ class StaticsController extends BaseStaticsController{
     }
 
     public function pageProject(){
-
         $pageNo = (int)Request::get('page', 1);
         $pageScroll  = CGlobal::num_scroll_page;
         $limit = 10;
@@ -346,7 +317,6 @@ class StaticsController extends BaseStaticsController{
         }
 
         $data = Statics::searchByCondition($search, $limit, $offset, $total);
-
 
         $dataTags=[];
         if(!empty($data)){
@@ -403,9 +373,7 @@ class StaticsController extends BaseStaticsController{
             $catid_dv = Info::getItemByKeyword('CAT_ID_DICH_VU_DETAIL');
             $cat_id = isset($catid_dv->info_id) ? strip_tags($catid_dv->info_content) : 0;
             $data_id = Category::getSubCate($cat_id);
-
             $cat_dmsp = (int)strip_tags(self::viewShareVal('CAT_ID_MENU_DANH_MUC_SAN_PHAM'));
-
             $text_danh_muc_san_pham = self::viewShareVal('TEXT_DANH_MUC_SAN_PHAM');
             $text_dvct = self::viewShareVal('TEXT_DICH_VU_CONG_TY');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
@@ -473,15 +441,13 @@ class StaticsController extends BaseStaticsController{
         $search['field_get'] = 'statics_id,statics_catid,statics_cat_name,statics_cat_alias,statics_title,statics_intro,statics_content,statics_image,statics_created,statics_tag';
 
         $data = Statics::searchByCondition($search, $limit, $offset, $total);
-
-
-
         foreach ($data as $item){
             if($item->statics_id > 0 && isset($item->statics_id)){
                 $catId = $item->statics_id;
                 $objSearch = Statics::getById($catId);
             }
         }
+
         $paging = $total > 0 ? Pagging::getPager($pageScroll, $pageNo, $total, $limit, $search) : '';
 
         $dataTags=[];
@@ -494,7 +460,6 @@ class StaticsController extends BaseStaticsController{
         }
 
         if (isset($objSearch)){
-
             $text_dich_vu = self::viewShareVal('TEXT_DICH_VU');
             $text_lien_he_voi_chung_toi = self::viewShareVal('TEXT_LIEN_HE_VOI_CHUNG_TOI');
             $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
@@ -542,7 +507,6 @@ class StaticsController extends BaseStaticsController{
                    'contact_created' => $contact_created,
                );
                $query = Contact::addData($dataInput);
-
                if ($query > 0){
                    Utility::messages('messages', 'Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ với bạn sớm nhất');
                    return Redirect::route('SIndex');
@@ -555,13 +519,10 @@ class StaticsController extends BaseStaticsController{
         }
     }
 
-
     public function pageProPor($catname, $catid){
         $arrCategory = Category::getAllCategory(0, array(), 0);
         $size = Product::groupBy('product_size')->selectRaw('count(*) as total, product_size')->get();
-
         $color = Product::groupBy('product_color')->selectRaw('count(*) as total, product_color')->get();
-
 
         return view('Statics::content.product_portfolio',[
             'arrCategory' => $arrCategory,
@@ -571,7 +532,6 @@ class StaticsController extends BaseStaticsController{
     }
 
     public function pageProductDetail($name = '', $id = 0){
-
         $pageNo = (int)Request::get('page', 1);
         $pageScroll = CGlobal::num_scroll_page;
         $limit  =12;
@@ -585,7 +545,6 @@ class StaticsController extends BaseStaticsController{
             $search['product_catid'] = $id;
             $search['product_min'] = (int)Request::get('min', -1);
             $search['product_max'] = (int)Request::get('max', -1);
-            
             $search['product_status'] = CGlobal::status_show;
             $search['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price,product_tag';
             $data  = Product::searchByCondition($search, $limit, $offset, $total);
@@ -594,13 +553,9 @@ class StaticsController extends BaseStaticsController{
         }
      
         $size = Product::groupBy('product_size')->selectRaw('count(*) as total, product_size')->get();
-
         $color = Product::groupBy('product_color')->selectRaw('count(*) as total, product_color')->get();
-
-
         $min = Product::orderBy('product_price')->min('product_price');
         $max = Product::orderBy('product_price')->max('product_price');
-
 
         return view('Statics::content.productDetail',[
             'data' => $data,
@@ -610,9 +565,9 @@ class StaticsController extends BaseStaticsController{
             'color' => $color,
             'min' => $min,
             'max' => $max,
-
         ]);
-        }
+    }
+
     public function pageProduct($name = '' , $id = 0){
         $data = $dataCate = $dataSame =  array();
 
@@ -621,11 +576,8 @@ class StaticsController extends BaseStaticsController{
             $dataCate = Category::getById($data->product_catid);
         }
 
-        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price,product_tag';
+        $searchSame['field_get'] = 'product_id,product_catid,product_cat_name,product_cat_alias,product_title,product_intro,product_content,product_image,product_created,product_price';
         $dataSame = Product::getSameData($id, $data->product_catid, $limit = 6, $searchSame);
-
-        $arrTag = Tag::getAllTag(array(),$limit);
-
 
         $pageNo = (int) Request::get('page', 1);
         $pageScroll = CGlobal::num_scroll_page;
@@ -637,9 +589,7 @@ class StaticsController extends BaseStaticsController{
         $dataSearch['rating_status'] = 1;
         $rating = Rating::searchByCondition($dataSearch,$limit,$offset,$total);
 
-
         $rating_star = Rating::getByProudctId($id);
-
         if(sizeof($rating_star) > 0)
         {
             $total = 0;
@@ -654,8 +604,6 @@ class StaticsController extends BaseStaticsController{
             $avg_rate = 0;
         }
 
-
-
         $ip = Request::ip();
         $checkip = Rating::checkIp($id,$ip);
         $check = 0;
@@ -668,25 +616,16 @@ class StaticsController extends BaseStaticsController{
             $check = 0;
         }
 
-
-
         $text_sl = Info::getItemByKeyword('SITE_PRODUCT_TEXT_SL');
         $text_nxcb = Info::getItemByKeyword('SITE_PRODUCT_TEXT_NXCB');
-
         $text_ten = Info::getItemByKeyword('SITE_PRODUCT_TEXT_TEN');
-
         $text_gmail = Info::getItemByKeyword('SITE_PRODUCT_TEXT_GMAIL');
-
         $text_dsbl = Info::getItemByKeyword('SITE_PRODUCT_TEXT_DSBL');
-
         $text_tt = Info::getItemByKeyword('SITE_PRODUCT_TEXT_TT');
-
         $text_sptt= Info::getItemByKeyword('SITE_PRODUCT_TEXT_SPTT');
-
-
+        $text_tu_khoa = self::viewShareVal('TEXT_Tu_Khoa');
 
         return view('Statics::content.pageProduct',[
-            'arrTag' => $arrTag,
             'data' => $data,
             'dataSame' => $dataSame,
             'rating' => $rating,
@@ -699,21 +638,19 @@ class StaticsController extends BaseStaticsController{
             'text_dsbl' =>$text_dsbl,
             'text_tt' =>$text_tt,
             'text_sptt' =>$text_sptt,
+            'text_tu_khoa' => $text_tu_khoa,
         ]);
     }
 
     public function pageSearchSize(){
-
         $dataSize = Request::get('dataSize');
         if(!empty($dataSize)){
-
             $pageNo = (int) Request::get('page', 1);
             $pageScroll = CGlobal::num_scroll_page;
             $limit = CGlobal::num_record_per_page;
             $offset = ($pageNo - 1) * $limit;
             $search = $data = array();
             $total = 0;
-
             $search['product_size'] = $dataSize;
             $dataSearch = Product::searchByCondition($search, $limit, $offset, $total);
         }
@@ -735,13 +672,11 @@ class StaticsController extends BaseStaticsController{
                             </div>';
         }
 
-
         $output .= '</div>';
         return $output;
-
     }
-    public function pageSearchColor(){
 
+    public function pageSearchColor(){
         $dataColor = Request::get('dataColor');
         if(!empty($dataColor)){
 
@@ -774,26 +709,22 @@ class StaticsController extends BaseStaticsController{
                             </div>';
         }
 
-
         $output .= '</div>';
         return $output;
-
     }
-    public function pageCart(){
 
+    public function pageCart(){
         $pnum = Request::get('product_num');
         $pid = Request::get('product_id');
 
         if($pid > 0 && $pnum > 0){
             $result = Product::getById($pid);
-
             if(Session::has('cart')){
                 $data = Session::get('cart');
                 $data[$pid]['title'] = $result->product_title;
                 $data[$pid]['image'] = $result->product_image;
                 $data[$pid]['price'] = $result->product_price;
                 $data[$pid]['id'] = $result->product_id;
-
                 if(isset($data[$pid]['num'])){
                     $data[$pid]['num'] += $pnum;
                 }else{
@@ -808,8 +739,6 @@ class StaticsController extends BaseStaticsController{
             }
 
             Session::put('cart', $data, 60*24);
-
-
         }
         Session::save();
         $info = Session::get('cart');
@@ -818,10 +747,10 @@ class StaticsController extends BaseStaticsController{
             'info' => $info,
         ]);
     }
+
     public function updateCart(){
         $number = Request::get('number');
         $data = Session::get('cart');
-
 
         foreach ($data as $item)
         {
@@ -833,8 +762,8 @@ class StaticsController extends BaseStaticsController{
                     $data[$i]['num'] = $qtt;
                 }
             }
-
         }
+
         Session::put('cart', $data, 60*24);
         Session::save();
 
@@ -843,11 +772,9 @@ class StaticsController extends BaseStaticsController{
         return view('Statics::content.pageCart',[
             'info' => $info,
         ]);
-
-
     }
+
     public function deleteCart(){
-        
         $id = Request::get('pid');
         if($id > 0 ){
             if(Session::has('cart')){
@@ -856,16 +783,13 @@ class StaticsController extends BaseStaticsController{
                 {
                     unset($data[$id]);
                 }
-
-
                 Session::put('cart', $data, 60*24);
                 Session::save();
             }
         }
         exit();
-
-
     }
+
     public function pagePay(){
         $info = Session::get('cart');
         $total_price = Request::get('total_price');
@@ -875,6 +799,7 @@ class StaticsController extends BaseStaticsController{
             'total_price' => $total_price,
         ]);
     }
+
     function str_rand($len) {
         $str = '';
         $times = ceil($len/32);
@@ -883,6 +808,7 @@ class StaticsController extends BaseStaticsController{
         }
         return substr($str, 0, $len);
     }
+
     public function pageOrder()
     {
         if (!empty($_POST)) {
@@ -890,11 +816,9 @@ class StaticsController extends BaseStaticsController{
             $customer_name = Request::get('ho') . ' ' . Request::get('ten');
             $customer_address = Request::get('country') . ' ' . Request::get('address') . Request::get('city') . Request::get('town');
             $customer_phone = Request::get('phone');
-
             $customer_email = Request::get('email');
             $total_price = Request::get('total_price');
             $orders_detail = serialize(Session::get('cart'));
-
             $orders_created = time();
 
             if ($customer_name != '' && $customer_address != '' && $customer_phone > 0) {
@@ -911,7 +835,6 @@ class StaticsController extends BaseStaticsController{
                 );
                 $query = Orders::addData($dataInput);
 
-
                 if ($query > 0) {
                     Utility::messages('messages', 'Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ với bạn sớm nhất');
                     Session::forget('cart');
@@ -924,9 +847,7 @@ class StaticsController extends BaseStaticsController{
     }
 
     public function pageTag( $id = 0){
-
         if ( $id > 0){
-
             $pageNo = (int)Request::get('page', 1);
             $pageScroll  = CGlobal::num_scroll_page;
             $limit = 10;
@@ -955,7 +876,6 @@ class StaticsController extends BaseStaticsController{
             if(!empty($data)){
                 foreach ($data as $item){
                     $tmp = ($item->statics_tag != '') ? json_decode($item->statics_tag, true) : [];
-
                     $dataTags = $dataTags + $tmp;
                 }
             }
@@ -992,8 +912,6 @@ class StaticsController extends BaseStaticsController{
         }
     }
 
-
-
     public function PageCustomer(){
         $cat_testimonials   = (int)strip_tags(self::viewShareVal('CAT_ID_CAMNHAN'));
         $name_cat_testimonials  = Info::getItemByKeyword('CAT_ID_CAMNHAN');
@@ -1008,37 +926,36 @@ class StaticsController extends BaseStaticsController{
             'data_testimonials' => $data_testimonials,
         ]);
     }
+
     public function ratingProduct()
     {
+        $rating  = Request::get('rating',0);
+        $comment =  Request::get('comment','');
+        $gmail =  Request::get('gmail','');
+        $author =  Request::get('author','');
+        $product_id = Request::get('product_id','');
+        $ip = Request::ip();
+        if ($rating != '' && $comment != '' && $author != ''){
+            $dataInput = array(
+                'product_id' => $product_id,
+                'rating_name' => $author,
+                'rating_email' => $gmail,
+                'rating_detail'=>$comment,
+                'rating_star'=>$rating,
+                'rating_ip'=>$ip,
+                'rating_status'=>0
 
-            $rating  = Request::get('rating',0);
-            $comment =  Request::get('comment','');
-            $gmail =  Request::get('gmail','');
-            $author =  Request::get('author','');
-            $product_id = Request::get('product_id','');
-            $ip = Request::ip();
-            if ($rating != '' && $comment != '' && $author != ''){
-                $dataInput = array(
-                    'product_id' => $product_id,
-                    'rating_name' => $author,
-                    'rating_email' => $gmail,
-                    'rating_detail'=>$comment,
-                    'rating_star'=>$rating,
-                    'rating_ip'=>$ip,
-                    'rating_status'=>0
+            );
+            $query = Rating::addData($dataInput);
 
-                );
-                $query = Rating::addData($dataInput);
-
-                if ($query > 0){
-                    Utility::messages('messages', 'Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ với bạn sớm nhất');
-
-                }
-            }
-            else{
-                Utility::messages('messages' , 'Thông tin liên hệ chưa chính sác. Bạn hãy đăng ký lại!');
-
+            if ($query > 0){
+                Utility::messages('messages', 'Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ với bạn sớm nhất');
             }
         }
+        else{
+            Utility::messages('messages' , 'Thông tin liên hệ chưa chính sác. Bạn hãy đăng ký lại!');
 
+        }
+    }
 }
+
